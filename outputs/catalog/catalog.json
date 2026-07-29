@@ -1,0 +1,3586 @@
+[
+  {
+    "entry_id": "1.bmp__1号_20250917125725832__0",
+    "class_name": "1.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部至下部的标签区域",
+    "appearance": "标签表面存在大面积明显褶皱和斜向折痕，多个区域呈波浪状起伏、局部鼓起或塌陷，标签平整度明显异常。",
+    "severity": 4,
+    "count": 6,
+    "orientation": "斜向左上-右下为主，多向交叉",
+    "geometry": "可见多条中长条斜向褶皱，长度约80至230像素、宽度约5至35像素，部分折痕弯曲并呈带状扩散；上部、中部和下部均有不连续的斜向折痕，局部相互交叉并形成不规则波浪状排列。",
+    "extent": "覆盖标签主体的大部分区域，约占标签宽度的85%、高度的80%，从瓶身中上部一直延伸至下部批号区域附近。",
+    "photometry": "褶皱表现为明显的明暗交替亮带和暗色折痕，与周围平整标签表面的对比中等偏强；部分折痕因反光形成较亮的斜向带状区域。",
+    "edge_profile": "同时存在较锐利的折痕棱线和较平缓的隆起/凹陷过渡，部分折痕边缘清晰，部分区域呈宽幅渐变起伏。",
+    "texture_effect": "标签文字和印刷图案在褶皱处出现局部弯曲、拉伸和错位，部分文字笔画被明暗折叠区域干扰但未完全遮挡。",
+    "prompt_hint": "A large bottle label with multiple prominent diagonal creases, broad wavy wrinkles, local bulges and depressions, causing printed text to warp across the uneven surface.",
+    "source_image": "../实拍正样本（有缺陷）/1.bmp/1号_20250917125725832.bmp",
+    "crop_path": "outputs/catalog/crops/1.bmp__1号_20250917125725832__0.png",
+    "bbox": [
+      285,
+      173,
+      462,
+      1207
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "1.bmp__1号_20250917125952761__0",
+    "class_name": "1.bmp",
+    "defect_type": "划痕",
+    "location": "瓶身上部标签右上区域",
+    "appearance": "可见一条细长、连续的斜向浅色划痕，从标签上边缘向右下方延伸，局部较为清晰。",
+    "severity": 2,
+    "count": 1,
+    "orientation": "斜向左上-右下",
+    "geometry": "单条细窄线状痕迹，长度约110像素，宽度约2至5像素，整体略有弯曲，无明显分叉或交叉。",
+    "extent": "约占瓶身宽度的4%，位于标签上部右侧，主要跨越标签上边缘至上部文字区域。",
+    "photometry": "表现为比周围标签更亮的细线，与暗色标签背景形成中等对比，局部明暗略有变化。",
+    "edge_profile": "边缘较锐利，呈细线状擦划痕迹，没有明显平缓隆起或凹陷过渡。",
+    "texture_effect": "经过少量印刷文字区域，但未明显造成文字断裂、拉伸或遮挡。",
+    "prompt_hint": "A single thin slightly curved diagonal scratch running from the upper label edge down toward the right across the dark printed label.",
+    "source_image": "../实拍正样本（有缺陷）/1.bmp/1号_20250917125952761.bmp",
+    "crop_path": "outputs/catalog/crops/1.bmp__1号_20250917125952761__0.png",
+    "bbox": [
+      574,
+      223,
+      31,
+      119
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "1.bmp__1号_20250917130015839__0",
+    "class_name": "1.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签中部存在一片明显的挤压起皱，形成贯穿大部分正面的长斜向折痕，并伴有分叉和局部隆起。",
+    "severity": 3,
+    "count": 4,
+    "orientation": "以斜向左下-右上为主，局部多向交叉",
+    "geometry": "主折痕从标签左侧中部偏下向右上方延伸，长度约650像素，呈细长、略弯曲的连续棱线；中间约在大字母区域出现重叠隆起，并分出数条较短的斜向支线，支线相互靠拢或交叉，整体呈不规则束状排列。",
+    "extent": "覆盖瓶身正面标签中部约85%的可见宽度和约22%的标签高度，从左侧文字区域跨过中央大型字母，一直延伸至右侧图案区域。",
+    "photometry": "折痕沿线表现为窄亮带与邻接暗线交替，中央重叠处暗部较深，右侧局部出现较宽的高光隆起，与周围平整标签对比明显。",
+    "edge_profile": "主折痕具有较锐利的棱线，部分支线边缘较尖；折痕之间夹有平缓鼓起和塌陷过渡。",
+    "texture_effect": "折痕使中央大型印刷字母及斜向底纹发生局部弯折、错位和轻微拉伸，但文字仍可辨认，未见印刷断裂。",
+    "prompt_hint": "A broad wrinkled label area with a long diagonal raised crease, branching folds, and alternating bright and dark ridge lines across the bottle center.",
+    "source_image": "../实拍正样本（有缺陷）/1.bmp/1号_20250917130015839.bmp",
+    "crop_path": "outputs/catalog/crops/1.bmp__1号_20250917130015839__0.png",
+    "bbox": [
+      45,
+      641,
+      711,
+      347
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "1.bmp__1号_20250917125816225__0",
+    "class_name": "1.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中下部右侧、靠近标签右边缘",
+    "appearance": "标签膜在右侧局部受到挤压并形成一片明显的起皱和凹凸变形，瓶身外轮廓也呈轻微波浪状。多条密集折痕使该区域显得局部收缩、扭曲。",
+    "severity": 3,
+    "count": 7,
+    "orientation": "竖向为主并夹杂斜向折痕",
+    "geometry": "约7条短至中等长度的波浪形褶皱密集聚集，粗细不均，部分折痕弯曲并相互汇合；褶皱沿右侧边缘近似纵向排列，中间夹有向左上-右下延伸的斜折线。",
+    "extent": "覆盖瓶身右侧约8%的宽度、约16%的图像高度，从瓶身中下部一直延伸至标签下部，紧贴标签右边缘。",
+    "photometry": "褶皱表现为较强的暗色沟槽与窄亮高光带交替，局部明暗对比明显，右侧边缘附近最突出。",
+    "edge_profile": "部分折痕具有较锐利的棱线，折痕之间为较平缓的鼓起或凹陷过渡，外侧轮廓呈不规则起伏。",
+    "texture_effect": "该处深色圆形印刷元素及邻近图案被压缩和弯曲，局部线条随褶皱发生扭曲，但未完全断裂或遮挡。",
+    "prompt_hint": "A localized cluster of compressed vertical and diagonal wrinkles with alternating bright ridges and dark grooves along the lower-right edge of the bottle label.",
+    "source_image": "../实拍正样本（有缺陷）/1.bmp/1号_20250917125816225.bmp",
+    "crop_path": "outputs/catalog/crops/1.bmp__1号_20250917125816225__0.png",
+    "bbox": [
+      686,
+      1005,
+      68,
+      271
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "1.bmp__1号_20250917125839320__0",
+    "class_name": "1.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签左侧",
+    "appearance": "标签膜出现一片明显的横向起皱和折叠，数条褶皱由左侧边缘向瓶身中央延伸并逐渐收拢，造成局部表面凹凸不平。",
+    "severity": 3,
+    "count": 5,
+    "orientation": "以横向为主，略呈斜向左上-右下",
+    "geometry": "约5条长短不一的细长褶皱，主要褶皱略弯曲并近似平行排列，其中上方折痕较粗且有轻微分叉；褶皱从标签左边缘密集起始，向右延伸约200至350像素后逐渐变细消失。",
+    "extent": "覆盖标签左侧约一半宽度、高度约6%，跨越生产许可及销售公司等文字区域。",
+    "photometry": "折痕表现为相邻的暗色细线与窄亮带，明暗交替明显，左侧起皱最强，向右对比逐渐减弱。",
+    "edge_profile": "主折痕边缘较锐利，伴有数条较平缓的隆起和凹陷过渡。",
+    "texture_effect": "褶皱使经过区域的多行中文文字发生轻微弯曲、错位和局部压缩，但未完全遮挡文字。",
+    "prompt_hint": "Add a cluster of five horizontal, slightly diagonal label-film wrinkles extending from the left edge toward the center, with alternating dark creases and narrow highlights.",
+    "source_image": "../实拍正样本（有缺陷）/1.bmp/1号_20250917125839320.bmp",
+    "crop_path": "outputs/catalog/crops/1.bmp__1号_20250917125839320__0.png",
+    "bbox": [
+      68,
+      815,
+      382,
+      105
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "1.bmp__1号_20250917125833053__0",
+    "class_name": "1.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中上部标签区域",
+    "appearance": "标签膜出现大面积斜向褶皱和折痕，形成一片被挤压、局部隆起或塌陷的透明膜区域。褶皱从标签上缘延伸至瓶身中部偏下位置，整体较明显。",
+    "severity": 4,
+    "count": 3,
+    "orientation": "斜向左上-右下，局部多向交叉",
+    "geometry": "主要为数条较长的斜向折痕，长度约占瓶身高度的40%至55%，宽度从数毫米到数厘米不等；部分折痕较直，部分呈弧形弯曲，在下端形成局部圆弧状卷曲和褶皱汇聚，彼此大致平行但存在交叉和错位排列。",
+    "extent": "覆盖标签区域约三分之一宽度和近一半高度，约从图像坐标(150,210)附近的标签上缘延伸至(680,1030)附近的瓶身中部，跨越上部文字、中央大号数字和中部图案。",
+    "photometry": "褶皱表现为明显的亮暗交替带，折痕边缘有较亮的高光线，邻近区域呈较暗的阴影或半透明灰带；与周围平整标签表面的对比度较强。",
+    "edge_profile": "部分折痕具有较锐利的折痕棱线，部分区域为平缓的隆起和凹陷过渡；下方局部可见卷曲状、圆弧状的膜面变形边缘。",
+    "texture_effect": "标签上的文字和大号数字被褶皱区域覆盖并产生局部明暗变化，部分图案边缘出现拉伸、错位或被透明折叠区域遮挡的效果。",
+    "prompt_hint": "A large transparent bottle label with prominent diagonal wrinkles and folded creases, showing alternating glossy highlights and dark shadow bands, with the printed text visibly warped beneath the deformed film.",
+    "source_image": "../实拍正样本（有缺陷）/1.bmp/1号_20250917125833053.bmp",
+    "crop_path": "outputs/catalog/crops/1.bmp__1号_20250917125833053__0.png",
+    "bbox": [
+      145,
+      205,
+      585,
+      830
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "1.bmp__1号_20250917125835131__0",
+    "class_name": "1.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签中部偏左存在成片的斜向褶皱和折痕，局部呈波浪状起伏并伴随小范围鼓起或塌陷，褶皱覆盖在印刷图案区域上。",
+    "severity": 3,
+    "count": 3,
+    "orientation": "斜向左上-右下，局部多向交叉",
+    "geometry": "约3条主要褶皱，长度约80-180像素、宽度约3-15像素，整体弯曲且不完全平行；其中部分褶皱相互汇合，形成不规则的折叠片状区域。",
+    "extent": "大致覆盖瓶身宽度的20%-35%、瓶身高度的20%左右，主要跨越标签中部偏左的文字与斜向图案区域。",
+    "photometry": "褶皱处呈亮暗交替的窄带表现，局部为高光亮线，旁侧伴有暗色折痕阴影，与周围平整标签相比对比度中等偏强。",
+    "edge_profile": "同时具有较锐利的折痕棱线和较平缓的隆起/凹陷过渡，边缘不完全规则。",
+    "texture_effect": "部分印刷图案和文字背景受到拉伸、弯曲和局部明暗遮挡，但文字主体仍基本可辨。",
+    "prompt_hint": "A bottle label with a noticeable cluster of diagonal wrinkled folds and shallow creases across the middle-left printed area, showing alternating bright highlights and dark shadows.",
+    "source_image": "../实拍正样本（有缺陷）/1.bmp/1号_20250917125835131.bmp",
+    "crop_path": "outputs/catalog/crops/1.bmp__1号_20250917125835131__0.png",
+    "bbox": [
+      255,
+      560,
+      285,
+      365
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "1.bmp__1号_20250917125818337__0",
+    "class_name": "1.bmp",
+    "defect_type": "变形",
+    "location": "瓶身标签中部至下部，集中在正面中央偏右的透明标签区域",
+    "appearance": "标签膜出现大面积纵向起伏和多条横斜向折痕，中下部形成明显的块状鼓起、塌陷及层叠褶皱。整体表面不平整，局部呈角状折叠。",
+    "severity": 4,
+    "count": 9,
+    "orientation": "以横向和斜向左上-右下为主，伴随纵向起伏",
+    "geometry": "上部有数条较长而平缓的横向波纹；中部沿纵向形成宽大的带状隆起和凹陷；约在瓶身中下部可见多条长短不一的锐利横折线及斜折线，部分折痕相互连接并构成三角形、梯形和矩形状折叠面。褶皱宽窄不均，排列不规则，右侧局部呈层叠状。",
+    "extent": "覆盖约瓶身可见宽度的三分之一，自标签上缘附近延伸至标签下部，纵向约占整瓶高度的三分之二；最明显区域横跨瓶身中部至下部。",
+    "photometry": "变形区域呈明显的亮带、灰暗带交替，折叠面之间存在较强明暗分界；中下部横折痕表现为窄暗线及邻接高光边，和周围平滑标签对比明显。",
+    "edge_profile": "上部起伏边缘较平缓，中下部多处为较锐利的折痕棱线，局部鼓包与凹陷之间存在突变，并形成清晰角点。",
+    "texture_effect": "中央透明区域的明暗和轮廓被明显扭曲，邻近右侧印刷文字随标签折叠产生轻微弯曲和压缩，但多数文字仍可辨认。",
+    "prompt_hint": "A large wrinkled transparent bottle label with vertical bulging, layered horizontal and diagonal creases, sharp angular folds, and alternating bright and dark bands.",
+    "source_image": "../实拍正样本（有缺陷）/1.bmp/1号_20250917125818337.bmp",
+    "crop_path": "outputs/catalog/crops/1.bmp__1号_20250917125818337__0.png",
+    "bbox": [
+      401,
+      213,
+      283,
+      1112
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161659164__0",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身标签上部至中部，主要集中在正面右侧",
+    "appearance": "标签膜存在一条贯穿上部至右侧中部的长斜向折痕，并在右侧文字区域汇入多条短而密集的起皱褶线，形成明显的局部隆起和挤压变形。",
+    "severity": 4,
+    "count": 7,
+    "orientation": "以斜向左上-右下为主，右侧局部多向交叉",
+    "geometry": "一条细长、略弯曲的主折痕由瓶身左上方向右下方延伸，长度约850像素；折痕在右侧中部逐渐加深，并分化为约6条长短不一的窄褶皱。局部褶线呈束状排列，部分近似平行，部分相互交叉，末端有分叉和弯折。",
+    "extent": "整体横跨约70%的可见瓶身宽度、约40%的瓶身可见高度；从标签上部左侧延伸至瓶身中部右缘，并覆盖右侧大号英文文字区域。",
+    "photometry": "主折痕表现为连续的窄亮棱与邻接暗线组合，右侧聚集区域出现强烈的明暗交替亮带和深色阴影，与周围平整标签表面对比明显。",
+    "edge_profile": "主折痕具有较锐利的棱线，右侧汇聚处为尖锐折叠与局部隆起相结合，周边伴有较平缓的膜面塌陷过渡。",
+    "texture_effect": "折痕穿过右侧大号印刷字母，使字母边缘发生明显弯曲、错位和局部压缩；左上至中央的无字区域也可见膜面纹理被拉伸。",
+    "prompt_hint": "Add a long diagonal label-film crease from the upper left to the mid-right, merging into several sharp bunched wrinkles that distort the printed letters.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161659164.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161659164__0.png",
+    "bbox": [
+      258,
+      164,
+      842,
+      960
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161653699__0",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身右侧标签区域",
+    "appearance": "标签表面出现成片、明显的波浪状褶皱和斜向折痕，褶皱集中分布在右侧文字标签上，并形成多条明暗交替的起伏带。",
+    "severity": 4,
+    "count": 8,
+    "orientation": "斜向左上-右下为主，局部多向交错",
+    "geometry": "褶皱多为中长条带状，长度约40至190像素、宽度约5至30像素，整体弯曲且略呈波浪形；部分折痕相互平行，部分在标签右侧交叉或汇聚，形成局部鼓起与塌陷区域。",
+    "extent": "约覆盖瓶身右侧标签宽度的80%以及标签高度的30%，大致跨越图像中的y=500至1220区域，穿过右侧多行文字和标签边缘附近。",
+    "photometry": "褶皱表现为明显的亮色高光带与暗色折痕交替，局部折痕呈深暗线状，与周围平整标签表面对比强烈。",
+    "edge_profile": "同时存在较锐利的折痕棱线和较平缓的隆起/凹陷过渡，部分区域具有明显的立体压折效果。",
+    "texture_effect": "右侧标签上的文字被褶皱拉伸、倾斜并局部遮挡，部分字符笔画在折痕处出现变形和明暗断续。",
+    "prompt_hint": "A white bottle label with prominent diagonal wavy wrinkles and creases across the right-side printed text, showing alternating bright highlights and dark folded valleys.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161653699.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161653699__0.png",
+    "bbox": [
+      890,
+      500,
+      225,
+      725
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161539992__0",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身上部至瓶肩下方的标签区域",
+    "appearance": "标签上部存在多条大范围褶皱，其中右上方有一条明显的长斜向折痕，并伴随数条浅横向波浪褶皱。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "以斜向左上-右下为主，伴有横向褶皱",
+    "geometry": "主折痕从右上部向右下延伸，长度较长、宽度不均且略弯曲，形成连续的凹陷带；其周围约有4条细长浅褶皱，呈横向或缓弧形分布，部分与主折痕相接。",
+    "extent": "覆盖瓶身上部约80%的可见宽度和约16%的瓶身高度，主折痕跨越右侧多行说明文字并延伸至标签右边缘。",
+    "photometry": "主折痕表现为较宽的暗色凹陷带，局部边缘带有细窄高光；浅褶皱为低对比度的明暗交替线，在右侧文字区域对比更明显。",
+    "edge_profile": "主斜折痕棱线较清楚，局部为锐利折叠；周围横向褶皱过渡较平缓。",
+    "texture_effect": "右上方多行黑色说明文字沿斜向折痕发生明显弯曲和错位，局部字形受到挤压；浅横褶皱处印刷图案轻微起伏。",
+    "prompt_hint": "Create a broad diagonal crease with several shallow horizontal ripples across the upper bottle label, visibly warping the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161539992.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161539992__0.png",
+    "bbox": [
+      133,
+      124,
+      963,
+      388
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161539992__1",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部标签接缝附近",
+    "appearance": "标签中部的竖向搭接区域出现一组密集的横向波浪褶皱和局部鼓起，形成明显的膜面起皱带。",
+    "severity": 4,
+    "count": 7,
+    "orientation": "横向",
+    "geometry": "约7条短至中等长度的弯曲褶皱上下密集排列，轮廓呈波浪形，部分褶皱彼此靠近并形成平行层叠；中间几条折痕较粗，末端逐渐变细。",
+    "extent": "集中覆盖瓶身中部约11%的可见宽度和约10%的瓶身高度，位于竖向标签接缝左缘至右侧文字栏之间。",
+    "photometry": "褶皱由亮银色高光带与暗色折痕交替构成，局部高光较强，与周围平整标签形成明显反差。",
+    "edge_profile": "较深褶皱具有清晰的折痕棱线，褶皱之间则呈平缓鼓起和凹陷过渡。",
+    "texture_effect": "褶皱使接缝附近的标签纹理产生横向压缩和波动，右侧相邻文字行轻微弯曲，但未出现明显断裂。",
+    "prompt_hint": "Add a dense cluster of seven horizontal wavy film wrinkles along the center label seam with alternating bright highlights and dark grooves.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161539992.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161539992__1.png",
+    "bbox": [
+      588,
+      954,
+      142,
+      225
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161539992__2",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中下部右侧标签",
+    "appearance": "右侧标签靠近“STERILE A”和合格标识上方存在一条较长的斜向折痕，局部呈尖锐的膜面塌陷。",
+    "severity": 3,
+    "count": 2,
+    "orientation": "斜向左下-右上",
+    "geometry": "一条主要折痕由左下向右上延伸，细长、略弯且中段较宽，旁侧伴随一条较短的近似平行支折痕；两者在上端接近标签右边缘。",
+    "extent": "覆盖瓶身右侧约9%的可见宽度和约9%的瓶身高度，斜跨客服信息下方并延伸到认证标识附近。",
+    "photometry": "折痕主体呈明亮高光脊线，边侧伴有暗色窄沟，明暗对比较强。",
+    "edge_profile": "主折痕边缘较锐利，中段具有明显棱线，末端逐渐变为平缓起伏。",
+    "texture_effect": "折痕使附近文字和标签底纹产生轻微斜向拉扯，局部字行边缘发生弯曲，但内容未被遮挡。",
+    "prompt_hint": "Add a sharp diagonal label-film crease above the STERILE mark, with a bright ridge, dark edge, and a short parallel secondary fold.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161539992.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161539992__2.png",
+    "bbox": [
+      967,
+      1282,
+      125,
+      187
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161702498__0",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身上部至瓶身中部右侧的标签膜",
+    "appearance": "标签膜上存在一组很长的斜向折痕和局部拱起，折痕从品牌标识上方延伸至右侧水滴图标下方，形成明显的膜面扭曲。",
+    "severity": 4,
+    "count": 3,
+    "orientation": "斜向左上-右下",
+    "geometry": "以一条细长、略弯曲的主折痕为中心，长度约700像素；中下段逐渐变宽并伴有约2条较短的平行或分叉棱线，局部形成狭长楔形隆起，各折痕总体同向排列。",
+    "extent": "纵向跨越瓶身上部至中部，约占可见瓶身高度的三分之一；横向覆盖瓶身宽度约四分之一，并穿过上方品牌区、AQUA文字右部及水滴图标附近。",
+    "photometry": "主折痕表现为连续的高亮细带，旁侧伴随暗色阴影和次级亮带，明暗交替明显，与周围均匀标签表面对比强。",
+    "edge_profile": "主折痕具有较锐利的棱线，中下段隆起区域边缘较宽，呈锐利折线与平缓鼓起过渡并存。",
+    "texture_effect": "折痕穿过部分印刷文字和图标，使AQUA右侧及水滴图标周边的印刷轮廓产生轻微错位、弯曲和压缩，但未完全遮挡。",
+    "prompt_hint": "Add a long diagonal wrinkled label-film crease with a sharp bright ridge, dark side shadow, and slight branching bulges.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161702498.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161702498__0.png",
+    "bbox": [
+      650,
+      145,
+      321,
+      735
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161702498__1",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部偏左至中下部的标签膜",
+    "appearance": "标签膜形成一片宽阔的斜向褶皱带，左侧有明显堆叠和鼓起，随后向右下方拉伸成多条折痕，膜面出现较大范围起伏。",
+    "severity": 4,
+    "count": 6,
+    "orientation": "斜向左上-右下",
+    "geometry": "褶皱带由左侧数条短而弯曲、相互汇聚的折痕起始，向右下延伸为约3至4条长短不一的近似平行斜纹；主褶皱较宽且略呈弧形，部分棱线分叉、交叠，整体呈扇形展开。",
+    "extent": "覆盖瓶身中部左缘至中央偏右区域，横向约占瓶身可见宽度的六成，纵向约占瓶身高度的六分之一；跨越MOIST文字下部、SPA保湿区域及其下方横线。",
+    "photometry": "左侧隆起处出现强烈高光和深暗阴影，向右延伸的折痕呈多组亮暗相间的斜带，对比度高，局部高光近似白色。",
+    "edge_profile": "左侧堆叠处为尖锐折痕棱线并伴随局部鼓包，向右下逐渐转为较宽、较平缓的波浪状起伏，但仍可见清晰边界。",
+    "texture_effect": "褶皱使MOIST下方和SPA保湿文字区域发生明显弯曲、拉伸及局部压缩，横向印刷线被折痕扰动并呈轻微错位，但文字仍基本可辨。",
+    "prompt_hint": "Create a broad fan-shaped diagonal cluster of label wrinkles with folded ridges, bright highlights, dark valleys, and warped printed text.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161702498.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161702498__1.png",
+    "bbox": [
+      104,
+      879,
+      627,
+      374
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161651496__0",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部至瓶身下部标签区域",
+    "appearance": "标签中央存在大面积纵向起皱和折痕，形成连续的明暗相间褶皱带，表面不平整且有明显凹凸起伏。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "竖向",
+    "geometry": "约5条纵向褶皱，长度很长，基本贯穿标签的上中部至下部；褶皱宽度约10至35像素，整体近似平行但局部轻微弯曲，部分褶皱相互靠近形成带状起伏，无明显分叉。",
+    "extent": "覆盖瓶身可见宽度约15%，从接近瓶肩下方延伸至瓶身下部标签区域，覆盖高度约80%。",
+    "photometry": "褶皱表现为连续的亮色高光带与暗色折痕交替，和周围标签表面对比明显。",
+    "edge_profile": "以较锐利的纵向折痕棱线为主，边缘同时伴有较平缓的隆起和凹陷过渡。",
+    "texture_effect": "中央区域主要为空白标签，印刷文字影响较小；局部表面纹理和亮度被拉伸、扭曲并被褶皱打断。",
+    "prompt_hint": "A large vertical band of parallel wrinkles and creases running down the center of a bottle label, with alternating bright highlights and dark folds.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161651496.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161651496__0.png",
+    "bbox": [
+      565,
+      130,
+      165,
+      2040
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161651496__1",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身右上部至右侧中部标签区域",
+    "appearance": "标签右侧出现明显的斜向折痕、局部鼓起和横向波浪状褶皱，边缘区域有多处不规则塌陷和挤压变形。",
+    "severity": 4,
+    "count": 7,
+    "orientation": "多向交叉",
+    "geometry": "上部约3条斜向折痕，主要由左上向右下延伸，长度约50至120像素、宽度约8至20像素；中部和下部约4条横向或略弯曲褶皱，长度约70至150像素，彼此近似平行并局部交叠，形成不规则波浪边缘。",
+    "extent": "覆盖瓶身右侧约8%至10%的宽度，从瓶肩下方约250像素处延伸至瓶身中部约1000像素处，覆盖高度约30%。",
+    "photometry": "折痕处出现强亮色反光带，并伴随相邻暗色凹槽，明暗反差强，局部高光呈断续状。",
+    "edge_profile": "斜向折痕具有较锐利的棱线，横向褶皱则表现为较平缓的隆起和凹陷交替，局部过渡突然。",
+    "texture_effect": "右侧文字和边缘印刷内容局部发生弯曲、拉伸和错位，部分笔画被褶皱造成的暗部遮挡。",
+    "prompt_hint": "Multiple diagonal and horizontal wrinkles crumpling the upper-right bottle label, with sharp creases, raised folds, and distorted printed text.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161651496.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161651496__1.png",
+    "bbox": [
+      995,
+      250,
+      115,
+      765
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161701372__0",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身左侧标签区域，主要位于瓶身中上部",
+    "appearance": "标签左侧出现一大片明显的斜向波浪状褶皱和折痕，局部伴随挤压形成的隆起与塌陷。褶皱从标签上部向下延伸，整体连续且较为明显。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "斜向左上-右下",
+    "geometry": "约5条长条状褶皱，长度约200至650像素，宽度约5至25像素，整体呈弯曲波浪形并大致平行排列；其中部分褶皱相互靠近并形成交叠，局部具有较锐利的折痕棱线，周围伴随平缓的隆起和凹陷过渡。",
+    "extent": "覆盖标签左侧约五分之一至四分之一的宽度，纵向跨越瓶身中上部约三分之一高度，从接近标签上边缘一直延伸到主要文字区域下方，贯穿“AQUA”左侧及部分下方标签区域。",
+    "photometry": "褶皱表现为明显的亮暗交替条带，折叠凸起处出现高光亮带，凹陷处呈暗色折痕；与周围标签表面的对比度较强。",
+    "edge_profile": "同时具有锐利的折痕棱线和较平缓的隆起/凹陷过渡，主折痕边缘较清晰，邻近区域逐渐过渡。",
+    "texture_effect": "褶皱使标签表面印刷图案在左侧出现局部弯曲、拉伸和明暗遮挡，部分文字边缘受到折痕影响而变形。",
+    "prompt_hint": "A large diagonal cluster of wavy wrinkles and compressed folds on the left side of a bottle label, with alternating bright highlights and dark creases distorting the printed graphics.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161701372.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161701372__0.png",
+    "bbox": [
+      135,
+      420,
+      185,
+      720
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161537754__0",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部左侧标签区域",
+    "appearance": "标签左侧出现明显的大面积褶皱、折叠和局部塌陷，形成多条相互交错的波浪状折痕。褶皱从标签左边缘向瓶身中部延伸，明显破坏标签平整度。",
+    "severity": 5,
+    "count": 8,
+    "orientation": "斜向左上-右下及多向交叉",
+    "geometry": "可见约8条主要褶皱和折痕，长度约40至300像素、粗细约5至35像素，整体弯曲起伏，部分折痕呈尖锐棱线，部分呈平缓波浪状；多条褶皱在左侧汇聚并向右下方展开，局部相互交叉，排列杂乱。",
+    "extent": "覆盖标签左侧约三分之一宽度和约五分之一高度，主要跨越瓶身中部的英文大字区域，并从左边缘延伸至约瓶身宽度的45%位置。",
+    "photometry": "褶皱区域呈明显明暗交替，凸起处形成较亮的高光带，凹陷和折痕处表现为暗色阴影，与周围平整标签表面对比很强。",
+    "edge_profile": "同时具有锐利的折痕棱线和局部平缓的隆起、凹陷过渡；左侧汇聚处边缘较尖锐，向右侧延伸后逐渐变为弯曲的波浪状起伏。",
+    "texture_effect": "标签上的英文文字被褶皱明显扭曲、拉伸并产生局部明暗遮挡，部分笔画在折痕处发生变形，文字背景的水平分隔线也被折皱扰乱。",
+    "prompt_hint": "A large severely wrinkled label on the left-middle body of a cosmetic bottle, with intersecting diagonal folds, sharp creases, wavy bulges, and strong alternating highlights and shadows distorting the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161537754.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161537754__0.png",
+    "bbox": [
+      105,
+      755,
+      610,
+      340
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "1.jpg__1_20260426161648224__0",
+    "class_name": "1.jpg",
+    "defect_type": "变形",
+    "location": "瓶身上部至中部右侧标签",
+    "appearance": "标签膜出现一片明显的横向及轻微斜向褶皱，形成多道波浪状折痕和局部隆起；右侧边缘附近有一条较突出的横向鼓起折边。",
+    "severity": 3,
+    "count": 4,
+    "orientation": "以横向为主，略呈斜向左上-右下",
+    "geometry": "约4道长短不一的褶皱上下排列，主要折痕从标签中部偏右向瓶身右缘延伸，长度约180至430像素；线条略弯曲、局部呈双棱或波浪形，彼此大致平行，最下方折痕较粗并在右边缘形成明显外凸。",
+    "extent": "覆盖瓶身可见宽度约35%，纵向跨越瓶身上部至中部约14%的图像高度，集中在右侧产品说明文字区域。",
+    "photometry": "褶皱表现为窄亮高光带与相邻暗色折痕成对出现，局部反差明显；最下方隆起的上缘较亮、下缘形成较深阴影。",
+    "edge_profile": "上方数道折痕具有较清晰的棱线并伴随平缓波浪过渡，右侧下方鼓起处边缘锐利且有明显阶梯状凸起。",
+    "texture_effect": "多行黑色说明文字随褶皱发生轻微弯折、错位和局部压缩，但文字整体仍可辨认，未见完全断裂或遮挡。",
+    "prompt_hint": "Add four roughly parallel horizontal-to-diagonal wrinkles with alternating bright ridges and dark creases across the upper-right label, including a pronounced raised fold at the right edge.",
+    "source_image": "../实拍正样本（有缺陷）/1.jpg/1_20260426161648224.jpg",
+    "crop_path": "outputs/catalog/crops/1.jpg__1_20260426161648224__0.png",
+    "bbox": [
+      651,
+      463,
+      453,
+      321
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "2.bmp__2号_20250917125835129__0",
+    "class_name": "2.bmp",
+    "defect_type": "变形",
+    "location": "瓶身上部至瓶身中部左侧标签区域",
+    "appearance": "标签左侧可见成片不规则波浪状褶皱和局部塌陷，表面明暗起伏明显，导致标签平整度被破坏。",
+    "severity": 3,
+    "count": 5,
+    "orientation": "近似竖向，局部向右下方倾斜",
+    "geometry": "约5条长短不一的弯曲褶皱，长度约60至190像素、宽度约8至25像素，部分相互平行，局部交叠但无明显分叉；褶皱集中分布在标签左侧并呈不规则波浪形排列。",
+    "extent": "覆盖标签左侧约20%的宽度和约22%的高度，主要跨越瓶身上部至中部左侧区域。",
+    "photometry": "褶皱表现为交替出现的亮色高光带和暗色折痕，与周围平整标签表面的对比中等偏强。",
+    "edge_profile": "以平缓的隆起和凹陷过渡为主，局部可见较锐利的折痕棱线。",
+    "texture_effect": "褶皱使左侧标签图案和部分文字产生局部弯曲、拉伸和明暗遮挡，但整体图案仍可辨认。",
+    "prompt_hint": "Add several irregular vertical wavy wrinkles and shallow dents across the upper-left section of the bottle label, with alternating highlights and dark creases.",
+    "source_image": "../实拍正样本（有缺陷）/2.bmp/2号_20250917125835129.bmp",
+    "crop_path": "outputs/catalog/crops/2.bmp__2号_20250917125835129__0.png",
+    "bbox": [
+      95,
+      270,
+      155,
+      260
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "2.bmp__2号_20250917125725832__0",
+    "class_name": "2.bmp",
+    "defect_type": "变形",
+    "location": "瓶身标签中部至中下部，主要位于左侧和中央区域",
+    "appearance": "标签膜出现大面积不规则起皱和塌陷，包含多条弧形、波浪形及斜向折痕；中央还有局部鼓起形成的亮斑状隆起，周围表面明显扭曲。",
+    "severity": 4,
+    "count": 10,
+    "orientation": "多向交叉，以斜向左上-右下和弧形横向为主",
+    "geometry": "约10条可辨识褶皱，长短不一；左侧有数条细长弯曲折痕相互靠近并局部交叉，中央存在一处较宽的椭圆状鼓包及弧形凹陷，下方有多条较长的斜向波浪折痕呈松散平行排列，部分折痕发生分叉和汇合。",
+    "extent": "覆盖标签约55%的宽度和45%的高度，从瓶身中部左侧文字区延伸至中央大字图案及中下部标签区域。",
+    "photometry": "褶皱表现为明暗交替的细带和宽带，隆起处形成较强高光，凹陷折痕呈暗色弧线；与周围平整标签的灰度对比中等至明显。",
+    "edge_profile": "细折痕局部具有较锐利的棱线，较大的鼓包和塌陷则呈平缓弧形过渡，中央及下方可见锐利折线与柔和波纹并存。",
+    "texture_effect": "左侧小字及中央印刷图案随褶皱发生弯曲、压缩和轻微错位，部分文字笔画被高光与暗折痕干扰，但未完全断裂或遮挡。",
+    "prompt_hint": "Large wrinkled transparent bottle label with intersecting curved and diagonal creases, localized bulges, depressions, and alternating bright and dark fold bands.",
+    "source_image": "../实拍正样本（有缺陷）/2.bmp/2号_20250917125725832.bmp",
+    "crop_path": "outputs/catalog/crops/2.bmp__2号_20250917125725832__0.png",
+    "bbox": [
+      76,
+      374,
+      481,
+      722
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "2.bmp__2号_20250917125816224__0",
+    "class_name": "2.bmp",
+    "defect_type": "变形",
+    "location": "瓶身标签中部至下部",
+    "appearance": "标签膜出现大面积起皱和挤压变形，多条波浪状褶皱及斜向折痕贯穿中央图案并延伸至右侧文字区，局部可见鼓起与塌陷。",
+    "severity": 4,
+    "count": 12,
+    "orientation": "多向交叉，以斜向左上-右下及近横向为主",
+    "geometry": "约12条长短不一的褶皱，主要为中长距离的弧形或斜直折痕；若干较宽波浪带近似平行排列，部分在瓶身中央偏右处汇聚、交叠并分叉，右侧文字区还伴有数条较短的近横向起伏。",
+    "extent": "覆盖标签约85%的宽度和约55%的高度，从瓶身中部的大号图案区域跨越至下部圆形标志和右侧说明文字区域。",
+    "photometry": "褶皱表现为宽窄不一的亮带与暗带交替，折痕处局部形成较强高光棱线，凹陷侧呈暗灰阴影，与周围平整标签的对比中等至明显。",
+    "edge_profile": "兼有较锐利的细长折痕棱线和平缓的波浪状隆起、凹陷过渡，中央偏下区域的折叠边缘最明显。",
+    "texture_effect": "标签上的大号数字、装饰带、圆形标志及右侧多行文字随褶皱发生弯曲和局部拉伸，部分文字行基线呈波浪状，但未完全断裂或遮挡。",
+    "prompt_hint": "Add extensive wrinkling to the glossy bottle label, with intersecting diagonal creases, horizontal ripples, and alternating bright and dark folded bands across the middle and lower label.",
+    "source_image": "../实拍正样本（有缺陷）/2.bmp/2号_20250917125816224.bmp",
+    "crop_path": "outputs/catalog/crops/2.bmp__2号_20250917125816224__0.png",
+    "bbox": [
+      78,
+      565,
+      665,
+      681
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "2.bmp__2号_20250917125839317__0",
+    "class_name": "2.bmp",
+    "defect_type": "变形",
+    "location": "瓶身标签区域，自瓶身上部延伸至瓶身下部",
+    "appearance": "标签膜大面积起皱并形成多条明显的斜向折痕，局部伴有宽带状鼓起和塌陷。褶皱贯穿标签上的文字及图案，整体表面呈不平整的波浪状。",
+    "severity": 5,
+    "count": 12,
+    "orientation": "以斜向左上-右下为主，局部多向交叉",
+    "geometry": "约12条长短不一的褶皱和折痕密集分布；主要折痕呈左上至右下的长斜线或宽带状弧形，长度约150-850像素，部分接近贯穿标签。中上部有数条近似平行的长折痕，中部及下部存在分叉、弯折和相互交叠的短褶皱，并伴随较宽的波浪形隆起区域。",
+    "extent": "覆盖标签可见宽度约90%、高度约95%，从标签顶缘附近跨越瓶身上部、中部直至标签底缘，左侧至右侧大部分区域均受影响。",
+    "photometry": "折痕表现为明亮高光带与暗色凹折线交替，部分宽褶皱形成明显的渐变亮暗区；中部和右侧折痕与周围标签的对比较强。",
+    "edge_profile": "长斜向折痕多具有较锐利的棱线，宽带状区域则呈平缓隆起或凹陷过渡，局部折痕交汇处边缘突变明显。",
+    "texture_effect": "标签上的英文大字、中文文字和圆形图标均受到起皱影响，局部笔画出现弯曲、错位和压缩拉伸，但未被完全遮挡。",
+    "prompt_hint": "A bottle label covered with severe diagonal film wrinkles, sharp creases, and broad wavy bulges distorting the printed graphics.",
+    "source_image": "../实拍正样本（有缺陷）/2.bmp/2号_20250917125839317.bmp",
+    "crop_path": "outputs/catalog/crops/2.bmp__2号_20250917125839317__0.png",
+    "bbox": [
+      65,
+      191,
+      680,
+      1172
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "2.bmp__2号_20250917130038937__0",
+    "class_name": "2.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签膜存在大面积明显褶皱、斜向折痕和局部鼓起/塌陷，形成多条交错的波浪状变形带。褶皱从标签上部延伸至中下部，部分区域明显影响标签平整度。",
+    "severity": 4,
+    "count": 7,
+    "orientation": "多向交叉，以斜向左上-右下和斜向右上-左下为主",
+    "geometry": "包含数条长距离斜向折痕和弧形波浪褶皱，长度约为瓶身宽度的20%-80%，宽度约2-35像素；部分褶皱弯曲、相互交叉或逐渐汇合，局部形成较宽的隆起与凹陷区域，排列较杂乱。",
+    "extent": "覆盖标签区域约80%的宽度和约65%的高度，主要跨越瓶身上部至中部，范围从标签顶部延伸到中部文字及图案区域。",
+    "photometry": "褶皱表现为连续的明暗交替带，既有较亮的高光折射带，也有相邻的暗色折痕阴影；与周围平整标签表面的对比明显。",
+    "edge_profile": "同时存在较锐利的折痕棱线和较平缓的隆起/凹陷过渡，部分斜向折痕边缘清晰。",
+    "texture_effect": "标签文字和印刷图案在褶皱处出现局部弯曲、拉伸、明暗不均和轻微遮挡，部分文字基线及图案轮廓被波浪形变形带穿过。",
+    "prompt_hint": "A large transparent label film on a bottle with multiple intersecting diagonal creases, wavy wrinkles, and bulging collapsed areas causing alternating bright highlights and dark fold shadows across the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/2.bmp/2号_20250917130038937.bmp",
+    "crop_path": "outputs/catalog/crops/2.bmp__2号_20250917130038937__0.png",
+    "bbox": [
+      69,
+      177,
+      635,
+      827
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "2.bmp__2号_20250917125942229__0",
+    "class_name": "2.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签膜表面存在大面积波浪状起皱和斜向折痕，多个折痕从标签上部向右下方延伸，局部形成明显的明暗交替褶皱带。",
+    "severity": 4,
+    "count": 7,
+    "orientation": "斜向左上-右下，多向交叉",
+    "geometry": "褶皱以长条状和弧曲带状为主，长度约100至500像素、宽度约5至35像素，部分近似平行，部分在标签中部交叉并形成不规则折叠，右侧有一条较短的弯曲隆起褶皱。",
+    "extent": "覆盖标签主体约80%的宽度和约65%的高度，主要跨越瓶身中部至中下部，影响文字区和图案区。",
+    "photometry": "褶皱表现为明显的亮暗交替带，折痕凸起处出现高光，凹陷处呈暗色，与周围标签表面对比明显。",
+    "edge_profile": "同时存在较锐利的斜向折痕棱线和较平缓的波浪状隆起/凹陷过渡，局部边缘较清晰。",
+    "texture_effect": "标签上的文字和几何图案在褶皱处出现局部弯曲、拉伸和明暗遮挡，部分字迹被折痕切断或变得不均匀。",
+    "prompt_hint": "A large glossy bottle label with severe diagonal wrinkles, wavy creases, raised and depressed folds, and alternating bright highlights and dark valleys distorting the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/2.bmp/2号_20250917125942229.bmp",
+    "crop_path": "outputs/catalog/crops/2.bmp__2号_20250917125942229__0.png",
+    "bbox": [
+      190,
+      160,
+      558,
+      890
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "2.bmp__2号_20250917125942229__1",
+    "class_name": "2.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签及标签下缘",
+    "appearance": "标签下半部存在明显的斜向挤压折叠和局部塌陷，多个折痕汇聚在下方，导致标签底边呈不平整的弯曲和下垂形态。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "斜向左上-右下及斜向右上-左下",
+    "geometry": "可见数条长条状斜向折痕，长度约120至450像素、宽度约8至40像素，部分折痕呈弧形并在下部汇聚，局部形成三角形和扭曲的褶皱区域，排列较杂乱。",
+    "extent": "覆盖标签下半部约75%的宽度和约45%的高度，跨越中下部文字、生产信息区以及标签底边。",
+    "photometry": "折叠区域具有强烈的灰白高光边和深色阴影，明暗反差较大，标签底部塌陷处整体偏暗。",
+    "edge_profile": "主要为较锐利的折叠棱线，伴随局部平缓凹陷；标签下缘的变形边界明显弯曲且不平直。",
+    "texture_effect": "下半部生产批号、日期和失效日期文字被折痕拉伸、倾斜或部分遮挡，底部图案和边框线条发生明显错位。",
+    "prompt_hint": "A bottle label crushed and folded in the lower half, with converging diagonal creases, sagging bottom edge, deep shadows, and distorted printed batch and date text.",
+    "source_image": "../实拍正样本（有缺陷）/2.bmp/2号_20250917125942229.bmp",
+    "crop_path": "outputs/catalog/crops/2.bmp__2号_20250917125942229__1.png",
+    "bbox": [
+      185,
+      775,
+      560,
+      550
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "2.jpg__2_20260426161647141__0",
+    "class_name": "2.jpg",
+    "defect_type": "划痕",
+    "location": "瓶身上部，标签上方偏中部",
+    "appearance": "可见一条细长的浅色线状擦痕，沿瓶身表面斜向延伸，区别于周围较均匀的表面反光。",
+    "severity": 2,
+    "count": 1,
+    "orientation": "斜向左上-右下",
+    "geometry": "单条细长、近似直线的划痕，长度约70像素，宽度约3至6像素，无明显分叉或交叉。",
+    "extent": "覆盖瓶身宽度约6%，位于瓶身上部标签上缘之上，未跨越大范围标签区域。",
+    "photometry": "表现为较亮的细窄线状高光，与周围瓶身表面的对比中等，线两侧未见明显连续暗带。",
+    "edge_profile": "边缘较锐利，呈细线状擦划痕迹，无明显平缓隆起或凹陷过渡。",
+    "texture_effect": "不明显影响标签印刷图案或文字，主要位于标签上方的瓶身区域。",
+    "prompt_hint": "A single thin diagonal scratch on the upper bottle body above the label, appearing as a narrow bright line.",
+    "source_image": "../实拍正样本（有缺陷）/2.jpg/2_20260426161647141.jpg",
+    "crop_path": "outputs/catalog/crops/2.jpg__2_20260426161647141__0.png",
+    "bbox": [
+      570,
+      310,
+      80,
+      120
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "2.jpg__2_20260426161659167__0",
+    "class_name": "2.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中上部标签区域",
+    "appearance": "标签表面存在明显的大面积褶皱和折痕，主要集中在左侧大字区域并向右下方延伸，局部伴随横向波浪状起伏。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "斜向左上-右下并伴随横向",
+    "geometry": "可见1条较长、较明显的斜向折痕，从标签左侧中上部斜向延伸至中部下方，边缘较深且略弯曲；其周围有数条较短的平行或交叉浅褶皱，并在下方形成数条横向波浪状隆起，整体排列不规则。",
+    "extent": "覆盖标签左侧至中部，约占瓶身可见宽度的45%，约占瓶身高度的18%，跨越标签上的大号英文文字及其下方区域。",
+    "photometry": "折痕表现为明显的暗色折线与相邻亮色高光带交替，和周围标签表面的明暗对比强，褶皱区域具有明显的局部反光变化。",
+    "edge_profile": "主斜向折痕具有较锐利的折痕棱线，周围横向褶皱则呈较平缓的隆起与凹陷过渡。",
+    "texture_effect": "褶皱使标签印刷文字局部发生弯曲、拉伸和错位，部分笔画被折痕造成的明暗变化遮挡或切断。",
+    "prompt_hint": "A large wrinkled label with a sharp diagonal crease running from the upper left to the lower center, surrounded by several horizontal wavy folds that distort the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/2.jpg/2_20260426161659167.jpg",
+    "crop_path": "outputs/catalog/crops/2.jpg__2_20260426161659167__0.png",
+    "bbox": [
+      108,
+      680,
+      590,
+      440
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "2.bmp__2号_20250917125954829__0",
+    "class_name": "2.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签中部存在明显的纵向挤压褶皱和局部折痕，顶部边缘形成斜向折叠，向下延伸为较宽的波浪状隆起与塌陷区域。",
+    "severity": 3,
+    "count": 4,
+    "orientation": "多向交叉",
+    "geometry": "可见一条从标签上边缘向右下方延伸的较锐利斜向折痕，向下连接数条近竖向、略弯曲的褶皱带；中下部还有较宽的弧形过渡褶皱，褶皱之间大致平行但局部交错。",
+    "extent": "主要覆盖瓶身中部偏右的标签区域，约占瓶身宽度的25%、高度的65%，从标签顶部约205像素处延伸至约1280像素处。",
+    "photometry": "褶皱表现为明暗交替的亮带和暗带，与周围平整标签表面对比明显；顶部折痕亮暗反差较强，中下部以宽幅渐变阴影为主。",
+    "edge_profile": "顶部斜向折痕边缘较锐利，向下逐渐过渡为平缓的隆起和凹陷，部分褶皱具有明显的折叠棱线。",
+    "texture_effect": "标签图案在褶皱附近出现局部拉伸、弯曲和明暗遮挡，竖向区域的印刷边界被折痕打断或扭曲。",
+    "prompt_hint": "A bottle label with a prominent vertical compression wrinkle, a sharp diagonal fold at the upper edge, and broad wavy creases extending downward with alternating highlights and shadows.",
+    "source_image": "../实拍正样本（有缺陷）/2.bmp/2号_20250917125954829.bmp",
+    "crop_path": "outputs/catalog/crops/2.bmp__2号_20250917125954829__0.png",
+    "bbox": [
+      430,
+      205,
+      215,
+      1080
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "2.jpg__2_20260426161654860__0",
+    "class_name": "2.jpg",
+    "defect_type": "变形",
+    "location": "瓶身右侧标签区域，从瓶身上部延伸至瓶身下部",
+    "appearance": "标签右侧出现大面积明显的起皱、折叠和局部塌陷，形成连续的纵向波浪状变形带，局部伴随斜向折痕和鼓起区域。",
+    "severity": 4,
+    "count": 8,
+    "orientation": "竖向为主，夹杂斜向左上-右下和横向短折痕",
+    "geometry": "多条长条状、弯曲不直的褶皱沿瓶身纵向排列，长度约为瓶身高度的10%至45%，宽度约5至35像素；部分褶皱相互平行，部分在局部交叉或汇聚，右侧中上部可见明显的横向折叠和不规则塌陷。",
+    "extent": "主要覆盖瓶身右侧约10%至15%的宽度，纵向从瓶身上部约四分之一处延伸至接近瓶底，跨越右侧标签边缘及多行文字区域。",
+    "photometry": "褶皱表现为强烈的明暗交替，高光亮带与暗色折痕相邻，和周围平整标签表面的对比明显，局部折叠处出现高亮反光。",
+    "edge_profile": "同时具有较锐利的折痕棱线和较平缓的隆起、凹陷过渡；中上部横向折叠边缘较锐利，下部纵向波纹相对平缓。",
+    "texture_effect": "右侧标签文字和印刷图案在褶皱处发生局部弯曲、拉伸和明暗断裂，部分内容被折叠变形或遮挡。",
+    "prompt_hint": "A large wrinkled label deformation runs vertically along the right side of the bottle, with parallel wavy folds, diagonal creases, bright highlights, dark crease shadows, and locally collapsed label areas.",
+    "source_image": "../实拍正样本（有缺陷）/2.jpg/2_20260426161654860.jpg",
+    "crop_path": "outputs/catalog/crops/2.jpg__2_20260426161654860__0.png",
+    "bbox": [
+      900,
+      450,
+      135,
+      1460
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "2.jpg__2_20260426161648227__0",
+    "class_name": "2.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中上部标签区域",
+    "appearance": "标签表面出现大面积横向波浪状褶皱和挤压折痕，右侧形成明显的局部鼓起与塌陷，褶皱带贯穿瓶身正面。",
+    "severity": 4,
+    "count": 6,
+    "orientation": "横向，局部斜向交错",
+    "geometry": "约6条长条状褶皱，整体较长且弯曲，主要近似水平延伸，局部呈波浪形并略向右下倾斜；右侧褶皱密集，部分相互汇合、交叉并形成不规则塌陷区。",
+    "extent": "覆盖瓶身可见宽度约85%，从左侧标签边缘延伸至右侧标签区域，垂直覆盖约占瓶身高度的8%，主要位于多行文字标签的中上部。",
+    "photometry": "褶皱表现为明显的明暗交替带，凸起处形成较亮的高光亮带，凹陷处呈暗色折痕；与周围平整标签表面对比强烈，右侧区域对比最明显。",
+    "edge_profile": "同时具有较锐利的局部折痕棱线和较平缓的隆起/凹陷过渡，右侧部分边缘较锐利并伴随连续波纹。",
+    "texture_effect": "褶皱穿过标签文字和印刷区域，使部分文字出现弯曲、压缩、拉伸和局部遮挡，文字基线明显不平直。",
+    "prompt_hint": "A large horizontal band of wrinkled and crumpled label film across the bottle, with multiple wavy folds, alternating highlights and dark creases, and severe buckling on the right side distorting the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/2.jpg/2_20260426161648227.jpg",
+    "crop_path": "outputs/catalog/crops/2.jpg__2_20260426161648227__0.png",
+    "bbox": [
+      92,
+      808,
+      960,
+      205
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "2.jpg__2_20260426161649335__0",
+    "class_name": "2.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部偏左，标签左侧边缘及“MOIST”文字区域",
+    "appearance": "标签膜局部受挤压形成一片明显的波浪状褶皱，多条折痕从左侧边缘向右侧延伸并上下叠置。",
+    "severity": 3,
+    "count": 6,
+    "orientation": "以斜向左上-右下及近横向为主",
+    "geometry": "约6条长短不一的弯曲褶皱，主要为细窄波浪线，部分相互平行，局部交汇或重叠；较长折痕约延伸至瓶身宽度的五分之一，左端褶皱更密集、更弯曲。",
+    "extent": "覆盖瓶身中部左侧约22%的瓶身宽度、约7%的图像高度，从标签左边缘跨入“MOIST”字样的左半部。",
+    "photometry": "折痕呈深色细线与窄亮带交替，和周围较均匀的标签表面形成明显对比，左侧边缘处明暗起伏最强。",
+    "edge_profile": "包含数条较锐利的折痕棱线，棱线之间伴有平缓的小幅隆起和凹陷过渡。",
+    "texture_effect": "“MOIST”左侧字母及附近标签图案被波浪状扭曲，笔画边缘发生弯折和局部压缩，但未完全断裂或遮挡。",
+    "prompt_hint": "A cluster of six wavy diagonal and near-horizontal creases compressing the left-middle bottle label and distorting the printed letters.",
+    "source_image": "../实拍正样本（有缺陷）/2.jpg/2_20260426161649335.jpg",
+    "crop_path": "outputs/catalog/crops/2.jpg__2_20260426161649335__0.png",
+    "bbox": [
+      78,
+      1020,
+      258,
+      170
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "2.jpg__2_20260426161653705__0",
+    "class_name": "2.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签表面存在大面积明显的波浪状褶皱、斜向折痕和局部塌陷，褶皱集中分布在标签中部至下部，并横跨瓶身正面。",
+    "severity": 5,
+    "count": 10,
+    "orientation": "斜向左下-右上为主，多向交错",
+    "geometry": "约10条长条状波浪褶皱和折痕，长度约占瓶身宽度的50%-95%，宽度从数像素至数十像素不等；多数呈弧形或弯曲线状，彼此大致平行但局部交叉、汇聚并形成连续的起伏带，部分折痕边缘较锐利。",
+    "extent": "覆盖标签区域约80%的宽度和约65%的高度，主要从左侧标签边缘延伸至右侧瓶身边缘，跨越瓶身中部至中下部多行文字区域。",
+    "photometry": "褶皱表现为明显的明暗交替亮带和暗色折痕，局部高光反射很强，与周围较均匀的标签表面形成强烈对比。",
+    "edge_profile": "同时存在锐利的折痕棱线和较平缓的隆起、凹陷过渡，整体呈连续的起伏变形。",
+    "texture_effect": "标签上的中文文字和横向排版被褶皱明显拉伸、弯曲和局部遮挡，部分文字笔画沿折痕发生错位变形。",
+    "prompt_hint": "A large severely wrinkled label on the middle of a plastic bottle, with multiple diagonal wavy folds, sharp creases, alternating highlights and shadows, and distorted printed Chinese text.",
+    "source_image": "../实拍正样本（有缺陷）/2.jpg/2_20260426161653705.jpg",
+    "crop_path": "outputs/catalog/crops/2.jpg__2_20260426161653705__0.png",
+    "bbox": [
+      125,
+      575,
+      915,
+      790
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "2.jpg__2_20260426161655893__0",
+    "class_name": "2.jpg",
+    "defect_type": "变形",
+    "location": "标签中部至下部偏右区域",
+    "appearance": "标签膜存在明显的纵向褶皱和局部起伏，形成连续的竖向折痕带，并伴随下部横向波浪状皱褶。",
+    "severity": 3,
+    "count": 5,
+    "orientation": "竖向为主，局部横向交叉",
+    "geometry": "主要为1条较长的弯曲纵向折痕，长度约1100像素、宽度约20至60像素；其右侧及下部可见数条较短的横向波浪褶皱，长度约80至220像素、宽度约10至35像素，排列不规则并局部交叉。",
+    "extent": "覆盖标签右侧约四分之一宽度，从瓶身上部约350像素处延伸至约1500像素处，重点集中在右侧中下部。",
+    "photometry": "褶皱表现为明暗交替的亮暗窄带，与周围标签表面有中等至较强对比；部分折痕呈暗色，邻近区域伴随高光亮带。",
+    "edge_profile": "纵向主折痕边缘较锐利，局部由平缓隆起和凹陷过渡组成；横向褶皱边缘较柔和但轮廓连续可见。",
+    "texture_effect": "标签上的文字和印刷纹理在褶皱附近出现局部拉伸、弯曲和明暗不均，但未明显断裂或完全遮挡。",
+    "prompt_hint": "Add a long irregular vertical crease with several shallow horizontal waves across the right-middle label film, creating alternating bright highlights and dark fold lines.",
+    "source_image": "../实拍正样本（有缺陷）/2.jpg/2_20260426161655893.jpg",
+    "crop_path": "outputs/catalog/crops/2.jpg__2_20260426161655893__0.png",
+    "bbox": [
+      620,
+      330,
+      430,
+      1160
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "2.jpg__2_20260426161700288__0",
+    "class_name": "2.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部偏左至右侧标签区域",
+    "appearance": "标签表面存在大面积明显褶皱、折痕和局部鼓起，形成多条交错的斜向亮暗折线，整体呈被挤压后向右下方堆叠的变形状态。",
+    "severity": 5,
+    "count": 6,
+    "orientation": "斜向左上-右下 / 多向交叉",
+    "geometry": "约6条主要褶皱，其中数条为较长、弯曲的斜向折痕，长度约150至450像素、宽度约10至35像素；部分折痕在中部汇合并形成尖角状交叉，褶皱之间呈放射状和不规则平行排列，右侧有明显横向至斜向的隆起边缘。",
+    "extent": "覆盖标签中部约一半瓶身宽度，主要位于图像x约360至1000、y约890至1410区域，跨越多行文字及标签图案。",
+    "photometry": "褶皱表现为强烈的亮色高光带与暗色折痕交替，局部对周围标签形成很强的明暗反差，尤其是中央斜向折线和右下方折叠边缘。",
+    "edge_profile": "同时具有锐利的折痕棱线和较平缓的隆起、塌陷过渡；中央交汇处折痕较尖锐，周边区域呈连续起伏。",
+    "texture_effect": "标签上的文字和印刷图案被明显拉伸、弯曲并局部遮挡，部分文字跨越褶皱后出现错位和变形。",
+    "prompt_hint": "Large crumpled label deformation with multiple intersecting diagonal folds, sharp creases, raised glossy ridges, and distorted printed text on the middle of a cylindrical bottle.",
+    "source_image": "../实拍正样本（有缺陷）/2.jpg/2_20260426161700288.jpg",
+    "crop_path": "outputs/catalog/crops/2.jpg__2_20260426161700288__0.png",
+    "bbox": [
+      350,
+      885,
+      670,
+      545
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917125723726__0",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部偏下的标签区域",
+    "appearance": "标签左下至中部出现明显的挤压褶皱和折痕，形成连续的斜向波纹与局部塌陷，标签表面不再平整。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "斜向左下-右上，多向交叉",
+    "geometry": "褶皱以数条长条状、弯曲的明暗带呈现，长度约80至300像素、宽度约5至35像素；部分褶皱近似平行，部分在左侧相互交叉并形成局部扭曲区域，无明显分叉。",
+    "extent": "约覆盖瓶身宽度的65%、高度的15%，主要跨越标签中部偏下区域，从左侧瓶身边缘延伸至中央及右下方，影响多行文字区域。",
+    "photometry": "表现为明显的高光亮带与暗色折痕交替，和周围平整标签相比对比度较强，局部呈现宽范围的明暗渐变。",
+    "edge_profile": "以较锐利的折痕棱线为主，同时伴有平缓的隆起和凹陷过渡，褶皱边缘不完全规则。",
+    "texture_effect": "褶皱使标签底纹和部分文字产生局部弯曲、拉伸和轻微错位，但文字整体仍可辨认。",
+    "prompt_hint": "A bottle label with a large crumpled deformation across the lower middle area, showing several diagonal intersecting wrinkles, sharp crease lines, and alternating bright highlights and dark folds that distort the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917125723726.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917125723726__0.png",
+    "bbox": [
+      56,
+      826,
+      564,
+      178
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917130047372__0",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签膜表面存在大面积不平整，伴随多条斜向褶皱、折痕和局部起伏。褶皱从标签上部延伸至下部，部分区域呈波浪状明暗交替。",
+    "severity": 3,
+    "count": 7,
+    "orientation": "斜向左上-右下为主，局部多向交叉",
+    "geometry": "约7条中长距离褶皱或折痕，长度约100至500像素、宽度约5至35像素，整体呈弧形或轻微弯曲的带状结构；部分褶皱近似平行排列，部分在标签中部交错，局部伴随较宽的隆起或塌陷区域，无明显分叉。",
+    "extent": "覆盖主标签约80%的高度和90%的宽度，范围约从标签上边缘下方至标签下边缘，跨越瓶身中部的大部分正面区域。",
+    "photometry": "主要表现为亮色高光带与暗色折痕相间，褶皱两侧存在明显明暗反差；部分区域为宽而柔和的亮暗过渡，局部折痕对比度较强。",
+    "edge_profile": "多数为平缓的隆起或凹陷过渡，夹杂少量较锐利的斜向折痕棱线；边缘不完全笔直，具有波浪和弯曲特征。",
+    "texture_effect": "褶皱覆盖并穿过标签文字及印刷图案，使局部文字和背景图案出现轻微拉伸、弯曲、明暗不均和部分遮挡，但整体文字仍可辨认。",
+    "prompt_hint": "A large bottle label with broad diagonal wrinkles and folded creases across most of its surface, showing alternating bright highlights and dark recessed lines that slightly distort the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917130047372.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917130047372__0.png",
+    "bbox": [
+      158,
+      194,
+      589,
+      899
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917125847738__0",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部至中下部的标签膜，主要位于正面偏左及中央大字区域",
+    "appearance": "标签表面存在一片较明显的波浪状起皱，多条细长褶皱横穿中央印刷文字，局部伴有轻微塌陷和不平整。",
+    "severity": 3,
+    "count": 7,
+    "orientation": "以横向和斜向左上-右下为主",
+    "geometry": "约7条长短不一的细窄褶皱，整体略弯曲并呈波浪状；较长者横跨约半个瓶身宽度，较短者局限于中央偏左，部分褶皱相互接近但无明显分叉，排列较为松散且不完全平行。",
+    "extent": "覆盖标签中部至中下部约23%的瓶身高度、约70%的可见瓶身宽度，跨越中央纵向大字及其左侧区域。",
+    "photometry": "褶皱表现为低对比度的细暗线与邻近浅亮带交替，局部在印刷浅色文字上更易辨认，与周围平滑标签形成中等对比。",
+    "edge_profile": "多数为平缓起伏的隆起或凹陷过渡，少数褶皱中心带有较清晰的细窄折痕棱线。",
+    "texture_effect": "中央大号印刷字母和底纹沿褶皱发生轻微波动与弯折，轮廓局部扭曲，但没有明显断裂或遮挡。",
+    "prompt_hint": "Add several subtle horizontal and diagonal wavy wrinkles across the middle-lower glossy bottle label, with alternating faint bright and dark crease lines distorting the printed letters.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917125847738.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917125847738__0.png",
+    "bbox": [
+      109,
+      762,
+      559,
+      377
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917130057816__0",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身标签上部至中下部",
+    "appearance": "标签膜出现大面积明显起皱和折叠，多条宽窄不一的斜向褶皱贯穿主要图文区域；左侧边缘同时有局部挤压形成的波浪状皱褶。",
+    "severity": 5,
+    "count": 9,
+    "orientation": "以斜向左上-右下为主，局部多向交叉",
+    "geometry": "约有5条较长的斜向折痕从标签左上或左中部延伸至右侧中下部，长度约350-700像素，部分呈宽带状并带弧形弯曲；其间夹有数条较细的平行棱线。左边缘另有约4条短而弯曲的横斜向褶皱，彼此堆叠并形成局部鼓起和塌陷。",
+    "extent": "覆盖标签宽度约85%、高度约65%，从标签顶缘附近跨过左侧大字、中央“水感觉3.0”区域并延伸至右侧水滴图案下方。",
+    "photometry": "褶皱表现为宽亮带、暗色折痕及灰度渐变带交替，主折痕与周围标签反差明显；左侧挤压区域有高光斑和深暗阴影相邻。",
+    "edge_profile": "主斜折痕具有较清晰的棱线，部分宽带边缘平缓；左侧局部褶皱边缘锐利且起伏密集，伴随明显鼓包和凹陷过渡。",
+    "texture_effect": "标签上的左侧大字、中央文字及水滴图案被折痕切过并产生弯折、错位和局部拉伸，部分笔画明暗不连续，但未完全遮挡。",
+    "prompt_hint": "Severe wrinkled plastic bottle label with multiple broad diagonal creases, sharp fold ridges, and puckered bulges along the left edge.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917130057816.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917130057816__0.png",
+    "bbox": [
+      59,
+      207,
+      648,
+      833
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917130057816__1",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身标签底部",
+    "appearance": "标签底部横向装饰带出现连续波浪状起伏，形成多处竖向鼓包和凹槽，局部还有斜向折痕汇入底边。",
+    "severity": 3,
+    "count": 7,
+    "orientation": "以竖向起伏为主，夹有斜向左上-右下折痕",
+    "geometry": "约6条宽度不等的短竖向波状隆起沿底部横向并排分布，轮廓圆缓；另有1条较长的斜向折线从左侧中下部延伸至底部中央，与波浪区域相接。",
+    "extent": "覆盖标签底部宽度约80%、标签总高度约10%，主要位于圆形标识下方至标签下缘之间。",
+    "photometry": "表面呈连续明暗相间的竖向条带，隆起处较亮、凹陷处较暗，中央和右侧对比更明显。",
+    "edge_profile": "大部分为平缓的隆起与凹陷过渡，少量斜向折线边缘较清楚但不尖锐。",
+    "texture_effect": "底部灰色横带发生波浪状扭曲，带状图案边界不再平直；上方圆形标识基本未被遮挡。",
+    "prompt_hint": "A wavy deformed lower label band with several vertical bulges, shallow dents, and one diagonal crease.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917130057816.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917130057816__1.png",
+    "bbox": [
+      67,
+      1275,
+      661,
+      151
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917125942230__0",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身标签中部至中下部，主要集中在左侧并横跨至右侧",
+    "appearance": "标签膜出现大面积起皱和挤压变形，多条长短不一的折痕叠加，其中一条明显的斜向隆起折带从左侧中下部延伸至右侧中部。",
+    "severity": 4,
+    "count": 10,
+    "orientation": "以斜向左下-右上为主，伴有竖向及多向交叉",
+    "geometry": "主折痕为一条较长、较宽且略带弧度的斜向折带，自左侧约三分之二高度处向右上延伸，局部呈双重平行棱线；左侧另有约9条短至中长褶皱，部分近竖向、部分斜向，弯曲并发生交叉或汇聚，形成不规则的鼓起、塌陷和尖角状折面。",
+    "extent": "整体覆盖约瓶身可见宽度的90%，纵向覆盖标签高度约55%；从瓶身中部左侧文字区延伸到中下部，并跨过中央大字直至右侧边缘。",
+    "photometry": "折痕沿线呈明显的亮色高光带和暗色阴影带交替，主斜折带对比强；左侧褶皱区域明暗变化杂乱，局部隆起处高光集中。",
+    "edge_profile": "主斜折痕具有较锐利的棱线，周围伴随较平缓的隆起过渡；左侧多处折痕边缘锐利，局部塌陷边缘呈弧形缓变。",
+    "texture_effect": "标签上的中文说明、网址、容量文字以及中央大号英文字母被局部弯折、错位和拉伸，部分笔画沿折痕发生明显扭曲，但未完全遮挡。",
+    "prompt_hint": "Create a large wrinkled shrink-label area with a strong diagonal raised fold, alternating bright and dark crease bands, and multiple intersecting vertical and oblique creases on the left.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917125942230.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917125942230__0.png",
+    "bbox": [
+      52,
+      350,
+      697,
+      674
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917125912820__0",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签膜中部存在一片明显的横向起皱和挤压折痕，形成连续的波浪状隆起与凹陷。主要折痕从左侧向右侧略微倾斜，并伴有数条较浅的平行褶皱。",
+    "severity": 3,
+    "count": 4,
+    "orientation": "以横向为主，略呈左下-右上斜向",
+    "geometry": "约4条长短不一的弧形褶皱集中排列；主折痕较长，横跨标签大部分宽度，呈轻微弯曲的双线状棱脊，局部在瓶身中央附近交汇并分出较短支线；其余褶皱较细浅，大致平行分布。",
+    "extent": "覆盖瓶身中部约80%的可见宽度和约10%的瓶身高度，从标签左缘延伸至右缘，跨过中央大号文字区域。",
+    "photometry": "折痕表现为相邻的暗色细线与浅色高光带，明暗交替明显；中央及右侧的主褶皱与周围平整标签之间对比较强。",
+    "edge_profile": "主折痕具有较清晰的棱线和局部锐利转折，周边伴随较平缓的波浪状隆起、凹陷过渡。",
+    "texture_effect": "褶皱穿过大号印刷字母，使字形边缘出现轻微错位、弯曲和压缩，但文字整体仍可辨认。",
+    "prompt_hint": "Add several long horizontal-to-slightly-diagonal wrinkles across the middle of the bottle label, with alternating bright ridges and dark crease lines that warp the printed letters.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917125912820.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917125912820__0.png",
+    "bbox": [
+      78,
+      787,
+      648,
+      181
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917125828860__0",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身上部至瓶身中部的透明标签区域",
+    "appearance": "标签膜出现大面积波浪状褶皱和斜向折痕，中央区域有明显的局部鼓起与塌陷，褶皱覆盖并穿过大号印刷文字。",
+    "severity": 4,
+    "count": 8,
+    "orientation": "斜向左上-右下为主，夹杂竖向和多向交叉",
+    "geometry": "约8条可辨识的长条状褶皱，长度约80至430像素、宽度约5至35像素，整体弯曲且粗细不均；部分褶皱相互交叉并形成不规则片状起伏，主要呈平行斜向排列，中央有局部汇聚。",
+    "extent": "约覆盖瓶身宽度的55%，从标签上边缘附近延伸至瓶身中部，覆盖约标签高度的65%；主要范围为图像坐标x160至570、y180至850。",
+    "photometry": "褶皱表现为明暗交替的高光亮带和暗色折痕，中央区域与周围平整标签相比具有中等至强烈的对比，部分折痕呈半透明亮白反光。",
+    "edge_profile": "同时存在较锐利的折痕棱线和较平缓的隆起/凹陷过渡，部分斜向折痕边界清晰。",
+    "texture_effect": "标签上的大号文字和几何图案在褶皱处发生局部拉伸、弯曲和明暗断续，但整体文字仍可辨认。",
+    "prompt_hint": "Large transparent bottle label with broad diagonal wrinkles, intersecting creases, and uneven bulging and sinking across the printed typography.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917125828860.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917125828860__0.png",
+    "bbox": [
+      160,
+      180,
+      410,
+      670
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917125828860__1",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中下部右侧标签区域",
+    "appearance": "右下方标签膜出现明显成片褶皱和局部挤压变形，形成不规则的波浪状起伏与数条斜向折痕。",
+    "severity": 4,
+    "count": 6,
+    "orientation": "斜向左上-右下及斜向右上-左下，多向交叉",
+    "geometry": "约6条中短褶皱，长度约50至220像素、宽度约6至30像素，弯曲不直，局部呈扇形放射并相互交叉；右侧边缘附近可见片状鼓起和塌陷。",
+    "extent": "约覆盖瓶身宽度的25%，从瓶身中部偏下延伸到标签下缘附近，覆盖约高度的20%；主要范围为图像坐标x535至755、y900至1130。",
+    "photometry": "褶皱呈明显的亮暗交替，高光折脊与暗色凹槽并存，和周围标签表面的对比强，右侧局部反光较亮。",
+    "edge_profile": "部分折痕具有清晰锐利的棱线，周围伴随较宽的平缓隆起和凹陷过渡。",
+    "texture_effect": "右侧印刷图案和圆形标识在褶皱处发生局部弯曲、拉伸和遮挡，图案边缘出现不连续的明暗变化。",
+    "prompt_hint": "Crumpled lower-right bottle label with several crossing diagonal creases, bright ridges, dark valleys, and localized compression folds.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917125828860.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917125828860__1.png",
+    "bbox": [
+      535,
+      900,
+      220,
+      235
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917125828860__2",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中下部中央至左侧标签区域",
+    "appearance": "标签下半部存在较宽的纵向和斜向起皱带，局部标签被拉扯后形成波浪状起伏和轻微塌陷。",
+    "severity": 3,
+    "count": 5,
+    "orientation": "竖向与斜向交错",
+    "geometry": "约5条较长但相对平缓的褶皱，长度约100至360像素、宽度约5至25像素，弯曲度中等，部分近似平行，末端向不同方向散开并与相邻褶皱连接。",
+    "extent": "约覆盖瓶身宽度的35%，从大号文字下方延伸至标签下部，覆盖约高度的25%；主要范围为图像坐标x170至520、y760至1160。",
+    "photometry": "以低对比度的灰色亮带和暗色凹槽为主，明暗交替较柔和，但在局部斜向折痕处对比增强。",
+    "edge_profile": "以平缓的隆起/凹陷过渡为主，夹杂少量较清晰的细折痕边缘。",
+    "texture_effect": "大号文字下半部和背景几何图案出现轻微弯曲、拉伸和局部变形，未完全断裂。",
+    "prompt_hint": "Moderate broad wrinkles across the lower central bottle label, with soft vertical and diagonal folds subtly warping the printed graphics.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917125828860.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917125828860__2.png",
+    "bbox": [
+      170,
+      760,
+      350,
+      400
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917125923334__0",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部标签左侧至中央区域",
+    "appearance": "标签膜出现多条斜向褶皱，并在中央形成一处纵向波浪状凹凸变形。褶皱使局部表面起伏明显，轮廓不规则。",
+    "severity": 3,
+    "count": 6,
+    "orientation": "多向交叉，以斜向左上-右下和近竖向为主",
+    "geometry": "左侧约有4条细长弧形斜褶皱，长度约80-210像素，部分近似平行并穿过小字区域；中央约有2条较宽的纵向弯曲折痕，呈S形或封闭弧状，局部相互贴近但无明显分叉。",
+    "extent": "覆盖标签中部约45%的可见宽度和约25%的标签高度，从左侧说明文字区域延伸到中央深色斜纹区域。",
+    "photometry": "折痕主要表现为低对比度暗线与窄亮边相伴，中央凹凸处形成较宽的明暗渐变带，与周围平整标签相比具有可见的波浪起伏。",
+    "edge_profile": "细褶皱具有较清晰的折痕棱线，中央变形则以平缓隆起和凹陷过渡为主，边界弯曲且不规则。",
+    "texture_effect": "左侧部分说明文字和背景斜纹沿褶皱发生轻微弯曲、压缩和错位，但文字仍基本可辨认，未见完全断裂或遮挡。",
+    "prompt_hint": "Add several diagonal film wrinkles and a broad sinuous vertical dent across the middle of the bottle label.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917125923334.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917125923334__0.png",
+    "bbox": [
+      132,
+      466,
+      365,
+      327
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.bmp__3号_20250917125923334__1",
+    "class_name": "3.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签左侧至中央，净含量文字附近",
+    "appearance": "标签在净含量文字上下出现成片横向起皱，形成数条连续的波浪状压褶和局部鼓起。褶皱横跨较宽区域，表面呈明显不平整状态。",
+    "severity": 3,
+    "count": 4,
+    "orientation": "横向，略呈左上-右下弧形",
+    "geometry": "约4条长短不一的波浪形褶皱，上下间隔较近；主要折痕长度约180-470像素，粗细不均，整体从左侧边缘向中央延伸，部分折痕相互汇合并形成宽缓弧带。",
+    "extent": "覆盖标签可见宽度约60%，高度约10%，跨越网址、产品标识及净含量文字附近，并延伸到右侧深色图案边缘。",
+    "photometry": "褶皱呈暗色弯曲带与灰白高光边交替排列，左侧和文字下方对比较强，向中央逐渐变弱。",
+    "edge_profile": "主折痕边缘较清楚，局部呈锐利压线；相邻鼓包区域为宽缓、圆滑的明暗过渡。",
+    "texture_effect": "网址和净含量等印刷文字随波浪褶皱发生弯折及轻微拉伸，文字基线不再平直，部分笔画受到明暗带干扰但未被遮挡。",
+    "prompt_hint": "Create four broad horizontal wavy wrinkles across the lower-middle bottle label, bending the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/3.bmp/3号_20250917125923334.bmp",
+    "crop_path": "outputs/catalog/crops/3.bmp__3号_20250917125923334__1.png",
+    "bbox": [
+      54,
+      946,
+      487,
+      154
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161646046__0",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身上部至中部右侧标签",
+    "appearance": "标签膜存在一大片明显的斜向折皱，主折痕从上部中央向右下延伸，并在右侧文字区域形成多条聚拢、交叠的褶皱。",
+    "severity": 4,
+    "count": 7,
+    "orientation": "斜向左上-右下",
+    "geometry": "一条较长且略弯曲的主折痕由左上向右下贯穿，长度约650像素；其右下端分化出约6条长短不一的细窄褶皱，部分近似平行，部分呈扇形聚拢并相互交叉，局部形成尖角状折叠。",
+    "extent": "覆盖约瓶身可见宽度的55%、可见高度的28%，从瓶身上部靠近标签顶缘处跨越品牌标志区域，一直延伸至瓶身中部右侧的大号英文文字区域。",
+    "photometry": "主折痕表现为连续暗色棱线，边缘伴随窄亮带；右侧密集褶皱呈强烈的明暗交替，与周围平整标签对比明显。",
+    "edge_profile": "主折痕棱线较锐利，右下端多条褶皱边缘尖锐并带有局部隆起，褶皱之间夹有较平缓的塌陷过渡。",
+    "texture_effect": "褶皱穿过品牌图形及右侧大号英文文字，使字母边缘发生明显弯折、压缩和错位，但未完全遮挡印刷内容。",
+    "prompt_hint": "A large diagonal wrinkled label film with a sharp crease and fan-shaped intersecting folds distorting the printed letters.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161646046.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161646046__0.png",
+    "bbox": [
+      465,
+      150,
+      665,
+      690
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161646046__1",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部偏右标签",
+    "appearance": "标签中部有一组纵向波浪状起皱和局部塌陷，形成细长的不规则凹凸带。",
+    "severity": 3,
+    "count": 4,
+    "orientation": "竖向",
+    "geometry": "约4条细长褶皱沿竖向略呈S形延伸，单条长度约180至500像素、宽度约5至25像素；各褶皱不完全平行，局部汇合后再次分开，中央形成一处较宽的波浪状凹陷。",
+    "extent": "覆盖约瓶身可见宽度的15%、可见高度的30%，从瓶身上中部延伸至中部偏下，主要位于中央高光区与右侧文字区之间。",
+    "photometry": "褶皱由窄亮色隆起带和深灰色凹陷线交替构成，在标签的颗粒状高光表面上仍清晰可见，局部对比中等偏强。",
+    "edge_profile": "部分折线边缘较锐利，中央较宽区域则呈平缓的隆起和凹陷过渡，整体为连续波浪状轮廓。",
+    "texture_effect": "主要位于印刷留白区域，对文字遮挡较少；靠右边缘与大号字母相邻，使局部印刷边界产生轻微弯曲和拉伸。",
+    "prompt_hint": "Several vertical wavy wrinkles and shallow dents in the label film, with alternating bright ridges and dark troughs.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161646046.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161646046__1.png",
+    "bbox": [
+      620,
+      480,
+      195,
+      735
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161539999__0",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部至中下部的标签左侧",
+    "appearance": "标签膜左侧出现大面积挤压起皱和塌陷，多条波浪状褶皱从左边缘向内延伸，并在下部汇聚成明显斜折痕。",
+    "severity": 4,
+    "count": 10,
+    "orientation": "以斜向左上-右下为主，夹杂近竖向弯曲褶皱",
+    "geometry": "约10条长短不一的褶皱，主要为细长弯曲棱线；上半段沿标签左边缘近似平行排列，中下段逐渐向右下方倾斜并相互靠拢，局部交叉、分叉，形成三角状收缩和放射状折叠，最长折痕延伸至下方黑色文字色块内部。",
+    "extent": "覆盖标签左侧约三分之一宽度，纵向从“AQUA MOIST”文字左侧附近一直跨越说明文字区并延伸到下方黑色色块，约占可见瓶身高度的三分之一。",
+    "photometry": "褶皱表现为窄亮高光带与深色阴影折痕交替，左边缘和汇聚处明暗反差强，斜向折痕在黑色色块上仍可辨认。",
+    "edge_profile": "兼有锐利的折痕棱线和较宽缓的鼓起、凹陷过渡；下部汇聚处折痕较深且边缘清晰。",
+    "texture_effect": "标签上的横线、中文说明文字及下方黑色色块随褶皱发生局部弯曲、压缩和错位，部分笔画被折痕阴影干扰，但未完全遮挡。",
+    "prompt_hint": "Large wrinkled label film on the left-middle bottle, with converging diagonal creases, alternating bright ridges and dark folds, distorting the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161539999.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161539999__0.png",
+    "bbox": [
+      96,
+      778,
+      412,
+      905
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161651501__0",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部标签左侧至中右部",
+    "appearance": "标签膜出现大面积挤压起皱，左侧褶皱最密集，并有数条长折痕横向及斜向延伸到中央文字区域；右侧也有局部鼓起和波浪状折痕。",
+    "severity": 4,
+    "count": 15,
+    "orientation": "多向交叉，以横向和斜向左上-右下为主",
+    "geometry": "左侧约有10条长短不一的弯曲褶皱，部分呈尖角、分叉和相互交汇，形成不规则扇形及波浪形排列；其中约4条较长折痕从左侧向右延伸，跨过“AQUA/MOIST”文字区域。右侧另有约3条短而弯曲的横向褶皱，局部呈鼓包状。",
+    "extent": "覆盖瓶身中部约80%的可见宽度和约28%的图像高度，从标签左边缘延伸至瓶身中右侧，纵向跨越“AQUA”下部、“MOIST”主体及其下方说明文字上缘。",
+    "photometry": "褶皱表面形成明显的亮色高光带与暗色折痕交替，左侧对比最强；长折痕在黑色文字上表现为连续的灰亮带，右侧局部隆起也产生弧形高光。",
+    "edge_profile": "兼有锐利的折痕棱线和平缓的波浪状隆起；左侧多处折角边缘尖锐，向中央及右侧延伸后逐渐变宽、过渡变缓。",
+    "texture_effect": "标签上的“AQUA”和“MOIST”文字被褶皱挤压并产生局部弯曲、错位和明暗断续，下方横线及小字也有轻微波浪形扭曲，但印刷内容仍可辨认。",
+    "prompt_hint": "Create a large crumpled label area with intersecting horizontal and diagonal wrinkles, sharp folds on the left, and wavy raised creases extending across the central text.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161651501.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161651501__0.png",
+    "bbox": [
+      96,
+      452,
+      982,
+      704
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161651501__1",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身上部至中下部标签中央",
+    "appearance": "标签中央存在一条连续的竖向折叠带，从上方品牌标识附近向下贯穿多组文字，呈窄幅起伏和局部收缩。",
+    "severity": 3,
+    "count": 2,
+    "orientation": "竖向",
+    "geometry": "由一条主要细长折痕和一条紧邻的较弱平行皱线构成，整体略弯曲，宽度沿纵向不均；在中部与横向褶皱交叉，并出现短小分叉和局部波浪。",
+    "extent": "纵向覆盖瓶身可见高度约55%，从上部品牌标识下方延伸至中下部黑色矩形宣传区上缘，横向宽度约占瓶身宽度的6%。",
+    "photometry": "折叠带呈窄亮高光与相邻暗线并行的明暗结构，在浅色标签区域较明显，经过黑色印刷文字时亮带被文字对比强化。",
+    "edge_profile": "主折痕具有较清晰的窄棱线，周围伴随较平缓的凹陷过渡；交叉区域边缘稍显破碎和起伏。",
+    "texture_effect": "中央品牌标识、“AQUA/MOIST”及下方说明文字被竖向折痕轻微压缩和扭曲，部分笔画出现局部错位，但没有完全断裂或遮挡。",
+    "prompt_hint": "Add a narrow vertical label fold with alternating bright and dark ridges running through the center of the printed graphics.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161651501.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161651501__1.png",
+    "bbox": [
+      592,
+      185,
+      83,
+      1305
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161538866__0",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签中部出现一片明显的横向起皱和压折，多条波浪状褶皱由中央向右侧延伸，其中下方有一条较长折痕横穿文字区域。",
+    "severity": 3,
+    "count": 9,
+    "orientation": "横向",
+    "geometry": "约9条长短不一的细窄褶皱，整体近似水平并带轻微弯曲；上半部分数条短褶皱密集、近似平行排列，长度约120至220像素，下方折痕较长，约600像素，局部呈双线状明暗棱边，未见明显分叉。",
+    "extent": "覆盖标签中部约六成瓶身可见宽度，高度约占标签主体的15%，从文字信息区左缘附近一直延伸至瓶身右侧弧面。",
+    "photometry": "褶皱表现为细窄亮带与暗色折痕交替，中央区域反光较强；长折痕形成连续暗线并伴随邻近亮边，与周围平整标签对比明显。",
+    "edge_profile": "多数为较锐利的压折棱线，部分短皱纹边缘呈平缓波浪状隆起和凹陷过渡。",
+    "texture_effect": "褶皱穿过多行中文说明文字，使局部字形发生轻微上下错位和波动，但文字整体仍可辨认，未见印刷断裂。",
+    "prompt_hint": "Add a cluster of horizontal wavy label wrinkles with alternating bright ridges and dark crease lines across the middle of the bottle.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161538866.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161538866__0.png",
+    "bbox": [
+      426,
+      770,
+      701,
+      279
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161537760__0",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部偏右的标签区域",
+    "appearance": "标签表面存在大面积明显起皱和折叠，右侧文字区域出现多条斜向折痕，向下延伸后形成连续的横向波浪状褶皱和局部塌陷。",
+    "severity": 4,
+    "count": 12,
+    "orientation": "多向交叉，以上部斜向左上-右下和下部横向为主",
+    "geometry": "约12条长短不一的褶皱和折痕，长度约30至280像素、宽度约3至25像素；上部褶皱多为弯曲斜线，局部呈锐利折痕，下部为多条近似横向的波浪状条带，彼此大致平行但局部交叉、汇聚并形成不规则塌陷。",
+    "extent": "覆盖瓶身右侧标签约40%的宽度和约25%的高度，范围从右侧文字区上部延伸至STERILE标识上方及其附近，跨越多行印刷文字。",
+    "photometry": "褶皱表现为明显的亮暗交替，高光亮带与暗色折痕并存；与周围平整标签表面对比强烈，尤其在右侧斜向折痕和下部横向褶皱处最明显。",
+    "edge_profile": "同时包含锐利的折痕棱线和较平缓的隆起、凹陷过渡；部分折痕边缘清晰，部分褶皱呈宽幅渐变阴影。",
+    "texture_effect": "多行文字和标签图案被明显扭曲、拉伸并局部遮挡，文字基线在褶皱处发生弯曲，部分笔画被亮暗折痕切断或变形。",
+    "prompt_hint": "A large wrinkled bottle label with intersecting diagonal creases and horizontal wave-like folds, producing strong alternating highlights and dark recessed lines that distort the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161537760.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161537760__0.png",
+    "bbox": [
+      600,
+      820,
+      530,
+      590
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161653710__0",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中上部标签区域，主要从左侧边缘延伸至正面中央",
+    "appearance": "标签膜出现一大片明显的挤压起皱，多条长条状折痕由左侧向右下方斜向延伸。左侧标签边缘局部堆叠、塌陷，褶皱横跨正面大字印刷区域。",
+    "severity": 4,
+    "count": 6,
+    "orientation": "斜向左上-右下",
+    "geometry": "约6条较长褶皱呈近似平行的扇形排列，起点集中在瓶身左侧边缘，向右下逐渐展开；主要折痕长度约350至760像素，宽度约8至30像素，整体略微弯曲，局部相互靠拢或叠压。左端伴有短而密集的波浪状起伏，向中央延伸后形成较连续的斜向棱线。",
+    "extent": "覆盖瓶身可见宽度约65%，高度约17%；从瓶身中上部左侧文字区域跨越至正面“AQUA MOIST”字样的中下部。",
+    "photometry": "褶皱表现为连续的亮色高光带与暗色折痕交替，左侧及折痕棱线处对比强，向右侧逐渐变弱；部分暗线横穿黑色印刷文字。",
+    "edge_profile": "主要褶皱具有较锐利的折痕棱线，间隔区域为平缓鼓起或凹陷过渡；左侧边缘的挤压变形更陡、更密集。",
+    "texture_effect": "标签上的左侧小字以及“AQUA MOIST”大字被斜向折痕穿过，局部产生弯折、错位和明暗遮断，但文字主体仍可辨认。",
+    "prompt_hint": "Add six long parallel diagonal wrinkles and compressed folds across the upper-middle bottle label, with alternating bright ridges and dark creases.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161653710.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161653710__0.png",
+    "bbox": [
+      87,
+      617,
+      756,
+      414
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161644929__0",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部标签，位于“MOIST”下方至“SPA保湿/多效极润”文字区域",
+    "appearance": "标签膜形成一片横贯正面的宽幅褶皱和塌陷带，左侧隆起明显，向中部斜向下延伸后转为近横向折痕。局部伴有多条细小分支皱纹。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "以斜向左上-右下及横向为主",
+    "geometry": "一条主要宽折带由左侧边缘起始，呈缓弧形向右下延伸，长度约850像素、宽约35至70像素；其上下边缘各有细长折痕，中央文字附近另有约3条短小弯曲分支，彼此局部交叉并逐渐汇入右侧近水平棱线。",
+    "extent": "覆盖标签正面约四分之三以上宽度、高度约8%，从瓶身左缘跨过“SPA保湿”和“多效极润”区域并延伸至右侧横线附近。",
+    "photometry": "折带上缘呈较亮的宽高光，下缘伴随暗色细线，局部形成明显明暗交替，与周围均匀标签表面对比强。",
+    "edge_profile": "主折带边缘较清晰，左侧为平缓隆起与塌陷过渡，中部和右侧出现较锐利的折痕棱线。",
+    "texture_effect": "“SPA保湿”和“多效极润”文字及其上下分隔线发生弯曲、压缩和局部错位，但未完全遮挡。",
+    "prompt_hint": "A broad wrinkled label-film band with diagonal-to-horizontal folds, bright raised ridges and dark creases crossing the middle of the bottle label.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161644929.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161644929__0.png",
+    "bbox": [
+      101,
+      1137,
+      870,
+      199
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161644929__1",
+    "class_name": "3.jpg",
+    "defect_type": "划痕",
+    "location": "瓶身上部标签，品牌标志左上方至标志内部",
+    "appearance": "一条细长明亮的直线状划痕斜穿品牌标志上方，线条连续且与周围表面反差明显。",
+    "severity": 2,
+    "count": 1,
+    "orientation": "斜向左上-右下",
+    "geometry": "单条近直线划痕，长度约155像素，宽约2至4像素，中段略有亮度间断，无明显分叉或交叉。",
+    "extent": "覆盖瓶身宽度约6%，从品牌标志上方延伸至“海昌”图案内部。",
+    "photometry": "主要表现为窄而明亮的高对比线，局部由亮白转为较暗细线。",
+    "edge_profile": "边缘细锐，线宽基本稳定。",
+    "texture_effect": "划痕穿过品牌印刷区域，使局部黑色图案上出现一条亮线，但文字结构仍可辨认。",
+    "prompt_hint": "A thin straight bright diagonal scratch running down-right across the upper brand logo.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161644929.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161644929__1.png",
+    "bbox": [
+      315,
+      200,
+      79,
+      153
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161644929__2",
+    "class_name": "3.jpg",
+    "defect_type": "划痕",
+    "location": "瓶身上部标签，品牌标志右下侧",
+    "appearance": "一条短小明亮的斜向线状划痕，位于品牌英文标志右侧。",
+    "severity": 1,
+    "count": 1,
+    "orientation": "斜向左上-右下",
+    "geometry": "单条短直线，长度约45像素、宽约3至5像素，两端略尖，无分叉和交叉。",
+    "extent": "仅覆盖瓶身宽度约4%，局限于品牌标志右下方的小区域。",
+    "photometry": "呈高亮白色细线，与较暗的标签底色形成较强对比。",
+    "edge_profile": "边缘锐利，中央稍宽、两端渐细。",
+    "texture_effect": "局部穿过品牌附近的印刷底面，未造成明显文字扭曲或遮挡。",
+    "prompt_hint": "A short sharp bright diagonal scratch beside the upper printed brand logo.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161644929.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161644929__2.png",
+    "bbox": [
+      529,
+      375,
+      39,
+      39
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161654863__0",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中上部标签左侧",
+    "appearance": "标签左侧出现成片的明显褶皱和挤压起伏，表面形成多条横向至斜向的波浪状折痕。",
+    "severity": 4,
+    "count": 8,
+    "orientation": "横向及斜向左上-右下",
+    "geometry": "多条短至中等长度的弯曲褶皱，宽度约5-20像素，局部呈层叠排列并轻微交叉，褶皱集中在标签左边缘向内约150像素范围内。",
+    "extent": "覆盖标签左侧约20%的宽度、约10%的标签高度，主要跨越中上部多行文字区域。",
+    "photometry": "褶皱表现为亮暗交替的高光带和暗色折痕，与周围平整标签表面对比强烈。",
+    "edge_profile": "部分折痕具有较锐利的棱线，周围伴随平缓的隆起和凹陷过渡。",
+    "texture_effect": "褶皱使附近文字和印刷线条发生局部弯曲、拉伸和明暗遮挡。",
+    "prompt_hint": "A transparent bottle label with a heavily wrinkled left section, showing layered horizontal and diagonal creases with alternating highlights and dark folds.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161654863.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161654863__0.png",
+    "bbox": [
+      238,
+      570,
+      195,
+      245
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "3.jpg__3_20260426161654863__1",
+    "class_name": "3.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签底部",
+    "appearance": "标签下方出现明显的横向折皱和局部塌陷，形成连续的波浪状隆起带及深色水平折痕。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "横向",
+    "geometry": "多条长条状、弯曲的水平褶皱，长度约250-500像素、宽度约8-35像素，部分褶皱近似平行并在中部汇聚，局部形成较宽的凹陷带。",
+    "extent": "覆盖标签底部约65%的宽度、约8%的高度，主要从左侧标签边缘延伸至中右部。",
+    "photometry": "折皱区域呈明显的亮暗交替，高光亮带位于褶皱隆起处，暗色细线位于折痕凹陷处，整体对比度较强。",
+    "edge_profile": "上方细折痕较锐利，下面的波浪状区域为较平缓的隆起与塌陷过渡。",
+    "texture_effect": "该区域基本位于文字下方空白标签区域，对印刷文字影响较小，但标签底边轮廓被明显拉皱并发生不规则起伏。",
+    "prompt_hint": "A bottle label with pronounced horizontal wrinkles and a broad collapsed wave near the lower edge, with alternating bright ridges and dark crease lines.",
+    "source_image": "../实拍正样本（有缺陷）/3.jpg/3_20260426161654863.jpg",
+    "crop_path": "outputs/catalog/crops/3.jpg__3_20260426161654863__1.png",
+    "bbox": [
+      240,
+      1620,
+      570,
+      185
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "4.bmp__4号_20250917125940142__0",
+    "class_name": "4.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部偏下的标签右侧边缘",
+    "appearance": "标签右边缘局部受挤压后起皱并向外翘起，形成一片明显的折叠、塌陷和鼓包区域。中下段可见较深的折痕及不规则褶皱。",
+    "severity": 3,
+    "count": 5,
+    "orientation": "多向交叉，以横向和斜向为主",
+    "geometry": "约5条长短不一的褶皱集中在标签边缘，短折痕呈横向或斜向排列，局部相互交叉；中部有一处较大的三角状翘起折片，下部伴随纵向压缩和波浪状皱缩。",
+    "extent": "覆盖标签右侧约7%的宽度，纵向跨越瓶身中部至中下部，约占标签总高度的16%。",
+    "photometry": "折叠凸起处形成较亮的高光带，凹陷折痕呈暗线，明暗交替明显，与周围平整标签反差较强。",
+    "edge_profile": "部分折痕具有较锐利的棱线，翘起折片边缘清晰；周围皱缩区域则呈不规则、较平缓的隆起和凹陷过渡。",
+    "texture_effect": "右侧窄条区域的印刷文字及边缘图案被挤压、弯曲并局部遮挡，排列连续性受到破坏。",
+    "prompt_hint": "Add a locally crushed and lifted label edge with several sharp horizontal and diagonal creases, a small triangular folded flap, and alternating bright highlights and dark fold lines.",
+    "source_image": "../实拍正样本（有缺陷）/4.bmp/4号_20250917125940142.bmp",
+    "crop_path": "outputs/catalog/crops/4.bmp__4号_20250917125940142__0.png",
+    "bbox": [
+      707,
+      806,
+      60,
+      214
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "4.bmp__4号_20250917125833054__0",
+    "class_name": "4.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签区域，主要位于中央至右侧",
+    "appearance": "标签膜出现一条明显的长斜向折痕，并在其右侧及下方伴随多条横向波浪状褶皱和局部隆起，形成较明显的挤压起皱区域。",
+    "severity": 3,
+    "count": 7,
+    "orientation": "斜向左上-右下与横向交叉",
+    "geometry": "一条较长、略弯曲的主折痕由左上向右下延伸，沿途宽度不均并形成尖锐棱线；其末端附近分布约6条较短的横向或微弧形褶皱，长度约为瓶身宽度的15%-45%，彼此近似平行并局部汇聚、交叉，右侧有带状鼓起和塌陷。",
+    "extent": "覆盖瓶身中部偏下约30%的高度、约65%的可见瓶身宽度，从说明文字区域下部延伸至网址及净含量文字上方和右侧。",
+    "photometry": "折痕呈亮色棱线与暗色凹槽交替，主斜折痕对比明显；横向褶皱形成多层明暗波纹，右侧局部高光带较宽。",
+    "edge_profile": "主斜折痕边缘较锐利，局部形成折叠尖角；周围横向皱褶则以平缓隆起和凹陷过渡为主。",
+    "texture_effect": "标签上的说明文字、网址以及斜向底纹在褶皱处发生轻微弯折和错位，部分文字基线与图案边界被波浪状变形扭曲，但未完全遮挡。",
+    "prompt_hint": "Create a long diagonal sharp crease with several intersecting horizontal wavy wrinkles and alternating bright and dark fold bands on the lower-middle bottle label.",
+    "source_image": "../实拍正样本（有缺陷）/4.bmp/4号_20250917125833054.bmp",
+    "crop_path": "outputs/catalog/crops/4.bmp__4号_20250917125833054__0.png",
+    "bbox": [
+      249,
+      686,
+      505,
+      377
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "4.bmp__4号_20250917125914915__0",
+    "class_name": "4.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签膜",
+    "appearance": "标签中下部存在大面积起皱和挤压折叠，多条波浪状褶皱由左下向右上贯穿标签，并在中央形成局部鼓起和塌陷。下方主折痕十分明显，造成标签表面高低不平。",
+    "severity": 4,
+    "count": 9,
+    "orientation": "以斜向左下-右上为主，夹杂近横向弯曲褶皱",
+    "geometry": "约9条长短不一的褶皱聚集成片；其中3至4条较长的弧形折痕从标签左侧延伸至右侧，近似平行排列，长度约为瓶身宽度的60%-95%；其余较短折痕集中在中央文字附近，相互汇合或交叉。折痕宽度由细线状棱线到较宽的波浪形隆起不等，右侧局部形成明显向内收缩的弯折。",
+    "extent": "覆盖瓶身中部偏下至瓶身下部，横跨标签几乎整个可见宽度，约占瓶身可见宽度的95%、图像高度的29%；主要经过中央大号字母下半部并延伸到右侧圆形标志上方。",
+    "photometry": "褶皱表现为连续的亮色高光带与深色阴影带交替，主折痕对比强烈；中央和左下区域可见多层明暗波纹，明显区别于周围较平整的标签表面。",
+    "edge_profile": "主折痕具有较锐利的折叠棱线，边缘伴随狭窄暗影；周围褶皱则呈较平缓的隆起和凹陷过渡，部分棱线在中央汇合。",
+    "texture_effect": "褶皱使中央及下部的大号印刷字母发生弯曲、错位和局部压缩，文字笔画随表面波浪起伏；右侧图案边缘也被折痕挤压弯曲，但未完全遮挡。",
+    "prompt_hint": "Large wrinkled plastic label with multiple diagonal wave-like folds, alternating bright ridges and dark creases across the lower-middle bottle.",
+    "source_image": "../实拍正样本（有缺陷）/4.bmp/4号_20250917125914915.bmp",
+    "crop_path": "outputs/catalog/crops/4.bmp__4号_20250917125914915__0.png",
+    "bbox": [
+      45,
+      827,
+      720,
+      483
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "4.bmp__4号_20250917125812045__0",
+    "class_name": "4.bmp",
+    "defect_type": "变形",
+    "location": "瓶身上部，正面标签右上边缘附近",
+    "appearance": "标签上缘向内形成局部折叠和塌陷，呈狭长的斜向褶皱区域。",
+    "severity": 3,
+    "count": 2,
+    "orientation": "斜向左上-右下",
+    "geometry": "两条相邻的短折痕由标签上缘向右下延伸，长度约50至80像素；主折痕略弯且较粗，旁侧伴有一条较细的平行棱线，整体呈收拢状排列。",
+    "extent": "覆盖标签右上角附近约瓶身宽度的8%、瓶身可见高度的5%，从标签上边缘跨入标签内部。",
+    "photometry": "折痕表现为窄亮带与暗色阴影相邻，局部明暗对比明显，靠上缘处最强。",
+    "edge_profile": "主折痕棱线较锐利，外围逐渐过渡为平缓凹陷。",
+    "texture_effect": "标签底纹在折痕处发生轻微压缩和方向偏转，未明显遮挡文字。",
+    "prompt_hint": "Add two short diagonal label creases with a sharp highlight-shadow ridge near the upper-right edge of the front label.",
+    "source_image": "../实拍正样本（有缺陷）/4.bmp/4号_20250917125812045.bmp",
+    "crop_path": "outputs/catalog/crops/4.bmp__4号_20250917125812045__0.png",
+    "bbox": [
+      405,
+      229,
+      70,
+      99
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "4.bmp__4号_20250917125812045__1",
+    "class_name": "4.bmp",
+    "defect_type": "变形",
+    "location": "瓶身中部偏右，侧面文字标签左缘",
+    "appearance": "侧面标签出现一组明显的横向起皱和局部挤压，形成连续的波浪状凹凸带。",
+    "severity": 3,
+    "count": 3,
+    "orientation": "横向",
+    "geometry": "约三条短至中等长度的横向褶皱上下密集排列，单条长度约90至130像素；线条略弯曲、粗细不均，中部有轻微分叉和起伏，整体近似平行。",
+    "extent": "覆盖右侧标签宽度的大部分，约占瓶身宽度的17%、可见瓶身高度的4%，主要横跨侧面标签左缘至文字区。",
+    "photometry": "褶皱由暗色凹槽和窄亮色隆起交替构成，与周围平整标签对比明显。",
+    "edge_profile": "中间褶皱具有较锐利的压折边缘，上下两条则呈较平缓的隆起和凹陷过渡。",
+    "texture_effect": "局部标签文字行发生轻微弯折和压缩，但仍可辨认，没有断裂或完全遮挡。",
+    "prompt_hint": "Create three closely spaced horizontal wavy wrinkles across the mid-right side label with alternating dark grooves and bright raised ridges.",
+    "source_image": "../实拍正样本（有缺陷）/4.bmp/4号_20250917125812045.bmp",
+    "crop_path": "outputs/catalog/crops/4.bmp__4号_20250917125812045__1.png",
+    "bbox": [
+      632,
+      638,
+      140,
+      67
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "4.bmp__4号_20250917125927550__0",
+    "class_name": "4.bmp",
+    "defect_type": "变形",
+    "location": "瓶身标签中部至下部",
+    "appearance": "标签表面存在成片的波浪状起皱和多条斜向折痕，局部可见鼓起与塌陷，表面平整度明显不一致。",
+    "severity": 3,
+    "count": 10,
+    "orientation": "多向交叉，主要为斜向左上-右下及斜向右上-左下",
+    "geometry": "褶皱以中长条状为主，长度约占标签高度的15%至45%，宽度不一，部分较直、部分呈弧形弯曲；多条褶皱近似平行分布，并在中部与其他斜向折痕交叉，局部形成不规则片状起伏。",
+    "extent": "覆盖标签可见区域的大部分，约占瓶身宽度的85%、瓶身高度的65%，从瓶身上部标签边缘延伸至下部标签区域，重点集中在中部和下部。",
+    "photometry": "褶皱表现为明暗交替的高光亮带与暗色折痕，部分折痕与周围标签的对比明显，起伏区域呈现不均匀的反光变化。",
+    "edge_profile": "部分折痕具有较锐利的棱线，周围同时伴随平缓的隆起和凹陷过渡，整体属于膜面受挤压后的不平整变形。",
+    "texture_effect": "标签上的文字和几何印刷图案在褶皱处出现轻微拉伸、弯曲和局部明暗断续，但大部分文字仍可辨认。",
+    "prompt_hint": "A bottle with a large glossy printed label showing multiple diagonal creases, wavy wrinkles, and localized bulges and depressions across the middle and lower label.",
+    "source_image": "../实拍正样本（有缺陷）/4.bmp/4号_20250917125927550.bmp",
+    "crop_path": "outputs/catalog/crops/4.bmp__4号_20250917125927550__0.png",
+    "bbox": [
+      28,
+      216,
+      730,
+      1235
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "4.bmp__4号_20250917125902367__0",
+    "class_name": "4.bmp",
+    "defect_type": "变形",
+    "location": "标签上部至中部",
+    "appearance": "标签表面存在一片明显的斜向褶皱/折痕区域，从标签上边缘附近向右下方延伸，形成连续的亮暗交替带状变形。",
+    "severity": 3,
+    "count": 3,
+    "orientation": "斜向左上-右下",
+    "geometry": "主要由约3条斜向延伸的褶皱带组成，长度约100至400像素、宽度约5至45像素，整体略弯曲并近似平行排列，局部存在宽窄变化和轻微交叠；其中一条较窄的锐利折痕起始于标签上缘附近，向右下方延伸。",
+    "extent": "覆盖标签上部至中部，约占瓶身宽度的33%、瓶身高度的27%，大致跨越图像坐标x170至430、y240至670区域，并穿过上方成分文字和中部横线附近。",
+    "photometry": "褶皱表现为浅色高光亮带与相邻暗色折痕交替，和周围标签表面的明暗对比明显，部分区域具有较强反光。",
+    "edge_profile": "同时具有较锐利的折痕棱线和较平缓的隆起/凹陷过渡，褶皱边缘不完全笔直，呈轻微弯曲。",
+    "texture_effect": "褶皱经过文字和横线区域，使局部印刷内容出现轻微拉伸、弯曲和明暗遮挡，但文字整体仍可辨认。",
+    "prompt_hint": "A dark bottle label with several prominent diagonal wrinkles and folded reflective ridges running from the upper left toward the lower right, causing alternating bright highlights and dark creases across the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/4.bmp/4号_20250917125902367.bmp",
+    "crop_path": "outputs/catalog/crops/4.bmp__4号_20250917125902367__0.png",
+    "bbox": [
+      170,
+      240,
+      260,
+      430
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "4.jpg__4_20260426161653700__0",
+    "class_name": "4.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部至下部标签区域",
+    "appearance": "标签中央大面积出现密集的波浪状起皱和不规则褶皱，形成连续的纵向褶皱带，表面平整度明显异常。",
+    "severity": 4,
+    "count": 20,
+    "orientation": "多向交叉，以纵向和斜向为主",
+    "geometry": "由多条长短不一的细密褶皱组成，单条褶皱大多为弯曲或断续的细线状，局部相互交叉并呈杂乱排列，整体形成宽幅纵向皱褶区域。",
+    "extent": "大致覆盖瓶身宽度的四分之一，主要跨越标签中央区域，从瓶肩下方延伸至接近瓶底，覆盖瓶身高度约75%。",
+    "photometry": "褶皱区域呈明显的明暗交替细碎纹理，部分褶皱表现为亮色高光带，邻近区域伴随暗色凹折，和周围较均匀的标签表面对比明显。",
+    "edge_profile": "以连续的平缓隆起和凹陷过渡为主，夹杂局部较锐利的折痕棱线，整体不是单一平面反光。",
+    "texture_effect": "标签底纹在褶皱区域被拉伸、扭曲并产生局部断续，但未明显遮挡主要文字。",
+    "prompt_hint": "A large central area of the bottle label is covered with dense irregular longitudinal and diagonal wrinkles, with alternating bright ridges and dark recessed creases extending from the upper body toward the bottom.",
+    "source_image": "../实拍正样本（有缺陷）/4.jpg/4_20260426161653700.jpg",
+    "crop_path": "outputs/catalog/crops/4.jpg__4_20260426161653700__0.png",
+    "bbox": [
+      360,
+      150,
+      350,
+      2070
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "4.bmp__4号_20250917125734945__0",
+    "class_name": "4.bmp",
+    "defect_type": "变形",
+    "location": "瓶身下部的标签膜，靠近标签底边并横跨中部至右侧",
+    "appearance": "标签下部出现成片起伏和多道波浪状褶皱，右侧伴有较明显的斜向折痕，局部膜面呈隆起与塌陷交替。",
+    "severity": 3,
+    "count": 6,
+    "orientation": "以横向为主，右侧夹杂斜向左下-右上折痕",
+    "geometry": "约有4至5条长短不一的横向弧形褶皱，整体近似平行并沿瓶身弧面轻微弯曲；右侧另有1至2条较细、较直的斜向折痕，与横向起伏相交。横向褶皱较宽且过渡平缓，局部在中间偏右形成短小竖向或斜向汇聚纹。",
+    "extent": "覆盖标签下部约80%的可见宽度和约20%的标签高度，从圆形透明质酸图标下方延伸至标签底部金属色横带，并一直波及右侧文字区域下缘。",
+    "photometry": "褶皱表现为多道深浅交替的横向明暗带，中部有柔和亮带及暗带，右侧斜折痕形成对比较强的细亮边和暗边。",
+    "edge_profile": "大部分为平缓的波浪状隆起和凹陷过渡，右侧少数斜向折痕边缘较锐利。",
+    "texture_effect": "标签底部的金属色横带和局部文字背景随褶皱发生轻微弯曲、压缩和亮度不均，未见明显印刷断裂。",
+    "prompt_hint": "Create several broad horizontal wavy wrinkles with a few sharper diagonal creases across the lower bottle label, showing alternating bright and dark bands.",
+    "source_image": "../实拍正样本（有缺陷）/4.bmp/4号_20250917125734945.bmp",
+    "crop_path": "outputs/catalog/crops/4.bmp__4号_20250917125734945__0.png",
+    "bbox": [
+      96,
+      1178,
+      660,
+      293
+    ],
+    "source_size": [
+      796,
+      1656
+    ]
+  },
+  {
+    "entry_id": "4.jpg__4_20260426161702497__0",
+    "class_name": "4.jpg",
+    "defect_type": "变形",
+    "location": "瓶身上部至中部的背面标签膜",
+    "appearance": "标签膜存在大面积明显起皱和折叠变形，一条长斜折痕自左上向右下贯穿文字区，并在中下部形成多条放射状褶皱、局部鼓起与塌陷。",
+    "severity": 4,
+    "count": 14,
+    "orientation": "以斜向左上-右下为主，中下部多向交叉并呈放射状",
+    "geometry": "主折痕细长且略弯曲，从标签左上部延伸至中部偏右，长度约850像素；在瓶身中部偏右形成较宽的隆起折叠区，并向左下、正下及右下分出约10条长短不一的尖锐褶皱。标签左侧边缘另有数条短横向折痕，整体排列不规则，部分褶皱相交或汇聚。",
+    "extent": "覆盖标签可见宽度约90%、高度约58%，从瓶身上部文字区一直跨越至瓶身中部网站文字及合格标识上方区域。",
+    "photometry": "折痕表现为高亮棱线与深色阴影带相邻，明暗交替强烈；中部隆起区域形成宽亮带，周围凹陷呈较暗的三角形或条带状阴影，与标签底色对比明显。",
+    "edge_profile": "主折痕及放射状分支具有较锐利的棱线，局部折叠边缘尖锐；较宽鼓包和塌陷区域则呈平缓弧形过渡。",
+    "texture_effect": "多行印刷文字被褶皱明显弯折、拉伸和错位，部分笔画沿折痕发生扭曲，但未被完全遮挡。",
+    "prompt_hint": "Large wrinkled plastic label with a long diagonal crease and multiple sharp radiating folds, alternating bright ridges and dark valleys, distorting printed text.",
+    "source_image": "../实拍正样本（有缺陷）/4.jpg/4_20260426161702497.jpg",
+    "crop_path": "outputs/catalog/crops/4.jpg__4_20260426161702497__0.png",
+    "bbox": [
+      105,
+      180,
+      1025,
+      1335
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "4.jpg__4_20260426161642741__0",
+    "class_name": "4.jpg",
+    "defect_type": "划痕",
+    "location": "瓶身上部偏中间、标签上方",
+    "appearance": "可见一条细长的浅色线状擦痕，沿瓶身表面斜向延伸，整体较直但略有弯曲。",
+    "severity": 2,
+    "count": 1,
+    "orientation": "斜向左下-右上",
+    "geometry": "单条细窄长线，长度约90像素，宽度约3至8像素，中段略弯曲，无明显分叉或交叉。",
+    "extent": "位于瓶身上部，约占瓶身宽度的8%，从上方标签区域延伸至文字区域上缘附近。",
+    "photometry": "主要表现为浅色高光亮线，与周围灰暗标签表面形成弱至中等对比。",
+    "edge_profile": "边缘较锐利，呈细线状过渡，没有明显的大面积隆起或凹陷。",
+    "texture_effect": "未明显造成印刷文字断裂或遮挡，经过空白区域及文字上方边缘。",
+    "prompt_hint": "Add one thin, slightly curved diagonal light scratch across the upper label area of the bottle.",
+    "source_image": "../实拍正样本（有缺陷）/4.jpg/4_20260426161642741.jpg",
+    "crop_path": "outputs/catalog/crops/4.jpg__4_20260426161642741__0.png",
+    "bbox": [
+      682,
+      158,
+      96,
+      126
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "4.jpg__4_20260426161642741__1",
+    "class_name": "4.jpg",
+    "defect_type": "划痕",
+    "location": "瓶身右上部标签区域",
+    "appearance": "可见一条较长的弧形斜向线状擦痕，呈亮色边缘并伴随局部暗部，沿瓶身弧面向下延伸。",
+    "severity": 3,
+    "count": 1,
+    "orientation": "斜向左上-右下",
+    "geometry": "单条长条弧形线，长度约170像素，宽度约5至15像素，整体连续但弯曲明显，无分叉和交叉。",
+    "extent": "覆盖瓶身右上部约12%的宽度和约8%的高度，跨越标签右侧边缘及其邻近区域。",
+    "photometry": "以明显的浅色高光带为主，旁侧伴有较暗的细线，和周围表面形成中等对比。",
+    "edge_profile": "主边缘较锐利，局部有稍宽的平缓过渡，未见明显成片凹陷。",
+    "texture_effect": "对右侧印刷文字有轻微穿过和干扰，但未造成明显断裂或大面积遮挡。",
+    "prompt_hint": "Add a long curved diagonal bright scratch with a subtle dark edge on the upper-right label of the bottle.",
+    "source_image": "../实拍正样本（有缺陷）/4.jpg/4_20260426161642741.jpg",
+    "crop_path": "outputs/catalog/crops/4.jpg__4_20260426161642741__1.png",
+    "bbox": [
+      1008,
+      337,
+      106,
+      176
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "4.jpg__4_20260426161655898__0",
+    "class_name": "4.jpg",
+    "defect_type": "变形",
+    "location": "瓶身上部左侧标签膜",
+    "appearance": "标签左上区域存在一组明显的斜向褶皱和折痕，局部膜面被挤起并形成狭长隆起。多条折痕由左侧边缘向瓶身中央上方延伸。",
+    "severity": 4,
+    "count": 4,
+    "orientation": "斜向左上-右下",
+    "geometry": "约4条长短不一的细长褶皱，最长约280像素、较短约100像素；主折痕略带弧度并呈束状近似平行排列，部分在下端汇聚，形成尖角状夹褶。",
+    "extent": "覆盖瓶身上部左侧约15%的瓶身宽度和约13%的图像高度，从左侧轮廓附近延伸至上方品牌标识左下区域。",
+    "photometry": "折痕表现为连续亮色棱线与邻近暗带交替，主隆起高光明显，与周围较均匀的标签表面对比强。",
+    "edge_profile": "主折痕棱线较锐利，局部呈尖锐夹角；外围隆起向平整膜面的过渡较缓。",
+    "texture_effect": "该区域主要位于印刷文字外侧，未造成文字断裂，但标签底纹和表面反光被明显拉弯、压缩。",
+    "prompt_hint": "Add a cluster of four sharp diagonal wrinkles and raised folds on the upper-left label film, with alternating bright ridges and dark creases.",
+    "source_image": "../实拍正样本（有缺陷）/4.jpg/4_20260426161655898.jpg",
+    "crop_path": "outputs/catalog/crops/4.jpg__4_20260426161655898__0.png",
+    "bbox": [
+      113,
+      326,
+      190,
+      323
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "4.jpg__4_20260426161655898__1",
+    "class_name": "4.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中下部左侧标签边缘",
+    "appearance": "标签左侧边缘出现局部挤压起皱和凹凸变形，边缘轮廓被压出数个短小折角。该处形成一片纵向集中的皱缩区域。",
+    "severity": 3,
+    "count": 3,
+    "orientation": "多向交叉",
+    "geometry": "约3条短褶皱集中在左侧边缘，长度约40至120像素，形态弯曲且粗细不均；其中一条近竖向，另外两条斜向汇入边缘，呈不规则放射状排列。",
+    "extent": "覆盖瓶身左侧约8%的宽度，纵向跨越瓶身中下部约180像素，位于主要说明文字区域的左侧外缘。",
+    "photometry": "褶皱处有局部亮斑和深色凹痕相邻出现，明暗变化集中，较周围平滑表面更突兀。",
+    "edge_profile": "边缘处存在较锐利的折角和夹褶，向瓶身中央方向逐渐过渡为平缓起伏。",
+    "texture_effect": "未明显遮挡主要文字，但标签边缘的底纹发生压缩和弯曲，邻近印刷区域有轻微形变。",
+    "prompt_hint": "Create a small pinched wrinkle cluster along the mid-lower left label edge, with short intersecting folds and localized dents.",
+    "source_image": "../实拍正样本（有缺陷）/4.jpg/4_20260426161655898.jpg",
+    "crop_path": "outputs/catalog/crops/4.jpg__4_20260426161655898__1.png",
+    "bbox": [
+      91,
+      1171,
+      124,
+      212
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "4.jpg__4_20260426161701379__0",
+    "class_name": "4.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签膜出现大面积明显褶皱、折叠和局部塌陷，形成从左侧向中下部延伸的扇状挤压变形。褶皱区域具有明显的立体起伏和多条高亮折痕。",
+    "severity": 5,
+    "count": 8,
+    "orientation": "多向交叉，主方向为斜向左上-右下",
+    "geometry": "由多条长条状、弯曲且粗细不均的褶皱组成，长度约为100至500像素，宽度约为5至35像素；上部褶皱大致平行向右下延伸，中下部出现分叉、汇聚和扇状排列，局部形成尖锐折叠棱线并伴随宽缓凹陷。",
+    "extent": "约覆盖瓶身宽度的55%和高度的33%，范围从标签左侧中部约800像素高度处延伸至中下部约1580像素高度，跨越多行文字及标签中央区域。",
+    "photometry": "折痕呈明显亮暗交替表现，凸起棱线为强高光亮带，旁侧伴随深色暗折痕，与周围标签表面对比强烈。",
+    "edge_profile": "同时具有锐利的折痕棱线和较平缓的隆起、凹陷过渡，中心汇聚处边缘尤其尖锐明显。",
+    "texture_effect": "标签上的中文文字和数字被明显拉伸、弯曲和局部遮挡，部分文字笔画沿褶皱发生错位和变形。",
+    "prompt_hint": "A severely crumpled bottle label with multiple branching diagonal folds, sharp glossy crease lines, deep shadowed valleys, and distorted printed text across the center.",
+    "source_image": "../实拍正样本（有缺陷）/4.jpg/4_20260426161701379.jpg",
+    "crop_path": "outputs/catalog/crops/4.jpg__4_20260426161701379__0.png",
+    "bbox": [
+      80,
+      780,
+      700,
+      820
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "4.jpg__4_20260426161658102__0",
+    "class_name": "4.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中下部左侧标签区域",
+    "appearance": "标签左侧出现大面积明显褶皱、挤压和局部塌陷，褶皱集中在标签边缘并向瓶身下方延伸。",
+    "severity": 4,
+    "count": 9,
+    "orientation": "多向交叉，主要为斜向左上-右下并夹杂近横向",
+    "geometry": "约9条可见褶皱和折痕，长度约80至550像素、宽度约3至25像素；部分折痕弯曲并相互汇聚，左侧中部为密集的平行波浪状短褶皱，向下延伸为较长的斜向弧形折痕，排列杂乱并有交叉。",
+    "extent": "覆盖瓶身左侧约15%至20%的宽度，纵向约从瓶身中部偏下的标签横线处延伸至瓶身下部，整体范围约为图像x=85至310、y=1170至1950。",
+    "photometry": "褶皱区域呈明显明暗交替，凸起处形成亮色高光带，凹陷处出现暗色折痕，与周围平整标签表面的对比强烈。",
+    "edge_profile": "同时具有锐利的局部折痕棱线和较平缓的隆起/凹陷过渡；左侧密集区域边缘较锐利，下方长折痕相对平缓。",
+    "texture_effect": "标签上的横线、中文文字及下方图案在左侧被明显拉伸、弯曲和局部遮挡，印刷内容随褶皱发生不规则变形。",
+    "prompt_hint": "A large wrinkled and compressed label on the lower-left side of a bottle, with dense wavy folds, sharp diagonal creases, alternating bright highlights and dark valleys, and visibly distorted printed text.",
+    "source_image": "../实拍正样本（有缺陷）/4.jpg/4_20260426161658102.jpg",
+    "crop_path": "outputs/catalog/crops/4.jpg__4_20260426161658102__0.png",
+    "bbox": [
+      85,
+      1170,
+      230,
+      780
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "4.jpg__4_20260426161537761__0",
+    "class_name": "4.jpg",
+    "defect_type": "变形",
+    "location": "标签瓶身上部至瓶身中下部，主要集中在正面中央并向左右两侧延伸",
+    "appearance": "标签膜出现大面积严重起皱、折叠和局部鼓起塌陷，中央形成明显的菱形挤压区，周围伴随多条长斜折痕及波浪状褶皱。",
+    "severity": 5,
+    "count": 18,
+    "orientation": "多向交叉，以斜向左上-右下和斜向右上-左下为主",
+    "geometry": "约18条可辨识的主要褶皱和折痕；两条较长斜折痕从瓶身上部向中央汇聚，中央多条粗细不一的弯曲棱线交叉围成大型不规则菱形凹凸区。左侧分布数条短而弯曲的波浪褶皱，右侧折痕向标签边缘放射，下方另有长而窄的斜向褶皱延伸至瓶身中下部，局部存在分叉、重叠和锐角转折。",
+    "extent": "整体覆盖约瓶身可见宽度的85%和可见高度的70%，从瓶身上部靠近标签顶端一直跨越瓶身中部并延伸到中下部；最严重区域位于中央约一半宽度范围。",
+    "photometry": "褶皱棱线表现为连续的高光亮带，邻近凹陷形成暗色阴影，呈明显明暗交替；中央折叠区域反差很强，长斜折痕也具有清晰亮边和暗边。",
+    "edge_profile": "中央及上部多为锐利、清晰的折痕棱线，菱形区域边界存在明显硬折；外围波浪褶皱则兼有较平缓的隆起和凹陷过渡。",
+    "texture_effect": "标签上的文字和图案在中央及左右褶皱处发生明显弯曲、错位和局部压缩拉伸，部分字符被折痕穿过并产生视觉断裂或遮挡。",
+    "prompt_hint": "Severely crumpled glossy bottle label with a large central diamond-shaped bulge, deep intersecting diagonal creases, and radiating wavy wrinkles.",
+    "source_image": "../实拍正样本（有缺陷）/4.jpg/4_20260426161537761.jpg",
+    "crop_path": "outputs/catalog/crops/4.jpg__4_20260426161537761__0.png",
+    "bbox": [
+      116,
+      145,
+      973,
+      1785
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "4.jpg__4_20260426161536702__0",
+    "class_name": "4.jpg",
+    "defect_type": "变形",
+    "location": "瓶身中部偏上，标签上“AQUA MOIST”文字交界区域",
+    "appearance": "标签膜形成一片明显的横向波浪状褶皱，多道起伏折痕从左侧向中央及右侧延伸，左侧堆叠和塌陷最严重。褶皱造成标签表面局部鼓起、凹陷并使文字发生明显扭曲。",
+    "severity": 4,
+    "count": 8,
+    "orientation": "以横向为主，局部呈斜向左上-右下及波浪状弯曲",
+    "geometry": "约8道长短不一的细长褶皱密集排列，主要呈近似平行的波浪形；上部折痕较细且较直，中下部数道折痕更粗、更弯曲并相互汇合。左侧存在多处短促分叉和层叠皱缩，较长折痕横跨标签大半宽度后逐渐变浅。",
+    "extent": "覆盖瓶身可见宽度约70%，高度约10%；从标签左边缘横跨“AQUA”下缘和“MOIST”上半部，向瓶身中右部逐渐减弱。",
+    "photometry": "褶皱表现为连续的亮色高光带与暗色凹折带交替，左侧明暗反差强烈，中央区域仍可见多条平行暗亮纹，向右侧对比逐渐降低。",
+    "edge_profile": "兼有较锐利的折痕棱线和平缓的波浪状隆起；左侧折叠边缘较尖锐，中央至右侧以宽缓起伏过渡为主。",
+    "texture_effect": "标签上的“AQUA”底部及“MOIST”上半部被波浪褶皱挤压和错位，字母边缘出现弯曲、局部拉伸与明暗遮挡，但印刷内容未完全断裂。",
+    "prompt_hint": "Add a broad band of severe horizontal wavy label-film wrinkles with alternating bright ridges and dark creases across the AQUA MOIST text, strongest on the left.",
+    "source_image": "../实拍正样本（有缺陷）/4.jpg/4_20260426161536702.jpg",
+    "crop_path": "outputs/catalog/crops/4.jpg__4_20260426161536702__0.png",
+    "bbox": [
+      76,
+      826,
+      824,
+      258
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD7__0",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身中部偏左的标签区域",
+    "appearance": "标签表面出现明显的横向压折，形成一条较长的带状凹陷和褶皱。折痕沿瓶身弧面延伸，局部呈双线状。",
+    "severity": 3,
+    "count": 2,
+    "orientation": "横向，略带弧度",
+    "geometry": "两条近似平行的细长折痕，长度约400至500像素，宽度约5至15像素，整体弯曲并随瓶身轮廓延伸，局部有轻微分叉和错位。",
+    "extent": "覆盖瓶身宽度约40%，位于标签中部偏左，横跨左侧瓶身并延伸至中央区域。",
+    "photometry": "折痕表现为暗色细线与相邻亮色边带交替，和周围平整标签形成中等强度对比。",
+    "edge_profile": "具有较锐利的折痕棱线，边缘伴随较窄的平缓凹陷过渡。",
+    "texture_effect": "折痕处的印刷图案出现轻微弯曲和局部拉伸，但文字区域受影响较小。",
+    "prompt_hint": "A long shallow horizontal crease with two parallel dark fold lines across the middle of a cylindrical bottle label.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD7.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD7__0.png",
+    "bbox": [
+      108,
+      945,
+      535,
+      75
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD7__1",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身下部至瓶底上方的标签区域",
+    "appearance": "标签下半部出现大面积严重褶皱、挤压和局部塌陷，形成多条交错的深折痕及不规则鼓起区域。褶皱集中在左侧和中央下方，并向右下方扩散。",
+    "severity": 5,
+    "count": 12,
+    "orientation": "多向交叉，主要为斜向左上-右下和斜向右上-左下，夹杂局部横向褶皱",
+    "geometry": "包含多条长短不一的弯曲折痕，长度约40至350像素、宽度约5至50像素；部分折痕锐利且深，部分为宽阔平缓的隆起或塌陷，彼此交叉、汇聚并呈杂乱排列，局部形成波浪状和扇状褶皱。",
+    "extent": "覆盖瓶身下部约50%的宽度和约25%的高度，范围大致从左侧边缘延伸至中央偏右，并从中下部一直跨越至瓶底上方。",
+    "photometry": "褶皱区域明暗变化强烈，存在高光亮带、暗色折痕和中间灰色过渡，呈明显的明暗交替，和周围平整标签对比很强。",
+    "edge_profile": "同时具有锐利的深折痕棱线和平缓的隆起、凹陷过渡，局部折叠形成明显的尖锐褶边。",
+    "texture_effect": "标签上的图案和人物图像被明显扭曲、拉伸和局部遮挡，印刷纹理沿褶皱方向发生不连续变形。",
+    "prompt_hint": "A severely crumpled lower bottle label with deep intersecting folds, bulges, collapsed areas, and strongly distorted printed graphics.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD7.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD7__1.png",
+    "bbox": [
+      112,
+      1475,
+      610,
+      610
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD26__0",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身下部标签区域",
+    "appearance": "标签下部出现大面积严重起皱和挤压变形，包含横向波浪状隆起、斜向深折痕及局部塌陷；左下角和右下部的褶皱最密集。",
+    "severity": 5,
+    "count": 16,
+    "orientation": "多向交叉，以横向和斜向左上-右下为主",
+    "geometry": "上缘有约3条较长的横向波浪形折带，长度约占标签宽度的三分之一至四分之三，粗宽且弯曲；左下部约8条长短不一的锐利斜褶相互汇聚、分叉和交叉，形成扇形及杂乱堆叠；右下部另有约5条弧形、斜向及近竖向褶皱，其中一条较深的近竖向折带延伸至标签底缘。",
+    "extent": "覆盖标签下部约四分之一高度及接近全部宽度，从警示文字区域向下跨越STERILE标识、黑色批号框周边并延伸至标签底边；左侧约四分之一宽度和右侧约三分之一宽度变形尤其明显。",
+    "photometry": "褶皱表现为强烈的亮白高光带与深暗阴影交替，隆起处反光明显，凹陷及折痕内部呈黑灰色，和周围较平整标签形成高对比。",
+    "edge_profile": "兼有锐利的折痕棱线和宽缓的波浪状隆起；左下角多处折线边缘尖锐，中央横向鼓包及底缘起伏过渡较平缓。",
+    "texture_effect": "标签文字、STERILE标识及底部图案随褶皱发生弯曲、拉伸和局部压缩，部分字符被高光或深折痕遮挡；黑色批号框边缘附近也出现轻微扭曲。",
+    "prompt_hint": "Severe crumpled plastic label on the lower bottle, with broad horizontal buckles, deep intersecting diagonal creases, and alternating bright highlights and dark fold shadows.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD26.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD26__0.png",
+    "bbox": [
+      108,
+      1450,
+      947,
+      598
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD14__0",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身上部至瓶身中部的标签膜",
+    "appearance": "标签膜大面积卷折并形成横贯正面的宽大斜向褶皱带，左右两侧均有明显翘起、叠压和局部塌陷。中央文字区域被折叠错位，整体变形非常显著。",
+    "severity": 5,
+    "count": 7,
+    "orientation": "以斜向左上-右下为主，伴有斜向交叉和局部竖向折痕",
+    "geometry": "约有3条贯穿大部分瓶宽的长粗折痕，整体由左侧约y=450处向右侧约y=800处倾斜；其间夹有数条较短的尖锐支折和三角形隆起。左侧形成向外翘起的折叠边及竖向压痕，中部为宽大的重叠褶带，右侧聚合成扇形、三角形折叠并沿瓶边下垂，多条棱线相互交叉或近似平行排列。",
+    "extent": "覆盖约85%的可见瓶身宽度和约20%的瓶身总高度，从标签上部中文品牌文字区域跨越至“water labo”字样上方及周围，两端延伸到瓶身左右边缘。",
+    "photometry": "折痕处呈强烈的明暗交替：隆起棱面形成亮灰色高光带，折叠夹层及凹陷形成深黑色阴影；右侧斜折处对比最强，明显区别于周围平整标签。",
+    "edge_profile": "主要折痕边缘锐利，具有清晰的折叠棱线和叠层边界；较宽的鼓起区域则由平缓隆起逐渐过渡到尖锐压折。",
+    "texture_effect": "标签上的中文品牌字样被大幅扭曲、遮挡和错位，部分笔画被折痕切断；“water labo”上方区域受到褶带覆盖，印刷纹理随折面发生拉伸和方向偏转。",
+    "prompt_hint": "Severe wrinkled bottle label with a broad diagonal folded band, overlapping film, sharp creases, triangular bulges, and strong alternating highlights and shadows.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD14.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD14__0.png",
+    "bbox": [
+      94,
+      416,
+      1005,
+      490
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD15__0",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身下部标签区域",
+    "appearance": "标签膜在瓶身下部出现大面积严重褶皱、折叠、塌陷和局部鼓包，形成明显的挤压变形与不规则波浪状起伏。",
+    "severity": 5,
+    "count": 15,
+    "orientation": "多向交叉",
+    "geometry": "褶皱条纹长短不一，主要为中长条的弯曲折痕，局部呈扇形放射和杂乱交叉排列；部分折痕较深并形成尖锐棱线，多个隆起和凹陷相互连接，局部可见卷曲状边缘。",
+    "extent": "大致覆盖瓶身可见宽度的70%，覆盖标签下部约三分之一高度，主要跨越左侧至中右侧的图案区域，并延伸至靠近右侧文字标签的下方区域。",
+    "photometry": "褶皱区域表现为明显的亮暗交替，高光亮带沿凸起和折叠棱线分布，深色暗带位于凹陷和折缝处；与周围平整标签表面对比很强。",
+    "edge_profile": "同时具有锐利的折痕棱线和较平缓的隆起、凹陷过渡，部分折痕边界清晰且深。",
+    "texture_effect": "标签印刷图案在褶皱处被明显扭曲、拉伸和局部遮挡，图案边界随褶皱发生变形，部分区域出现断裂或难以辨认。",
+    "prompt_hint": "A severely crumpled bottle label with large multidirectional wrinkles, deep creases, compressed folds, bulges and collapsed areas across the lower third.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD15.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD15__0.png",
+    "bbox": [
+      95,
+      1250,
+      835,
+      750
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD22__0",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身中部偏左的标签膜",
+    "appearance": "标签左侧出现一组明显的横向波浪状褶皱，局部膜面被挤压后形成连续隆起和凹陷。",
+    "severity": 3,
+    "count": 4,
+    "orientation": "近横向，略呈左上-右下",
+    "geometry": "约4条长短不一的弧形折皱上下排列，主要褶皱长度约250-390像素、宽约8-25像素；线条轻微弯曲且基本平行，左端靠近标签边缘，向右逐渐变浅并收束。",
+    "extent": "覆盖瓶身宽度约三分之一，位于标签中部偏左，纵向覆盖约瓶身可见高度的8%。",
+    "photometry": "折皱隆起处形成较亮的细长高光带，下缘伴随暗色阴影，呈明显的明暗交替，与周围较平整标签对比清楚。",
+    "edge_profile": "主要折痕棱线较锐利，褶皱之间为较平缓的凹陷过渡。",
+    "texture_effect": "该区域印刷内容较少，膜面底纹被波浪状拉伸和压缩，但未见文字断裂。",
+    "prompt_hint": "Add four parallel horizontal wavy creases with alternating bright ridges and dark grooves on the left-middle label.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD22.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD22__0.png",
+    "bbox": [
+      91,
+      897,
+      393,
+      184
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD22__1",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身下部至瓶底上方的标签膜",
+    "appearance": "标签下半部存在大面积严重起皱和挤压塌陷，形成宽阔波浪、深折痕及局部鼓包，膜面整体明显扭曲。",
+    "severity": 5,
+    "count": 10,
+    "orientation": "多向交叉，以横向和斜向左上-右下为主",
+    "geometry": "约10条可辨识的主褶皱混合分布，其中多条为长度300-900像素的宽弧形横向皱带，另有数条从左侧及中下部斜向延伸的深折痕；褶皱粗细差异大，部分相互汇合、交叉并围成不规则凹坑，左下和中部可见大幅隆起后再塌陷的折叠结构。",
+    "extent": "横向覆盖标签可见宽度约90%，从瓶身下部说明文字区一直延伸至底部白色边带上方，纵向覆盖瓶身可见高度约25%。",
+    "photometry": "隆起表面出现宽亮高光和局部过曝亮斑，深凹槽呈连续暗带；明暗反差强烈且不规则，显示膜面高度起伏明显。",
+    "edge_profile": "同时包含锐利的深折痕棱线和宽缓的鼓包、凹陷过渡，部分折叠边缘呈尖角和波浪形卷曲。",
+    "texture_effect": "下部文字、图案及边框被明显弯折和扭曲，部分笔画随凹凸面发生压缩、倾斜和局部遮蔽，底部图形轮廓被大范围拉伸变形。",
+    "prompt_hint": "Create severe large-area crumpling on the lower label with deep intersecting folds, broad bulges, collapsed areas, and strong alternating highlights and shadows.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD22.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD22__1.png",
+    "bbox": [
+      88,
+      1438,
+      1012,
+      531
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD25__0",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身上部标签区域",
+    "appearance": "标签上部出现大面积起皱和挤压变形，多条长折痕由中上部向右侧延伸，并与横贯标签的弧形褶皱交叉。",
+    "severity": 4,
+    "count": 7,
+    "orientation": "以斜向左上-右下和横向为主，多向交叉",
+    "geometry": "约7条较长褶皱组成，其中数条从标签中上部向右下方呈弧形或斜线状放射，长度约180-650像素、宽度约5-35像素；另有一条横贯大部分标签宽度的细长弧形折痕。褶皱局部并行，向右侧逐渐汇聚并相互交叉，右上区域伴有较宽的波浪状隆起。",
+    "extent": "覆盖标签上部约80%的可见宽度和约22%的标签高度，从中文品牌文字上方延伸至文字下方，并跨越瓶身正面至右侧边缘。",
+    "photometry": "折痕表现为亮色高光带与深色阴影线相邻交替，右侧斜向褶皱反差较强，横向折痕形成连续的暗色棱线。",
+    "edge_profile": "主要折痕具有较锐利的棱线，较宽的波浪状区域则呈平缓隆起与凹陷过渡。",
+    "texture_effect": "中文品牌文字及附近图案受到明显弯折和局部拉伸，笔画沿褶皱发生扭曲，但未被完全遮挡。",
+    "prompt_hint": "Large wrinkled label area with intersecting diagonal folds and a long curved horizontal crease, showing alternating bright highlights and dark ridges.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD25.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD25__0.png",
+    "bbox": [
+      199,
+      258,
+      901,
+      498
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD25__1",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身中部偏左标签边缘",
+    "appearance": "标签左侧出现局部夹皱，数条短折痕从边缘向瓶身内部尖锐收拢，形成明显的三角形凹折。",
+    "severity": 3,
+    "count": 3,
+    "orientation": "近横向并略呈放射状",
+    "geometry": "约3条短而尖锐的折痕，长度约55-125像素、宽度约3-15像素，从左侧标签边缘向右侧汇聚；上下两条呈斜向夹角，中间一条近水平，整体构成楔形或扇形排列。",
+    "extent": "覆盖瓶身可见宽度约11%，高度约4%，位于标签左边缘、英文标题区域下方。",
+    "photometry": "折痕以深色阴影线为主，棱线附近伴有窄亮边，与周围灰色标签形成较强对比。",
+    "edge_profile": "折痕尖锐，靠近左边缘处较宽，向右逐渐变细并收束成尖点。",
+    "texture_effect": "该区域印刷内容较少，未明显遮挡文字，但标签表面纹理被挤压并产生方向性扭曲。",
+    "prompt_hint": "A localized triangular pinch wrinkle at the left label edge with three short sharp folds converging inward.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD25.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD25__1.png",
+    "bbox": [
+      198,
+      892,
+      130,
+      81
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD36__0",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身中部至瓶身下部的标签膜，主要集中在正面左侧并延伸至右侧文字区下缘",
+    "appearance": "标签膜出现大面积严重起皱、折叠和局部鼓包塌陷，中部有横向挤压皱带，左侧及下部形成多处尖锐的波浪状和放射状褶皱。整体表面明显扭曲，已不再平整贴合瓶身。",
+    "severity": 5,
+    "count": 18,
+    "orientation": "多向交叉，以横向和斜向左上-右下为主",
+    "geometry": "中部约有4至5条细长、近似平行的横向波纹，从左侧向中央延伸；左侧中下部有多条较深的斜向折痕汇聚成尖角和三角形折叠，部分折痕分叉、交叉。瓶身下半部另有多条宽而弯曲的波浪褶皱及不规则鼓包，折线长短不一，局部形成连续的凹凸沟槽。",
+    "extent": "覆盖瓶身可见标签高度约65%，从瓶身中部约三分之一高度一直延伸到标签底缘；横向覆盖可见瓶身宽度约85%，左半部最严重，并向中央及右侧文字区下部扩展。",
+    "photometry": "褶皱处呈明显的亮色高光带与深色阴影沟槽交替，左侧尖锐折叠和底部波浪区域明暗反差很强；平缓鼓包区域则表现为较宽的渐变亮暗带。",
+    "edge_profile": "同时存在锐利的折痕棱线和宽缓的隆起、凹陷过渡；左侧汇聚折叠及下部横斜折线边缘尖锐，中部大面积起伏较平缓。",
+    "texture_effect": "左侧图案被大幅压缩、拉伸和波浪化，轮廓发生明显错位扭曲；右侧下部文字和黑色信息框附近也随标签起伏产生弯折和局部形变，但未完全遮挡。",
+    "prompt_hint": "Create severe large-area wrinkling on the bottle label, with horizontal compression ripples, sharp diagonal folds, deep shadowed creases, and broad wavy bulges across the middle and lower label.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD36.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD36__0.png",
+    "bbox": [
+      84,
+      585,
+      986,
+      1438
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.1__500水次方一角度NOTGOOD31__0",
+    "class_name": "5.1",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签区域",
+    "appearance": "标签膜出现大面积明显起皱、折叠和局部鼓起/塌陷，尤其集中在下半部及左侧区域。多处褶皱形成连续波浪状起伏，并伴随一条横向明显挤压折痕。",
+    "severity": 5,
+    "count": 18,
+    "orientation": "多向交叉，以横向和斜向为主",
+    "geometry": "褶皱长短不一，约数十至数百像素，既有较宽的弧形波浪褶皱，也有细长、弯曲的折痕线；部分褶皱相互交叉、汇聚并形成不规则片状凹凸，左下区域褶皱较密集，中央偏下有横向连续折叠带。",
+    "extent": "覆盖瓶身下半部标签的大部分区域，约占瓶身可见宽度的80%，占瓶身高度的30%；大致从 y=1480 延伸至 y=2170，横跨左侧、中央及右侧下部标签，并影响多个文字和图案区域。",
+    "photometry": "褶皱表现为明显的明暗交替，高光亮带与暗色折痕并存；局部边缘对比很强，尤其左下和横向折叠带处具有强烈亮暗变化，明显区别于平整标签表面。",
+    "edge_profile": "同时存在锐利的折痕棱线和较平缓的隆起/凹陷过渡；横向折叠带边界较锐利，大片波浪区域则呈连续起伏的缓变轮廓。",
+    "texture_effect": "标签上的文字、条码样文字和印刷图案被明显拉伸、弯曲和局部遮挡，部分字符跨越褶皱后发生断裂或严重变形。",
+    "prompt_hint": "A plastic bottle label with severe large-area wrinkling, crumpled folds, intersecting diagonal creases, bulges and collapsed areas across the lower half, with strong alternating highlights and dark crease shadows.",
+    "source_image": "../实拍正样本（有缺陷）/5.1/500水次方一角度NOTGOOD31.jpg",
+    "crop_path": "outputs/catalog/crops/5.1__500水次方一角度NOTGOOD31__0.png",
+    "bbox": [
+      100,
+      1460,
+      990,
+      730
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD30__0",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "瓶身中上部标签区域",
+    "appearance": "标签表面出现一大片明显的斜向褶皱和挤压变形，形成宽带状隆起与塌陷，局部伴随多条平行折痕。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "斜向左上-右下",
+    "geometry": "褶皱整体呈长条状、弯曲状和波浪状，长度约150至850像素、宽度约10至80像素；多条褶皱大致平行排列，部分在右侧汇聚并轻微交叉，形成连续的斜向挤压带。",
+    "extent": "覆盖瓶身宽度约80%，从左侧标签边缘附近斜向延伸至右侧瓶身，纵向跨越约20%的瓶身高度，主要位于标签上半部。",
+    "photometry": "褶皱表现为明显的明暗交替，隆起处形成较亮的高光带，凹陷处呈暗色折痕，与周围平整标签表面对比强烈。",
+    "edge_profile": "以较锐利的折痕棱线为主，同时夹杂中等宽度的平缓隆起和凹陷过渡。",
+    "texture_effect": "标签上的印刷图案和文字在褶皱处发生局部拉伸、弯曲和错位，部分细节被暗色折痕遮挡。",
+    "prompt_hint": "A large dark bottle label with several pronounced diagonal compression wrinkles, raised glossy ridges and deep shadowed folds running from upper left to lower right.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD30.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD30__0.png",
+    "bbox": [
+      50,
+      630,
+      965,
+      475
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD30__1",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "瓶身中下部至瓶底标签区域",
+    "appearance": "标签下半部大面积起皱并发生严重挤压变形，褶皱密集，形成多层波浪状、卷曲状和塌陷状的皱褶区域。",
+    "severity": 5,
+    "count": 12,
+    "orientation": "多向交叉",
+    "geometry": "褶皱长度约30至500像素、宽度约8至90像素，既有横向和斜向长波纹，也有局部弯曲、卷折和分叉结构；多条褶皱相互交叠、交叉并呈杂乱排列，局部形成明显的团簇状塌陷。",
+    "extent": "覆盖瓶身宽度约90%，从左侧标签边缘横跨至右侧边缘，纵向约占瓶身高度25%，主要集中在下半部标签及接近瓶底的位置。",
+    "photometry": "褶皱区域具有强烈的明暗交替，凸起处出现亮色高光，深凹处形成明显暗带，整体与平整标签区域反差很强。",
+    "edge_profile": "同时存在锐利的折叠棱线和大幅度的平缓隆起、凹陷过渡，部分折痕边缘呈尖锐卷曲形态。",
+    "texture_effect": "底部图案、人物图像和标签文字被明显扭曲、拉伸和局部遮挡，印刷线条沿褶皱方向发生弯折，部分图案出现断裂感。",
+    "prompt_hint": "A severely crumpled bottle label covering the lower body, with dense overlapping multidirectional waves, sharp creases, curled folds, bulges and deep collapsed shadows distorting the printed artwork.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD30.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD30__1.png",
+    "bbox": [
+      52,
+      1550,
+      955,
+      690
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD19__0",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "瓶身中部至中下部的标签膜，主要集中于中部斜向区域及右侧边缘",
+    "appearance": "标签膜出现大面积挤压起皱和多道深折痕，一条宽大的斜向褶皱横跨瓶身，并在右侧汇聚成连续波浪状鼓包与凹陷。",
+    "severity": 5,
+    "count": 10,
+    "orientation": "以斜向左上-右下为主，右侧伴有横向及弯曲多向褶皱",
+    "geometry": "约有3道较长的斜向主折痕，由瓶身左侧向右下延伸，长度约占瓶身可见宽度的70%-90%，呈弧形且局部并行；右侧汇聚处另有约7道较短、较粗的弯曲褶皱，形成折叠、分叉和相互交叠的波浪状结构。",
+    "extent": "覆盖约80%的可见瓶身宽度和约35%的标签高度，从瓶身中部左侧横跨至右侧，并沿右侧向中下部延伸。",
+    "photometry": "主折痕表现为高对比度暗色沟槽，边缘伴随窄亮带；右侧起皱区域呈明显明暗交替，局部鼓起处高光较强、凹陷处较暗。",
+    "edge_profile": "斜向主褶皱具有较锐利的折痕棱线，右侧汇聚区域同时存在尖锐折叠和较平缓的波浪状隆起、凹陷过渡。",
+    "texture_effect": "标签文字和印刷图案被明显扭曲、弯折及局部遮挡，其中中部英文文字被斜向折痕切过，右侧图案随褶皱产生压缩和波浪形变。",
+    "prompt_hint": "Severe wrinkled bottle label with a broad diagonal fold and clustered wavy creases along the right side, showing alternating dark grooves and bright ridges.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD19.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD19__0.png",
+    "bbox": [
+      56,
+      925,
+      960,
+      850
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD46__0",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "瓶身中部偏右侧的窄幅标签",
+    "appearance": "标签膜出现多道明显的横向及弧形折皱，局部向外鼓起并形成连续波浪状起伏。中间有较深的暗色折痕，将标签表面分割成数个不平整区域。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "以横向为主，局部斜向左上-右下",
+    "geometry": "约5道长短不一的褶皱，上方两道呈弯曲弧线，中部一道较深且近横向贯穿标签宽度，下方两道为略倾斜的长折痕；褶皱粗细不均，彼此大致平行并伴随局部鼓包。",
+    "extent": "覆盖右侧窄标签约90%的宽度和约18%的标签高度，主要跨越瓶身中部区域。",
+    "photometry": "折皱表现为暗色凹痕与灰白高光带交替，深折痕对比强，鼓起部分具有较宽的亮暗渐变。",
+    "edge_profile": "主要折痕边缘较锐利，周围鼓包和凹陷则呈平缓过渡。",
+    "texture_effect": "标签上的文字和图案随褶皱发生局部弯曲、压缩及错位，但没有明显断裂或完全遮挡。",
+    "prompt_hint": "Add several pronounced horizontal curved creases and buckled waves across the middle of the narrow glossy bottle label.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD46.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD46__0.png",
+    "bbox": [
+      870,
+      830,
+      194,
+      390
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD46__1",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "瓶身下部偏右侧的窄幅标签",
+    "appearance": "标签膜下半部存在大面积严重起皱，形成密集的波浪、塌陷和不规则鼓包。底部褶皱尤其杂乱，多道折痕相互汇聚并扭曲。",
+    "severity": 5,
+    "count": 12,
+    "orientation": "多向交叉，以横向波浪和斜向折痕为主",
+    "geometry": "约12道可辨识褶皱，上部为数道宽缓的横向波纹，中下部逐渐变成短而深的弧形及斜向折痕；部分折痕分叉、交叉并围成不规则凹陷，底端呈密集堆叠和放射状皱缩。",
+    "extent": "覆盖右侧窄标签约95%的宽度和约27%的标签高度，从瓶身下部延伸至接近标签底部黑色横带上缘。",
+    "photometry": "褶皱区域具有强烈的明暗交替，隆起处形成宽亮带，凹陷及折痕处形成深灰至黑色曲线，和周围平整标签对比明显。",
+    "edge_profile": "宽缓鼓包与锐利折痕并存；下部折痕棱线较尖锐，局部凹陷边界清楚。",
+    "texture_effect": "背景图案和局部文字被明显扭曲、压缩和拉伸，多处线条随波纹弯折，但仍可见其连续性。",
+    "prompt_hint": "Create a large severely wrinkled patch with dense intersecting waves, sharp folds, and irregular bulges on the lower narrow bottle label.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD46.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD46__1.png",
+    "bbox": [
+      873,
+      1490,
+      190,
+      635
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD8__0",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "瓶身标签大部，自瓶身上部延伸至瓶身下部，主要集中在左右边缘、中部及下半部",
+    "appearance": "标签膜发生大面积严重起皱和扭曲，形成多条长斜向折痕、波浪状隆起及局部塌陷。右侧存在贯穿大半标签高度的深折痕，左侧与下半部可见密集褶皱和挤压变形。",
+    "severity": 5,
+    "count": 18,
+    "orientation": "多向交叉，以斜向左上-右下和纵向为主",
+    "geometry": "右侧约有3条细长而连续的斜向折痕，其中一条从标签顶部右中区域延伸至瓶身中下部；左侧约有5条长短不一的斜折痕并伴随局部尖角状分叉。中部及下半部约有10条宽窄不均的波浪形褶皱，部分呈弧形、S形或相互汇合，底部褶皱沿横向和斜向成片堆叠，局部形成明显鼓包与凹陷。",
+    "extent": "覆盖标签约90%的高度和95%的可见宽度，从标签上缘附近一直延伸至底部黑色容量信息条上方；右侧长折痕跨越约65%的标签高度，底部成片变形覆盖约35%的标签高度。",
+    "photometry": "折痕表现为高亮窄带与深色阴影交替，深折线对比强烈；宽缓鼓包呈大片渐变亮区，凹陷区域则形成不规则暗带，左右边缘和下部的明暗起伏尤其明显。",
+    "edge_profile": "兼有锐利的折痕棱线和平缓的隆起、凹陷过渡；右侧及左上部折痕边缘较锐利，下半部主要为宽缓波浪状起伏，并夹杂少量尖锐褶皱。",
+    "texture_effect": "标签上的英文、中文及图案随褶皱发生明显弯曲、拉伸和局部压缩；左侧文字被折痕切过并错位，中下部多行说明文字沿波浪起伏变弯，部分字符对比降低但未完全遮挡。",
+    "prompt_hint": "A bottle label with severe full-area film wrinkling, deep diagonal creases, broad wavy bulges, and compressed folds distorting the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD8.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD8__0.png",
+    "bbox": [
+      82,
+      278,
+      997,
+      2024
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD21__0",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "右侧细长瓶身中上部标签",
+    "appearance": "标签膜出现明显的大面积挤压起皱和褶皱，形成连续的波浪状折叠带，并伴有局部塌陷和鼓起。",
+    "severity": 4,
+    "count": 7,
+    "orientation": "多向交叉，整体以横向和斜向为主",
+    "geometry": "约7条主要褶皱，长度约30至150像素、粗细约5至20像素，部分折痕弯曲并相互交叉，形成不规则网状和折叠状排列；中部有明显尖锐折角。",
+    "extent": "覆盖右侧瓶身宽度约80%，纵向约占瓶身高度15%，主要跨越标签中上部的一整条横向区域。",
+    "photometry": "褶皱处呈明显明暗交替，高光亮带与深色暗折痕并存，与周围较均匀的标签表面形成强烈对比。",
+    "edge_profile": "同时具有锐利的折痕棱线和局部平缓的隆起、凹陷过渡，中央交叉处边缘较尖锐。",
+    "texture_effect": "标签上的印刷图案和文字在褶皱区域发生明显弯曲、拉伸和局部遮挡，部分内容被折痕打断。",
+    "prompt_hint": "A narrow bottle label with severe crumpled deformation, multiple intersecting horizontal and diagonal folds, sharp creases, raised and collapsed areas, and strong alternating highlights and shadows.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD21.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD21__0.png",
+    "bbox": [
+      897,
+      740,
+      169,
+      265
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD3__0",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "瓶身中部至瓶身下部标签区域",
+    "appearance": "标签膜出现大面积明显褶皱、折叠和挤压变形，褶皱横跨多行文字及图案，形成连续的波浪状和层叠状起伏。",
+    "severity": 5,
+    "count": 18,
+    "orientation": "多向交叉，整体以横向和斜向为主",
+    "geometry": "包含多条长距离弯曲褶皱和折痕，长度约为瓶身宽度的20%至90%，粗细不一；中部多为横向弧形平行褶皱，下部逐渐转为斜向、弯曲和杂乱交叉的褶皱，部分折痕相互汇合、分叉并形成局部鼓包和塌陷。",
+    "extent": "覆盖标签区域约75%的宽度和55%的高度，主要从瓶身中部文字区域延伸至瓶身下部图案区域，跨越英文、中文文字及底部装饰图案。",
+    "photometry": "褶皱表现为明显的明暗交替亮带和暗色折痕，局部有强高光边缘，和周围平整标签表面对比强烈。",
+    "edge_profile": "同时存在锐利的折痕棱线和较平缓的隆起、凹陷过渡；下部褶皱边缘更复杂且起伏明显。",
+    "texture_effect": "标签文字和印刷图案被明显拉伸、弯曲和局部遮挡，部分文字沿褶皱发生断续和形变。",
+    "prompt_hint": "A bottle label with severe large-area wrinkling, multiple overlapping wavy folds and diagonal creases distorting the printed text and artwork across the middle and lower body.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD3.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD3__0.png",
+    "bbox": [
+      95,
+      850,
+      920,
+      1270
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD3__1",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "瓶身上部右侧标签边缘",
+    "appearance": "标签右上侧出现明显的斜向折叠和局部卷曲，标签膜沿瓶身边缘产生狭长的重叠褶皱。",
+    "severity": 4,
+    "count": 4,
+    "orientation": "斜向左上-右下",
+    "geometry": "由数条较长、较窄的斜向折痕组成，彼此近似平行并局部交叠；折痕从瓶肩下方延伸至右侧瓶身中上部，边缘有局部卷起和尖锐折角。",
+    "extent": "覆盖瓶身右侧约18%的宽度和17%的高度，跨越瓶肩下缘至标签右侧中上部。",
+    "photometry": "折痕两侧出现明亮高光带和深色暗缝，明暗反差较强，局部呈现连续的高光—暗折痕交替。",
+    "edge_profile": "以较锐利的折痕棱线为主，伴随局部较平缓的卷曲过渡。",
+    "texture_effect": "右侧标签边缘和附近印刷区域被压缩、扭曲并部分遮挡，图案轮廓沿折痕发生弯折。",
+    "prompt_hint": "A narrow cluster of sharp diagonal overlapping creases and curled label folds on the upper-right side of a bottle label.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD3.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD3__1.png",
+    "bbox": [
+      815,
+      315,
+      205,
+      430
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD25__0",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "瓶身上部至中部的标签区域",
+    "appearance": "标签膜出现大面积挤压起皱，形成数条横贯瓶身正面的斜向折痕和波浪状隆起。褶皱由左侧向右下方延伸，局部相互汇聚并伴有明显塌陷。",
+    "severity": 4,
+    "count": 4,
+    "orientation": "斜向左上-右下",
+    "geometry": "约4条长褶皱呈近似平行排列，主要折痕长度约为瓶身可见宽度的70%-95%，粗细不均且略带弧形；上方一条为较宽的带状隆起，中下方数条为较窄的锐利折线，右侧逐渐汇聚并形成局部波浪状凹凸。",
+    "extent": "覆盖标签上半部约45%的高度，横向从瓶身左边缘延伸至右边缘，最明显区域跨越瓶身上部和中部交界处。",
+    "photometry": "褶皱沿线呈高光亮带与暗色阴影交替，较深折痕表现为连续暗线，隆起部分形成宽而柔和的亮灰带，与周围平整标签对比明显。",
+    "edge_profile": "主要折痕具有较锐利的棱线，宽带状隆起两侧则为较平缓的明暗过渡；右侧汇聚处可见明显凹陷和波浪边缘。",
+    "texture_effect": "褶皱使标签底色和局部印刷图形发生拉伸、弯曲及错位，但主要文字区域仅轻微受波及，未见明显断裂或遮挡。",
+    "prompt_hint": "Add four prominent diagonal label-film wrinkles running from upper left to lower right, with alternating bright ridges and dark crease shadows.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD25.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD25__0.png",
+    "bbox": [
+      94,
+      478,
+      958,
+      526
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD5__0",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身中部至中下部的标签膜，主要集中在横向接缝附近及左侧区域",
+    "appearance": "标签膜出现大面积挤压起皱和折叠，中央有多条贯穿瓶身的横向波浪褶皱，左侧同时形成密集堆叠、凹陷及斜向折痕。局部标签明显鼓起或塌陷，整体贴合不平整。",
+    "severity": 5,
+    "count": 16,
+    "orientation": "以横向为主，夹杂斜向左上-右下及多向交叉",
+    "geometry": "约有6条较长的横向波浪形褶皱从左侧延伸至右侧，其中上方一条细而锐利，中间数条较宽并近似平行排列；左侧另有约10条长短不一的斜向和弧形折痕，部分分叉、汇聚并形成扇状褶皱。若干折痕在左中部相互交叉，伴随宽缓的鼓包和深凹陷。",
+    "extent": "覆盖约瓶身可见宽度的90%，纵向从瓶身中部上缘延伸至中下部图案区域，约占可见标签高度的40%。横向长褶皱几乎贯穿整个正面，左侧褶皱向下扩展至水果图案上部。",
+    "photometry": "褶皱表现为连续的亮色隆起带与暗色凹陷带交替，中央横向折痕对比强烈；左侧堆叠区域存在大片不均匀高光和深暗阴影，明显区别于平整标签表面。",
+    "edge_profile": "中央多条折痕具有较锐利的棱线，部分边缘呈双线状；较宽的横向隆起和左侧鼓包则为平缓过渡，局部凹陷边缘陡峭。",
+    "texture_effect": "标签底色和印刷图案被明显压缩、弯曲和拉伸，左侧文字及中下部水果图案随折痕发生错位和波浪状扭曲，但未见完全断裂。",
+    "prompt_hint": "Create severe wrinkling on the bottle label with long horizontal wave-like creases, gathered diagonal folds, alternating bright ridges and dark recessed lines.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD5.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD5__0.png",
+    "bbox": [
+      94,
+      830,
+      1018,
+      960
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.2__500水次方二角度NOTGOOD48__0",
+    "class_name": "5.2",
+    "defect_type": "变形",
+    "location": "瓶身中下部至瓶底上方的标签膜",
+    "appearance": "标签膜出现大面积起皱和折叠变形，上缘有一条横贯瓶身的弧形长折痕，下方分布多条波浪状、斜向及近竖向褶皱，局部明显鼓起和塌陷。",
+    "severity": 4,
+    "count": 14,
+    "orientation": "多向交叉，以横向弧形和斜向褶皱为主",
+    "geometry": "最显著的一条长折痕由瓶身左侧约三分之一高度处向右上方弧形延伸，长度接近整个可见瓶宽，线条较粗且连续；其下方约有13条长短不一的褶皱，部分呈S形或波浪形，部分从瓶底区域向上放射，彼此汇合、交叉并形成不规则隆起与凹陷。左侧褶皱较窄且近竖向，中部和右下部褶皱更宽、更弯曲。",
+    "extent": "覆盖约90%的可见瓶身宽度和约45%的瓶身高度，从瓶身中部标签文字下方一直延伸至底部容量标识上方，主要集中在下半段标签。",
+    "photometry": "折叠处形成连续暗色棱线及相邻亮色隆起，明暗交替明显；瓶身左下、中下和右下区域对比最强，局部出现较亮的鼓包高光。",
+    "edge_profile": "横贯瓶身的主折痕边缘较锐利，呈明显压折棱线；下方多数褶皱为锐利折线与平缓波浪隆起混合，局部汇聚处过渡陡峭。",
+    "texture_effect": "标签上的中英文文字和水果插图随膜面褶皱发生弯曲、压缩及局部拉伸，部分线条在折痕处错位或变形，但未被完全遮挡。",
+    "prompt_hint": "Large wrinkled bottle label with a long curved transverse crease and multiple intersecting wavy folds across the lower half.",
+    "source_image": "../实拍正样本（有缺陷）/5.2/500水次方二角度NOTGOOD48.jpg",
+    "crop_path": "outputs/catalog/crops/5.2__500水次方二角度NOTGOOD48__0.png",
+    "bbox": [
+      57,
+      1000,
+      960,
+      1055
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD47__0",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身上部标签区域",
+    "appearance": "标签膜出现大面积斜向褶皱和明显折叠，形成从左侧向右下方延伸的宽带状隆起与塌陷，局部标签被挤压并翘起。",
+    "severity": 5,
+    "count": 6,
+    "orientation": "斜向左上-右下",
+    "geometry": "多条长条状、弯曲的褶皱彼此大致平行并局部交叉；主褶皱贯穿标签上部，长度约300至900像素，宽度约15至80像素，左侧伴随短小分叉和卷曲折痕，右侧逐渐汇聚成多层弧形折叠。",
+    "extent": "覆盖瓶身可见宽度约80%，占瓶身高度约18%，从左侧标签边缘横跨至右侧瓶身中上部，经过顶部品牌图案区域。",
+    "photometry": "褶皱表现为明显的亮暗交替带，折叠凸起处有高光亮带，凹陷处呈深暗色，和周围平整标签形成强对比。",
+    "edge_profile": "同时存在锐利的折痕棱线和较陡峭的隆起/凹陷过渡，主折痕边界清晰。",
+    "texture_effect": "标签上的品牌图案、字母和注册标记被明显拉伸、扭曲并局部遮挡，图案沿褶皱方向发生错位。",
+    "prompt_hint": "A severely wrinkled bottle label with broad diagonal folds running from upper left to lower right, sharp creases, raised glossy ridges, and dark compressed valleys distorting the printed logo.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD47.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD47__0.png",
+    "bbox": [
+      100,
+      510,
+      1015,
+      445
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD47__1",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签区域",
+    "appearance": "标签下半部存在成片的波浪状褶皱、挤压折痕和局部鼓包，褶皱集中在图案下缘及文字区域下方，造成明显的表面起伏。",
+    "severity": 4,
+    "count": 12,
+    "orientation": "多向交叉",
+    "geometry": "褶皱以长短不一的弧形和波浪形条带为主，长度约100至650像素、宽度约10至70像素；多条褶皱横向或斜向延伸，局部呈放射状汇聚并相互交叉，中央和右下区域可见较大的圆钝鼓包及塌陷。",
+    "extent": "覆盖瓶身可见宽度约85%，占瓶身高度约25%，主要位于标签中下部，从左侧边缘延伸至右侧边缘，跨越插图底部及其下方区域。",
+    "photometry": "褶皱区域出现大范围明暗交替，凸起处呈宽幅高光，深折痕和凹陷处呈暗色线带，整体对比度中高。",
+    "edge_profile": "大部分为平缓但明显的波浪状隆起和凹陷过渡，夹杂少量锐利细折痕；边缘不规则且连续起伏。",
+    "texture_effect": "下部插画和部分文字受到拉伸、弯曲和局部遮挡，印刷线条沿褶皱发生形变，但未完全断裂。",
+    "prompt_hint": "A bottle label with extensive lower-section wrinkling, overlapping wavy folds, compressed creases, and rounded bulges distorting the printed illustration.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD47.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD47__1.png",
+    "bbox": [
+      105,
+      1490,
+      985,
+      610
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD13__0",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身中部至瓶身下部的标签区域",
+    "appearance": "标签表面存在大面积、明显的褶皱、折痕和局部塌陷，形成从左上向右下延伸的主折痕，并在中下部汇聚成多向交叉的严重起皱区域。标签整体有明显挤压变形和不平整起伏。",
+    "severity": 5,
+    "count": 14,
+    "orientation": "斜向左上-右下为主，多向交叉并伴有局部横向、竖向褶皱",
+    "geometry": "可见约14条主要褶皱或折痕，包含数条长度约300至850像素的长条斜向折痕，以及多条长度约80至400像素的短褶皱。部分褶皱弯曲、汇聚并形成分叉，左侧和下部存在密集杂乱的波浪状皱褶，中央区域有较深的尖锐折叠边缘，整体排列不规则并相互交叉。",
+    "extent": "覆盖标签可见区域的大部分，约占瓶身可见宽度的80%至90%、高度的65%至70%，从瓶身中部偏左上位置一直延伸至瓶身下部和底部标签上缘，跨越左侧文字区、中央图案区及右侧大面积图案区。",
+    "photometry": "褶皱表现为明显的明暗交替，高光亮带与深色暗折痕并存；深折痕相对周围标签形成强烈暗对比，凸起区域出现狭长亮边，整体起伏对比很强。",
+    "edge_profile": "既有锐利、清晰的折痕棱线，也有较宽缓的隆起和凹陷过渡；中央斜向主折痕边缘较锐利，左下及底部区域则呈连续的波浪状缓变和多重压痕。",
+    "texture_effect": "标签上的文字和印刷图案被明显扭曲、拉伸和局部压缩，左侧文字沿褶皱发生弯曲，部分图案被折痕切断或遮挡，底部图案区域受到严重挤压变形。",
+    "prompt_hint": "A bottle label with severe large-area crumpling, deep diagonal creases, intersecting wrinkles, sagging folds, and strong alternating highlights and dark crease shadows across the middle and lower label.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD13.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD13__0.png",
+    "bbox": [
+      95,
+      535,
+      1010,
+      1585
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD49__0",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身下部标签区域",
+    "appearance": "标签下半部出现大面积严重起皱和挤压变形，包含一条贯穿大部分标签宽度的粗大横向隆起，并伴随多条斜向、弧形及竖向褶皱。左右边缘及底部区域局部鼓起、塌陷，整体表面明显不平整。",
+    "severity": 5,
+    "count": 15,
+    "orientation": "以横向为主，伴随多向交叉",
+    "geometry": "上缘有一条从左中部延伸至右侧的宽厚波浪状横向折带，长约标签宽度的八成，右端向上弯曲；其下分布约14条长短不一的褶皱，包含左侧密集的短弧形折痕、中央斜向交叉折痕、右侧弯曲隆起以及向标签底缘延伸的竖向和斜向波纹。部分褶皱相互汇合、分叉，排列杂乱且间距不均。",
+    "extent": "覆盖标签下部约三分之一高度和约九成宽度，自说明文字末段附近向下延伸，跨越“STERILE A/合格”标识、黑色批号日期框周围直至标签底缘。",
+    "photometry": "褶皱形成显著的亮色隆起带与深色凹陷带，呈连续明暗交替；横向主折带下缘具有较深暗影，左右边缘和底部的波浪褶皱对比强烈。",
+    "edge_profile": "横向主折带为宽缓隆起与较锐利暗色折线并存，局部折痕棱线清楚；其余区域既有尖锐折痕，也有平缓鼓包和凹陷过渡。",
+    "texture_effect": "标签文字和图案随褶皱发生明显弯曲、压缩和错位，部分小字被折线穿过而变形；“STERILE A”和“合格”附近边框轻微弯曲，黑色批号日期框周围表面起伏明显但主体仍可辨认。",
+    "prompt_hint": "Severe large-area crumpling on the lower label, with a broad horizontal raised fold and many intersecting diagonal, curved, and vertical wrinkles creating strong alternating highlights and shadows.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD49.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD49__0.png",
+    "bbox": [
+      113,
+      1518,
+      957,
+      562
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD19__0",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身下部左侧标签区域",
+    "appearance": "标签膜在瓶身左下方出现大面积、明显的褶皱、折叠和局部塌陷，形成连续的波浪状起伏与多条深浅不一的折痕。",
+    "severity": 5,
+    "count": 12,
+    "orientation": "多向交叉，整体以斜向左上-右下和近横向为主",
+    "geometry": "褶皱长度约30至300像素，宽度约5至45像素，部分呈弧形和波浪形，部分为锐利折线；多条褶皱近似平行排列并相互交叉，局部形成扇状和杂乱堆叠结构，伴随明显的鼓起与塌陷区域。",
+    "extent": "覆盖瓶身下部左侧约40%的瓶身宽度和约35%的瓶身高度，主要跨越标签中下部，从约瓶身高度的50%延伸至接近底部边缘。",
+    "photometry": "褶皱区域呈明显的明暗交替，高光亮带沿凸起和折叠边缘分布，深色阴影集中在凹陷和折痕沟槽中，与周围平整标签表面对比强烈。",
+    "edge_profile": "同时具有锐利的折痕棱线和较平缓的隆起/凹陷过渡，局部折痕边缘清晰尖锐，多个褶皱之间存在连续的软性起伏。",
+    "texture_effect": "标签上的图像和印刷图案被明显拉伸、弯曲和压缩，局部图案被折痕遮挡或分割，文字区域主要位于右侧但标签整体平整度受到影响。",
+    "prompt_hint": "Large severely wrinkled and crumpled label film on the lower-left side of a cylindrical bottle, with overlapping diagonal folds, sharp creases, bulges, and deep shadowed valleys distorting the printed graphics.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD19.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD19__0.png",
+    "bbox": [
+      105,
+      1190,
+      475,
+      840
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD44__0",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身上部标签",
+    "appearance": "标签上部出现明显的大面积斜向折叠和局部塌陷，形成贯穿标签宽度的深色折痕带，标签表面不再平整。",
+    "severity": 4,
+    "count": 3,
+    "orientation": "斜向左上-右下",
+    "geometry": "包含约3条主要斜向折痕，长度约250至800像素、宽度约10至45像素，整体较直但带有轻微弧度，彼此近似平行并形成层叠的折叠边缘，局部相互汇合。",
+    "extent": "覆盖瓶身正面标签上部约70%的宽度和约20%的标签高度，范围从左侧标签边缘延伸至右侧瓶身边缘，跨越上部图案及部分文字区域。",
+    "photometry": "折痕表现为明显的深暗带与相邻亮边交替，和周围标签表面对比强烈，部分区域呈褶皱造成的明暗突变。",
+    "edge_profile": "主要折痕具有较锐利的折叠棱线，边缘伴随局部较平缓的凹陷过渡。",
+    "texture_effect": "折痕使标签图案和右侧文字发生局部弯曲、拉伸和遮挡，部分图形被深色折叠区域切断。",
+    "prompt_hint": "A large dark diagonal fold across the upper bottle label, with sharp creased edges, layered overlap, and local label collapse distorting the printed graphics.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD44.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD44__0.png",
+    "bbox": [
+      355,
+      390,
+      845,
+      430
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD44__1",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签",
+    "appearance": "标签下半部出现大面积严重起皱和挤压变形，表面形成密集波浪状褶皱、隆起和塌陷。",
+    "severity": 5,
+    "count": 12,
+    "orientation": "多向交叉",
+    "geometry": "可见约12条主要褶皱，长度约100至650像素、宽度约8至70像素，弯曲且粗细不均，呈波浪状、环状和不规则交叉排列，多个褶皱在局部汇聚形成深凹陷和鼓包。",
+    "extent": "覆盖瓶身正面标签中下部约75%的宽度和约30%的标签高度，主要集中在图像约1500至2100像素高度区域，横跨产品图案并延伸至标签下边缘附近。",
+    "photometry": "褶皱区域具有强烈的明暗交替，高光亮带沿隆起边缘分布，深暗折痕位于凹陷处，与平整标签区域形成强对比。",
+    "edge_profile": "同时具有锐利的局部折痕棱线和较平缓的大范围隆起、凹陷过渡，褶皱边界复杂且不规则。",
+    "texture_effect": "下方图像和标签印刷纹理被明显扭曲、拉伸和局部遮挡，图案轮廓随褶皱发生起伏变形。",
+    "prompt_hint": "A severely crumpled bottle label with dense multidirectional waves, overlapping folds, raised bulges, deep valleys, and strongly distorted printed artwork across the lower half.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD44.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD44__1.png",
+    "bbox": [
+      375,
+      1490,
+      725,
+      640
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD44__2",
+    "class_name": "5.3",
+    "defect_type": "划痕",
+    "location": "瓶身正面标签中部",
+    "appearance": "标签上有一条细长、近乎笔直的竖向线状划痕，从标签上部延伸至中下部。",
+    "severity": 2,
+    "count": 1,
+    "orientation": "竖向",
+    "geometry": "单条连续细线，长度约1130像素、宽度约2至6像素，基本笔直，未见明显分叉或交叉，贯穿标签较大范围。",
+    "extent": "约占正面标签高度的55%，从上部图案区域一直延伸至下方褶皱区域附近，横向位置约在瓶身正面偏左中部。",
+    "photometry": "划痕主要表现为细窄的亮色反光线，与深色标签背景对比明显，局部亮度略有变化。",
+    "edge_profile": "边缘较锐利且清晰，呈窄线状，不具备大面积隆起或塌陷过渡。",
+    "texture_effect": "划痕轻微穿过标签图案和空白区域，未明显造成文字断裂，但在经过印刷区域时形成连续的亮线干扰。",
+    "prompt_hint": "A single long, thin, nearly straight vertical scratch running down the dark bottle label with a sharp bright reflective appearance.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD44.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD44__2.png",
+    "bbox": [
+      548,
+      415,
+      25,
+      1155
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD46__0",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身中部标签区域",
+    "appearance": "标签中部出现大面积横向及斜向褶皱、挤压折痕，形成明显的波浪状隆起和塌陷。褶皱横跨多行文字，导致标签表面明显不平整。",
+    "severity": 5,
+    "count": 8,
+    "orientation": "横向为主，夹杂斜向左上-右下和斜向右上-左下",
+    "geometry": "多条长条状弯曲褶皱从左侧延伸至右侧，长度约400-1000像素，宽度约10-50像素；部分褶皱近似平行排列，部分在中部交叉并形成连续的波浪形折带，局部存在尖锐折返。",
+    "extent": "覆盖瓶身宽度约85%，主要分布在标签中部约四分之一高度范围，跨越英文产品名称、说明文字和中文文字区域。",
+    "photometry": "褶皱呈明显明暗交替表现，凸起处形成亮色高光带，凹陷处呈深色暗带；与周围平整标签的对比很强。",
+    "edge_profile": "同时存在锐利的折痕棱线和较宽的平缓隆起/凹陷过渡，部分折痕边缘清晰尖锐。",
+    "texture_effect": "标签文字和印刷图案被明显拉伸、弯曲和局部遮挡，部分字母笔画沿褶皱发生错位。",
+    "prompt_hint": "A bottle label with severe horizontal and diagonal wrinkling, multiple overlapping wave-like creases and deep folds distorting the printed text across the middle section.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD46.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD46__0.png",
+    "bbox": [
+      150,
+      760,
+      1040,
+      420
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD46__1",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身下部标签区域",
+    "appearance": "标签下部出现大面积严重起皱和挤压变形，形成密集的波浪褶皱、局部鼓包和塌陷，整体表面呈明显褶皱堆积状态。",
+    "severity": 5,
+    "count": 12,
+    "orientation": "多向交叉，以横向和斜向为主",
+    "geometry": "褶皱长度约100-850像素，宽度约8-70像素，弯曲程度较大；多条褶皱相互交叉、汇聚并形成不规则团状和波浪状结构，局部出现放射状排列和深凹折叠。",
+    "extent": "覆盖瓶身宽度约80%，从标签下部说明文字区域延伸至装饰图案上缘，覆盖约600像素高度。",
+    "photometry": "凸起褶皱表现为连续亮色反光带，凹陷区域表现为深暗阴影，明暗变化频繁且对比强烈。",
+    "edge_profile": "既有较平缓的大面积起伏，也有多处锐利、深陷的折痕棱线；局部褶皱边缘呈不规则断续状。",
+    "texture_effect": "下部印刷图案被严重扭曲、拉伸和压缩，图案轮廓变形，局部细节被褶皱阴影遮挡。",
+    "prompt_hint": "A severely crumpled lower bottle label with dense intersecting waves, bulges, collapsed areas, deep sharp folds, and heavily distorted printed artwork.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD46.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD46__1.png",
+    "bbox": [
+      165,
+      1440,
+      990,
+      650
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD46__2",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身左侧标签区域",
+    "appearance": "标签左侧存在一条贯穿较大高度范围的竖向折痕或压痕，边缘呈细长亮线，局部对周围标签造成轻微纵向拉扯。",
+    "severity": 3,
+    "count": 1,
+    "orientation": "竖向",
+    "geometry": "单条近似直线的细长折痕，长度约1100像素，宽度约5-15像素，整体基本连续，局部略有轻微弯曲；与下方横向褶皱相交。",
+    "extent": "覆盖瓶身宽度约2%，从标签上部延伸至下部说明文字区域，跨越多个印刷区块。",
+    "photometry": "折痕棱线呈细亮色高光，旁侧伴有较窄暗带，与周围标签形成中等对比。",
+    "edge_profile": "边缘较锐利，呈细窄折痕棱线，过渡范围小。",
+    "texture_effect": "部分文字和细线在折痕处出现轻微弯曲或亮度变化，但未明显断裂。",
+    "prompt_hint": "A long narrow vertical crease running down the left side of a bottle label, with a sharp highlight edge and slight distortion of the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD46.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD46__2.png",
+    "bbox": [
+      255,
+      410,
+      35,
+      1140
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD51__0",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身右侧标签中下部",
+    "appearance": "右侧标签膜出现大面积明显褶皱、折痕和局部塌陷，形成多条横向及斜向波浪状起伏；下部褶皱密集并呈挤压揉皱状态。",
+    "severity": 4,
+    "count": 12,
+    "orientation": "横向、斜向及局部竖向交错",
+    "geometry": "可见约12条主要褶皱或折痕，长度约30至320像素，宽度约2至35像素，部分呈弧形和波浪形，局部相互交叉并形成片状凹凸；中部有一条较长的近竖向折痕贯穿标签，下部褶皱呈杂乱交织排列。",
+    "extent": "覆盖右侧标签约35%的宽度和约50%的高度，主要跨越瓶身中部至下部，从约瓶身高度35%处延伸至接近底部标签区域。",
+    "photometry": "褶皱表现为明显的明暗交替，高光亮带与暗色折痕并存；中下部起伏区域与周围平整标签的对比强，局部形成宽幅暗带和亮色弧带。",
+    "edge_profile": "同时包含较锐利的折痕棱线和较平缓的隆起、凹陷过渡；中部横向折痕边缘较清晰，下部揉皱区域边缘较弥散。",
+    "texture_effect": "标签上的英文、中文及图案在褶皱处发生明显弯曲、拉伸和局部错位，部分文字被折痕明暗变化遮挡。",
+    "prompt_hint": "A large wrinkled and crumpled label on the lower right side of a cylindrical bottle, with overlapping horizontal, diagonal and vertical folds, strong alternating highlights and dark creases, visibly distorting the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD51.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD51__0.png",
+    "bbox": [
+      715,
+      845,
+      420,
+      1175
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD23__0",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身中上部标签",
+    "appearance": "标签膜出现大面积严重褶皱和挤压变形，形成多条横向及斜向波浪状折痕，标签表面明显起伏不平。",
+    "severity": 5,
+    "count": 9,
+    "orientation": "横向为主，夹杂斜向左上-右下",
+    "geometry": "多条长条状弯曲褶皱，长度约占瓶身宽度的30%-90%，粗细不一，部分褶皱相互平行，部分在右侧汇聚交叉并形成局部尖锐折叠；整体呈连续波浪状排列。",
+    "extent": "覆盖瓶身中上部约80%的宽度和约20%的高度，主要跨越标签上的英文横幅、中文文字区域以及右侧标签边缘。",
+    "photometry": "褶皱表现为明显的明暗交替亮带和暗色折痕，与周围较平整的深色标签表面对比强烈。",
+    "edge_profile": "同时存在较锐利的折痕棱线和较平缓的隆起、凹陷过渡，右侧部分折痕边缘尤其明显。",
+    "texture_effect": "英文和中文印刷文字被褶皱拉伸、弯曲并局部遮挡，横幅边界也随标签变形而呈波浪状。",
+    "prompt_hint": "Severely wrinkled dark bottle label with multiple horizontal and diagonal wavy creases, compressed folds, strong alternating highlights and shadows, distorted printed text.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD23.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD23__0.png",
+    "bbox": [
+      88,
+      700,
+      1050,
+      475
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD23__1",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签",
+    "appearance": "标签下半部出现大面积皱缩、塌陷和不规则鼓包，表面形成密集的交错褶皱，尤其集中在下方图案区域和右侧边缘。",
+    "severity": 5,
+    "count": 14,
+    "orientation": "多向交叉，以下斜向和横向为主",
+    "geometry": "褶皱长短不一，既有横跨较大范围的弧形长褶皱，也有短而密集的分支折痕；多条褶皱相互交叉、汇聚和分叉，形成不规则网状皱缩，右侧有近竖向压折。",
+    "extent": "覆盖瓶身中下部约85%的宽度和约30%的高度，从说明文字下方延伸至下方黑色边带上缘，右侧褶皱延伸到标签侧边。",
+    "photometry": "大面积区域呈明显明暗交替，凸起处形成亮色高光带，凹陷处呈深暗折痕，整体与平整区域对比很强。",
+    "edge_profile": "以平缓起伏和塌陷过渡为主，同时夹杂局部锐利的深折痕；部分折痕具有明显的窄暗边和亮边。",
+    "texture_effect": "下方图案、人物图像和部分说明文字被严重扭曲、拉伸和局部遮挡，印刷内容沿褶皱方向发生不连续变形。",
+    "prompt_hint": "Large severely crumpled and buckled bottle label, with dense intersecting diagonal wrinkles, sagging folds, bulges, sharp creases, and heavily distorted printed artwork.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD23.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD23__1.png",
+    "bbox": [
+      95,
+      1450,
+      1020,
+      720
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD40__0",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身中部标签横向接合区域",
+    "appearance": "标签在瓶身中部形成一条贯穿大部分正面的横向压皱带，局部呈双重折线并伴有轻微隆起和塌陷。",
+    "severity": 3,
+    "count": 2,
+    "orientation": "横向",
+    "geometry": "两条细长、略有弯曲的折痕紧邻排列，主体从左侧标签边缘延伸至右侧，局部重合并形成窄带状起伏；左端和右端均有轻微波浪形收缩。",
+    "extent": "约覆盖瓶身可见宽度的90%，位于瓶身中部并横跨整个正面标签。",
+    "photometry": "折痕表现为连续暗色细线及相邻窄亮带，明暗交替明显，在左右侧高光区对比更强。",
+    "edge_profile": "主体为较锐利的折痕棱线，周围过渡为轻微平缓隆起。",
+    "texture_effect": "横向折痕穿过左侧英文文字，使局部字形发生轻微错位和弯曲，其余印刷区域沿折线产生窄幅扭曲。",
+    "prompt_hint": "A long horizontal double crease wrapping across the middle of a dark bottle label, with narrow alternating highlight and shadow lines.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD40.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD40__0.png",
+    "bbox": [
+      97,
+      982,
+      937,
+      75
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.3__500水次方三角度NOTGOOD40__1",
+    "class_name": "5.3",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签左侧至中央",
+    "appearance": "标签从左侧中部向右下方出现大面积斜向折叠和起皱，形成明显的弧形鼓起、凹陷及多条伴生褶皱。",
+    "severity": 4,
+    "count": 6,
+    "orientation": "斜向左上-右下",
+    "geometry": "一条较粗且弯曲的主折痕从左侧边缘斜向右下延伸，末端在中央偏左处回弯；主折痕两侧分布约5条长短不一的细褶皱，部分近似平行，部分在下端汇聚和分叉，整体构成宽大的折叠瓣状区域。",
+    "extent": "覆盖约40%的瓶身可见宽度和约30%的瓶身高度，从中部横向折痕下方一直延伸至下部图案区域。",
+    "photometry": "主折痕由宽亮带和深暗边缘共同构成，内部有明显明暗渐变；伴生细褶皱呈暗线与窄亮线交替，与周围平整标签对比强。",
+    "edge_profile": "主折叠边缘较锐利并带有明显棱线，折叠内部为宽缓鼓包和凹陷，末端存在收紧的尖锐折角。",
+    "texture_effect": "折皱使左侧中英文文字及下方印刷图案产生弯曲、拉伸和局部错位，图案轮廓沿主折痕明显扭曲，但未完全遮挡。",
+    "prompt_hint": "A large diagonal folded wrinkle on the lower-left bottle label, with a curved raised ridge, deep shadow edge, and several branching parallel creases.",
+    "source_image": "../实拍正样本（有缺陷）/5.3/500水次方三角度NOTGOOD40.jpg",
+    "crop_path": "outputs/catalog/crops/5.3__500水次方三角度NOTGOOD40__1.png",
+    "bbox": [
+      99,
+      1042,
+      474,
+      718
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD19__0",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身上部至中部右侧标签",
+    "appearance": "右侧标签膜出现大面积挤压起皱和局部鼓包，多条弧形、斜向折痕从标签右边缘向左侧延伸并汇聚，形成明显的扭曲区域。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "以斜向左上-右下和弧形横向为主，多向交叉",
+    "geometry": "约5条主要褶皱，包含2条较长且较深的弧形斜折痕、2条中等长度的横向弯曲褶皱及1处短促尖锐折叠；褶皱由右侧边缘附近呈扇形向左上和左侧展开，局部相互交叉并在右中部汇聚，伴随片状隆起和凹陷。",
+    "extent": "覆盖右侧标签可见宽度约80%，高度约20%，从标签上部边缘下方延伸至瓶身中部偏上，并触及瓶体右侧轮廓。",
+    "photometry": "折痕表现为高对比的深色弯曲暗带，局部棱线旁伴有窄亮带；右侧汇聚处形成明显亮暗交替，高于周围平整标签的对比度。",
+    "edge_profile": "主要折痕具有较锐利的棱线，折痕之间则呈平缓鼓起或塌陷过渡，右侧汇聚处边缘最尖锐。",
+    "texture_effect": "标签底色和图形被明显弯折、压缩及错位，右侧文字和图案局部随鼓包发生弯曲，但未完全断裂或遮挡。",
+    "prompt_hint": "Add a large crumpled label area with five sharp curved diagonal folds, radiating from the upper-right edge with alternating dark creases and bright ridges.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD19.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD19__0.png",
+    "bbox": [
+      737,
+      389,
+      395,
+      423
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD36__0",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身标签上部至下部，主要集中于瓶身中部及右侧",
+    "appearance": "标签膜发生大面积严重起皱和挤压变形，可见贯穿上中部的长斜向折痕、腰部横向堆叠褶皱，以及中下部多条波浪状隆起和塌陷。右侧褶皱尤为密集，形成明显的收缩、扭曲和局部鼓包。",
+    "severity": 5,
+    "count": 22,
+    "orientation": "多向交叉，以斜向左上-右下和横向为主",
+    "geometry": "上部有一条从左上向右下延伸的粗长弧形主折痕，长度约占瓶身可见宽度的九成，并伴随数条短斜褶；瓶身中部存在一条近横向的堆叠皱带，右端形成多层折叠。中下部有多条长短不一的弯曲褶皱向中央汇聚，部分呈放射状、V形和弧形，右侧则分布密集的波浪形细褶与深折痕，彼此交叉或近似平行。",
+    "extent": "覆盖约90%的标签可见宽度和约82%的标签高度，从标签顶缘附近一直延伸至下部净含量黑色条带上方；最严重区域跨越瓶身中部至右下部。",
+    "photometry": "褶皱表现为高光亮带与深色阴影带交替，主折痕和右侧堆叠处明暗反差强烈；平缓鼓包区域呈宽而渐变的亮暗过渡。",
+    "edge_profile": "兼有锐利的折痕棱线和宽缓的隆起、凹陷过渡；上部主斜折痕、腰部横向皱带及右侧汇聚折叠边缘较尖锐，中下部波浪褶皱较平缓。",
+    "texture_effect": "标签文字和图案随褶皱明显弯曲、压缩和错位，腰部英文文字被横向折叠带扭曲，中央人物图案及右下装饰纹样出现拉伸、弯折和局部遮蔽，但未见印刷本身断裂。",
+    "prompt_hint": "Severe large-area shrink-wrap label deformation with a long diagonal crease, horizontal buckling, and dense intersecting wavy wrinkles across the bottle.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD36.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD36__0.png",
+    "bbox": [
+      86,
+      180,
+      1042,
+      1775
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD31__0",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身中下部至瓶底上方的标签区域",
+    "appearance": "标签膜发生大面积严重起皱和挤压变形，左侧形成向内收拢的深折痕，中下部及右侧出现连续波浪状隆起、塌陷和扭曲。褶皱密集并贯穿大部分下半段标签。",
+    "severity": 5,
+    "count": 18,
+    "orientation": "多向交叉，以斜向左上-右下、斜向右上-左下及横向波浪为主",
+    "geometry": "左侧约有5条较深且较长的弧形、斜向折痕，在瓶身左下部汇聚并部分分叉；中部约有7条长短不一的波浪状褶皱，呈横向和斜向交错排列；右侧约有6条弯曲折痕及局部鼓包边界，由中部向右缘放射延伸。多数折痕较宽且弯曲，局部相互交叉形成尖角、凹坑和不规则隆起。",
+    "extent": "覆盖约瓶身可见宽度的90%，从瓶身中部偏下约高度45%处一直延伸至底部黑色容量文字带上方及其周边，整体约占瓶身可见高度的45%。",
+    "photometry": "折痕沿线表现为明显的暗色沟槽与相邻高光亮带交替，左侧汇聚处和中下部波浪边缘对比强烈；较大的鼓包区域呈宽缓亮面，凹陷处形成深暗阴影。",
+    "edge_profile": "左侧及中部主折痕具有较锐利的棱线和深凹边缘，右侧及下部部分区域则为平缓隆起与塌陷过渡；多处锐利折线与宽缓波纹并存。",
+    "texture_effect": "标签上的文字和插图被明显弯折、压缩和扭曲，左侧文字基线发生偏折，中下部图案轮廓随波浪褶皱起伏变形；局部图案在深折痕处出现视觉断裂和错位，但未被完全遮挡。",
+    "prompt_hint": "Create severe large-area crumpling on the lower bottle label, with intersecting diagonal creases, deep folded grooves, broad wavy bulges, and distorted printed artwork.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD31.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD31__0.png",
+    "bbox": [
+      89,
+      1095,
+      1022,
+      1118
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD25__0",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身右侧标签",
+    "appearance": "标签膜出现多条明显的横向至斜向褶皱和挤压折痕，局部形成连续的波浪状隆起与塌陷。",
+    "severity": 4,
+    "count": 5,
+    "orientation": "斜向左上-右下 / 近横向",
+    "geometry": "褶皱主要为中长条状，长度约30至115像素、宽度约3至18像素，部分折痕弯曲并呈波浪形，彼此大致平行但局部交错，集中分布在右侧标签中部至下部。",
+    "extent": "覆盖右侧标签约70%的高度，约占整幅瓶身可见宽度的10%，从瓶身中上部延伸至瓶身中下部。",
+    "photometry": "褶皱表现为亮暗交替的细长带状区域，折痕棱线较亮，凹陷区域偏暗，与周围标签表面对比明显。",
+    "edge_profile": "以较锐利的折痕棱线为主，部分区域带有平缓的隆起和凹陷过渡。",
+    "texture_effect": "标签底纹和局部印刷图案被褶皱拉伸、弯曲并出现轻微断续，文字区域受到局部遮挡或形变影响。",
+    "prompt_hint": "Several prominent diagonal and horizontal wrinkles and compression folds across the right side of a bottle label, with alternating bright ridges and dark recessed valleys.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD25.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD25__0.png",
+    "bbox": [
+      992,
+      625,
+      137,
+      440
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD25__1",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身中下部正面标签",
+    "appearance": "正面标签下半部存在大面积波浪状起皱和局部折叠，标签表面明显不平整，形成连续的横向褶皱带。",
+    "severity": 3,
+    "count": 6,
+    "orientation": "横向 / 斜向左上-右下 / 多向交叉",
+    "geometry": "褶皱以中长条状波纹为主，长度约100至650像素、宽度约8至45像素，部分褶皱弯曲、分叉并相互叠压，整体呈多条近横向平行波纹夹杂局部斜向折痕的排列。",
+    "extent": "覆盖正面标签约25%的高度，横向跨越瓶身可见宽度约75%，主要位于瓶身中下部，从左侧标签边缘延伸至右侧标签边缘附近。",
+    "photometry": "褶皱区域呈明显明暗交替，凸起处形成宽亮带，凹陷处形成暗色带，与周围平整标签的对比中等偏强。",
+    "edge_profile": "同时具有平缓的波浪状隆起/凹陷过渡和少量较锐利的折痕边缘，局部褶皱边界清晰。",
+    "texture_effect": "标签上的文字、图案和底纹在褶皱处发生弯曲、拉伸和局部遮挡，印刷内容随表面起伏明显变形。",
+    "prompt_hint": "A large wrinkled and buckled area across the lower front bottle label, with broad horizontal waves, overlapping folds, and distorted printed text and graphics.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD25.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD25__1.png",
+    "bbox": [
+      125,
+      1575,
+      808,
+      310
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD46__0",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身上部标签",
+    "appearance": "标签从左上侧向右下侧形成一条明显的宽幅斜向折叠带，标签膜整体发生错位、隆起和塌陷。",
+    "severity": 4,
+    "count": 2,
+    "orientation": "斜向左上-右下",
+    "geometry": "主要为两条长距离斜向折痕，长度约500至800像素、宽度约15至60像素，局部弯曲并逐渐变宽；折痕彼此大致平行，周围伴有不规则浅层波纹。",
+    "extent": "覆盖瓶身上部标签约70%的宽度，纵向从左上标签边缘延伸至右侧中上部，约占瓶身高度的30%。",
+    "photometry": "折痕表现为连续的明暗交替带，隆起处有较亮的高光，凹陷处呈暗色阴影，与平整标签区域对比明显。",
+    "edge_profile": "主折痕边缘较锐利，局部由锐利棱线过渡到中等宽度的平缓凹凸区域。",
+    "texture_effect": "标签边界和印刷区域出现明显错位，部分文字及图案被拉伸、倾斜或沿折痕发生形变。",
+    "prompt_hint": "A large dark bottle label with a prominent diagonal folded crease running from the upper left toward the lower right, with sharp ridges, bulges, and alternating highlights and shadows.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD46.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD46__0.png",
+    "bbox": [
+      90,
+      200,
+      930,
+      760
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD46__1",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身中部偏右标签",
+    "appearance": "标签右侧中部出现严重的局部挤压起皱，形成多层堆叠的波浪状褶皱、尖锐折角和明显塌陷。",
+    "severity": 5,
+    "count": 8,
+    "orientation": "多向交叉",
+    "geometry": "包含约8条长短不一的弯曲褶皱，长度约80至300像素、宽度约10至50像素；褶皱呈扇状和杂乱交叉排列，局部形成尖锐折角、分叉和重叠的片状隆起。",
+    "extent": "主要覆盖瓶身右侧约25%的宽度和约20%的高度，集中在标签中部至中下部，横跨右侧边缘附近。",
+    "photometry": "褶皱区域具有强烈的亮暗交替，凸起的折脊呈高光亮带，深凹处呈近黑色阴影，整体对比度很强。",
+    "edge_profile": "同时存在锐利折痕棱线和明显的陡峭凹陷，部分褶皱边缘清晰，部分区域为不规则的缓坡过渡。",
+    "texture_effect": "右侧标签图案被挤压并严重扭曲，局部印刷纹理沿褶皱方向拉伸、收缩和断续。",
+    "prompt_hint": "Severely crumpled bottle label on the right middle side, with dense overlapping wave-like wrinkles, sharp creases, deep folds, and strong alternating highlights and shadows.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD46.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD46__1.png",
+    "bbox": [
+      850,
+      870,
+      280,
+      520
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD46__2",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身中下部标签",
+    "appearance": "标签中下部存在大面积不平整和挤压变形，中央形成宽大的塌陷区，周围分布多条长褶皱和放射状折痕。",
+    "severity": 5,
+    "count": 12,
+    "orientation": "多向交叉",
+    "geometry": "可见约12条褶皱，长度约100至600像素、宽度约10至70像素，整体以弯曲长折痕为主；中央和右下区域有放射状、弧形及交叉褶皱，部分褶皱相互连接形成片状隆起与塌陷。",
+    "extent": "覆盖瓶身中下部标签约75%的宽度和约45%的高度，从左侧文字区域延伸至右侧边缘，并向下延伸到靠近底部标签的位置。",
+    "photometry": "大面积区域呈不均匀明暗分布，多个折脊形成宽亮带，深层凹陷形成暗色沟槽，亮暗交替明显且与周围平整区域反差强。",
+    "edge_profile": "既有清晰锐利的长折痕，也有大范围平缓的隆起和塌陷过渡；中央下方部分折痕边缘较深且轮廓明显。",
+    "texture_effect": "大面积印刷图案和文字受到拉伸、压缩及扭曲，部分图案轮廓被折痕切断或遮挡，文字基线出现不规则弯曲。",
+    "prompt_hint": "A large area of severe wrinkling and compression deformation across the lower bottle label, with broad sunken regions, radiating curved folds, sharp creases, and distorted printed graphics.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD46.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD46__2.png",
+    "bbox": [
+      90,
+      1030,
+      1010,
+      1050
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD5__0",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身中部偏左的标签区域",
+    "appearance": "标签左侧出现成片明显褶皱和挤压变形，表面形成多条横向波浪折痕，并伴随局部斜向收缩和鼓起。",
+    "severity": 4,
+    "count": 10,
+    "orientation": "横向为主，夹杂斜向左上-右下",
+    "geometry": "褶皱长度约为瓶身宽度的四分之一至三分之一，宽窄不一，整体弯曲且相互近似平行，局部有短褶皱交叠；部分折痕呈锐利暗线，两侧伴随平缓隆起。",
+    "extent": "覆盖标签左侧约三分之一宽度，纵向跨越瓶身中部约五分之一高度，主要位于说明文字中下部。",
+    "photometry": "表现为明显的明暗交替，高光亮带与暗色折痕交错，与周围平整标签表面对比强烈。",
+    "edge_profile": "同时存在较锐利的折痕棱线和较平缓的凹陷、隆起过渡，褶皱边缘不规则。",
+    "texture_effect": "褶皱使局部文字和印刷线条发生弯曲、拉伸及轻微错位，但未完全遮挡主要文字。",
+    "prompt_hint": "A bottle label with pronounced horizontal wrinkling and compressed wavy folds on the left middle section, with alternating bright ridges and dark creases distorting the printed text.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD5.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD5__0.png",
+    "bbox": [
+      68,
+      958,
+      410,
+      405
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  },
+  {
+    "entry_id": "5.4__500水次方四角度NOTGOOD5__1",
+    "class_name": "5.4",
+    "defect_type": "变形",
+    "location": "瓶身下部标签区域",
+    "appearance": "标签下部出现大面积严重起皱、折叠和挤压变形，左下方有密集褶皱与局部塌陷，中央及右下方也有连续波浪状起伏。",
+    "severity": 5,
+    "count": 18,
+    "orientation": "多向交叉，整体以横向和斜向左下-右上为主",
+    "geometry": "褶皱长短不一，长褶皱可延伸数百像素，既有弯曲的波浪褶皱，也有较深的折叠棱线；左下区域褶皱密集并局部交叉、分叉，中央下方呈宽大的弧形隆起和塌陷排列。",
+    "extent": "覆盖瓶身下部标签约八成宽度，纵向约占瓶身高度四分之一，跨越标签下方说明文字、STERILE标识及黑色批号框周边。",
+    "photometry": "褶皱区域呈强烈明暗交替，多个高光亮脊与深色暗折痕并存，和周围平整区域形成强对比。",
+    "edge_profile": "既有锐利、清晰的折痕棱边，也有大范围平缓的鼓包和凹陷过渡；左下角局部呈明显堆叠式折叠。",
+    "texture_effect": "下部文字、标识和黑色框线被明显拉伸、弯曲和局部遮挡，印刷图案随标签褶皱发生连续变形。",
+    "prompt_hint": "A severely crumpled bottle label covering the lower section, with dense overlapping folds, diagonal creases, broad bulges and collapsed areas distorting and partially obscuring the printed text and black batch box.",
+    "source_image": "../实拍正样本（有缺陷）/5.4/500水次方四角度NOTGOOD5.jpg",
+    "crop_path": "outputs/catalog/crops/5.4__500水次方四角度NOTGOOD5__1.png",
+    "bbox": [
+      70,
+      1570,
+      1050,
+      700
+    ],
+    "source_size": [
+      1200,
+      2400
+    ]
+  }
+]

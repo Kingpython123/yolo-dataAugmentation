@@ -1,0 +1,159 @@
+# ============================================================
+#  缺陷合成流水线配置
+#  所有大模型调用走 OpenAI 兼容协议，适配你的"中转站"
+# ============================================================
+
+api:
+  # 中转站的 OpenAI 兼容地址，一般以 /v1 结尾
+  base_url: "https://api.gpt.ge/v1"
+  # 中转站的 key。请勿把真实 key 写在这里(本文件会进 git)。
+  # 用环境变量注入: PowerShell -> $env:RELAY_API_KEY="sk-xxxx"
+  # 也可用 RELAY_BASE_URL 覆盖上面的 base_url。
+  api_key: "REPLACE_ME_OR_USE_ENV_RELAY_API_KEY"
+  timeout: 300          # 单次请求超时(秒); gpt-image-2 出2K图常超180s
+  http_retries: 2       # 超时/连接失败的指数退避重试次数
+  max_workers: 3        # 并发线程数(编目/生成)。调高更快但注意中转站限流
+
+models:
+  # 视觉理解模型(读图->结构化描述/定位/质检)。
+  vision: "gpt-5.6-sol"
+
+  # 图像编辑模型(参考引导地在裁块上加缺陷)。推荐:
+  #   gemini-2.5-flash-image (nano-banana): 保持原图一致性最好, 全局漂移最小 -> 配 gemini_chat
+  #   gpt-image-2: 支持1-8参考图 + 显式mask + 2K/4K, 细节强(会整图重渲染, 靠回贴兜底) -> 配 openai_images
+  #   备选: gpt-image-1 / qwen-image-edit / seedream
+  edit: "gpt-image-2"
+
+  # 图像编辑后端调用方式:
+  #   gemini_chat  -> 走 /chat/completions, 多图输入, 返回图(nano-banana/qwen-image-edit 常见)
+  #   openai_images-> 走 /images/edits, 支持 参考图(image[]) + 显式 mask (gpt-image-2/1 / dall-e-2)
+  edit_backend: "openai_images"
+
+data:
+  # 瓶身 ROI(比例坐标 [x0, y0, x1, y1], 0~1), 按类别指定, 留空=整幅画面。
+  # 用途: 亮背景拍法(1~4.bmp 画面里有浅色桌布)无法自动把桌布与瓶身背光面分开,
+  # 固定工位下瓶子位置稳定, 因此直接框定范围。缺陷掩膜会与该矩形求交,
+  # 裁块也只会落在其中 -> 从根上避免"缺陷画到桌布上"。
+  # 暗背景拍法(1~4.jpg / 5.x)靠边界暗区剔除即可, 无需 ROI。
+  # 用 `python run.py seg-check --grid` 生成带比例网格的预览来读取坐标。
+  bottle_roi: {}
+  # 有缺陷样本根目录(相对本项目上一级)
+  defect_root: "../实拍正样本（有缺陷）"
+  # 无缺陷样本根目录
+  clean_root: "../实拍负样本（无缺陷）"
+  # 类别列表; 留空则自动扫描 defect_root 下的子目录
+  classes: []
+  # 允许的图片扩展名
+  extensions: [".bmp", ".jpg", ".jpeg", ".png"]
+
+output:
+  root: "outputs"                 # 产物根目录
+  catalog: "outputs/catalog"      # 缺陷目录(描述+裁剪)
+  images: "outputs/generated"     # 合成图
+  masks: "outputs/masks"          # 缺陷掩膜
+  rejected: "outputs/rejected"    # 质检驳回的样本(不混入训练集, 供人工复核)
+  debug: "outputs/debug"          # 中间产物(debug=true 时)
+  annotations: "outputs/annotations.jsonl"  # 标注
+
+# ---- 缺陷编目(build-catalog) ----
+# 注意: 之前缺这一段, 代码走的是内置默认值, 这些旋钮无法调整。
+# 下列取值与原默认值完全一致, 因此补上本段不会改变当前缺陷库的构建行为。
+catalog:
+  # 缺陷类型白名单; 模型给出的近义词会被归一, 不在白名单的条目直接丢弃
+  defect_types: ["变形", "划痕"]
+  crop_pad_ratio: 0.35        # 划痕类: 参考裁剪在 bbox 外的外扩比例
+  crop_pad_ratio_deform: 0.7  # 变形类: 褶皱需要更多上下文才看得出走向
+  crop_min_size: 320          # 参考裁剪最短边下限(以缺陷为中心补足)
+  # 对参考裁剪做 CLAHE 增强后入库。会改变参考图的对比度与明暗关系,
+  # 生成模型可能照抄这种被拉高的对比 -> 默认关闭
+  enhance_reference: false
+  # 额外给编目用的 VLM 送一张 CLAHE 增强图辅助看清微弱褶皱(bbox 仍以原图为准)。
+  # 开启会让每张图的 VLM 输入翻倍(成本上升)
+  vlm_enhance_aid: false
+
+generation:
+  patch_size: 768          # 局部编辑裁块边长下限(像素)
+  # 自适应裁块: 按参考缺陷 bbox 长边 × margin 决定裁块大小。
+  # 大面积褶皱塞进过小裁块会被迫画成缩小版 -> 表现为"缺陷不够夸张"
+  adaptive_patch: true
+  adaptive_patch_margin: 1.3
+  max_patch_size: 2048     # 裁块单边上限(图高2400, 竖向贯穿褶皱需要大值)
+  # 参考缺陷 severity 下限: 过弱的缺陷不适合当复刻标准(1~2分的建议排除)
+  min_reference_severity: 3
+  num_per_clean: 2         # 每张干净图生成几个缺陷版本
+  allow_cross_class: true  # 是否允许参考其他类别缺陷
+  cross_class_ratio: 0.35  # 使用跨类参考的比例(0~1)
+  # 结构参考图: 额外给模型一张"缺陷浮雕图", 只含褶皱几何,
+  # 剥离源瓶的颜色/印刷图案/光照与镜面高光 -> 避免过曝亮边被照抄。
+  # 实测: 中频(褶皱)保留~100%, 文字级高频残留降到32~50%, 低频光照 std 从38~49降到9.5~12
+  use_structure_reference: true
+  structure_sigma_small: 6.0   # 高频截断, 越大越能抹掉印刷文字(6.0 为甜点)
+  structure_sigma_large: 40.0  # 低频截断, 越小越能压掉源瓶整体光照
+  structure_gain: 3.0          # 浮雕对比增益
+  mask_binarize_thresh: 128    # 软alpha -> 二值标注掩膜的阈值
+  max_retries: 3           # 质检不过时最大重试次数(会按最弱维度定向强化)
+  # 光度对齐: 差分前把生成图的全局亮度/色偏对齐到原图,
+  # 否则模型整图重渲染的漂移会被误当作缺陷并被 defect_gain 放大
+  photometric_align: true
+  min_defect_area_ratio: 0.0005   # 缺陷占裁块比例下限(过小视为没生成)
+  # 单个连通域面积上限。面积是"全局漂移 vs 大面积褶皱"的很差判据: 真实的大褶皱
+  # 同样会连成贯通裁块的大域(实测 0.69~0.76)。旧值 0.45 会把这类缺陷整体丢弃,
+  # 表现为"模型压根没生成"。现已改为: 超限的域不再静默丢弃, 过滤后若掩膜为空
+  # 则回退保留最大的那个域, 由瓶身/边界约束裁剪、由质检判断贴回效果。
+  max_defect_area_ratio: 0.85
+  # 掩膜约束(只做限制, 不改画面):
+  # 裁块边界内缩比例。掩膜必须在触及裁块边缘前归零, 否则贴回后裁块内外的
+  # 标签图案接不上 -> 表现为"瓶身上下不一样"的断层
+  border_fade_ratio: 0.08
+  bottle_erode: 6                 # 瓶身掩膜内缩(像素), 避开瓶身轮廓边缘
+  min_bottle_cover: 0.55          # 裁块内瓶身占比下限, 防止把缺陷画到桌布/背景上
+  debug: true              # 存中间产物(原patch/模型原始输出/对齐后/mask/结果)便于归因
+  feather: 10              # 掩膜回贴羽化半径(仅 blend_mode=feather 时用)
+  # 融合方式:
+  #   feather      -> 羽化叠加, 完整保留褶皱强度(推荐, 默认)
+  #   poisson_mixed-> 泊松梯度混合, 边缘最自然但会洗淡大面积低频褶皱(仅锐利缺陷可用)
+  #   poisson      -> 泊松替换
+  blend_mode: "feather"
+  # 缺陷增益: result = 原图 + gain*alpha*(编辑图-原图)
+  # 1.0 = 掩膜内完全采用模型输出, 不做任何像素增强(推荐, 默认)
+  # >1 会放大缺陷但实测会把高光削平(16~25%像素饱和), 严重损害融合自然度, 不建议开
+  defect_gain: 1.0
+  severity_adaptive_gain: false
+  # 缺陷差分阈值: 越小越能保留低对比褶皱(但过小会引入噪声), 默认18, 水立方微弱褶皱可试 10~14
+  diff_threshold: 14
+  seed: 42
+
+qc:
+  enable: true
+  # 面向 YOLO 训练数据标定的阈值(不是科研级1:1保真标准)。
+  # 门槛集中在人工审核发现的两个真实问题: 缺陷高光突兀、缺陷区与瓶身接缝断层。
+  # 注意: 缺陷面积大/变形夸张不扣分, 真实样本中本就存在。
+  min_realism_score: 5.5     # 加权综合分阈值(1~10)
+  qc_image_long_side: 1024   # 送质检的裁块长边(裁块级别, 不再压缩整图)
+  min_scores:
+    type_match: 5            # 必须是薄膜形变, 不能是脏斑点/污渍/异物
+    severity_match: 4        # 别太淡
+    highlight_natural: 5     # 高光不能突兀(主要门槛)
+    seam_continuity: 5       # 缺陷区与瓶身要连续(主要门槛)
+    # shape_fidelity 不设门槛: 对 YOLO 训练无意义, 仅记录进标注供事后筛选
+  # 综合分权重: 偏向高光与接缝
+  weights:
+    type_match: 0.20
+    shape_fidelity: 0.05
+    severity_match: 0.15
+    highlight_natural: 0.25
+    seam_continuity: 0.25
+    blend_quality: 0.10
+  # 兜底: 关闭时不合格样本一律进 outputs/rejected, 不混入训练集
+  keep_best_effort: false
+  best_effort_margin: 1.0
+  max_bg_change_ratio: 0.02  # 掩膜外允许变化的像素比例上限(硬约束校验)
+  bg_change_pixel_thresh: 12 # 判定"像素变化"的灰度差阈值
+  # 下面两项控制"是否把 VLM 的主观布尔判断当作驳回闸门"。默认 false:
+  # gate_only_local: "是否只有局部变化"已由 bg_change 逐像素严格验证, 无需再问
+  #   VLM。开启会导致大面积变形被误杀(实测 realism 7.5 的样本仅因此被驳回)。
+  # gate_on_bottle: 缺陷落在桌布上不影响使用(人工标注时不打框), 且 VLM 难以
+  #   分辨桌布与瓶身背光面(灰度高度重叠)。
+  # 注意: 关闭这两项后, "缺陷画到桌布上"不再被自动拦截, 依赖人工标注环节把关。
+  gate_only_local: false
+  gate_on_bottle: false

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>缺陷合成流水线 · 架构图</title>
+<style>
+  @page { size: 1600px 900px; margin: 0; }
+  html,body{ margin:0; padding:0; background:#e9e9e9; }
+  .slide{
+    width:1600px; height:900px; margin:20px auto; background:#ffffff;
+    position:relative; page-break-after:always;
+  }
+  svg{ display:block; }
+  text{ font-family:"Microsoft YaHei","Arial",sans-serif; fill:#000; }
+  .ttl{ font-size:28px; font-weight:700; }
+  .sub{ font-size:15px; fill:#555; }
+  .bt{ font-size:17px; font-weight:700; }      /* box title */
+  .bd{ font-size:13.5px; fill:#333; }          /* box detail */
+  .lb{ font-size:12.5px; fill:#444; }          /* arrow label */
+  .ft{ font-size:12px; fill:#666; }
+  .num{ font-size:13px; font-weight:700; fill:#fff; }
+  rect.box{ fill:#ffffff; stroke:#000; stroke-width:1.4; }
+  rect.stage{ fill:#f2f2f2; stroke:#000; stroke-width:1.4; }
+  rect.core{ fill:#e6e6e6; stroke:#000; stroke-width:2; }
+  rect.numbg{ fill:#000; }
+  line.flow{ stroke:#000; stroke-width:1.6; }
+  line.rule{ stroke:#000; stroke-width:1.2; }
+  line.dash{ stroke:#000; stroke-width:1.4; stroke-dasharray:6 4; }
+</style>
+</head>
+<body>
+
+<!-- ==================== SLIDE 1 ==================== -->
+<div class="slide">
+<svg width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#000"/>
+    </marker>
+  </defs>
+
+  <text class="ttl" x="140" y="72"> 缺陷合成流水线整体架构</text>
+  <text class="sub" x="140" y="100"></text>
+  <line class="rule" x1="140" y1="118" x2="1460" y2="118"/>
+
+  <!-- ---------- 左列: 缺陷侧 ---------- -->
+  <rect class="box" x="140" y="170" width="380" height="64"/>
+  <text class="bt" x="330" y="199" text-anchor="middle">实拍正样本(有缺陷)</text>
+  <text class="bd" x="330" y="221" text-anchor="middle">12 类瓶子</text>
+
+  <line class="flow" x1="330" y1="242" x2="330" y2="266" marker-end="url(#ah)"/>
+
+  <rect class="stage" x="140" y="274" width="380" height="64"/>
+  <rect class="numbg" x="140" y="274" width="26" height="26"/>
+  <text class="num" x="153" y="292" text-anchor="middle">1</text>
+  <text class="bt" x="330" y="303" text-anchor="middle">VLM 缺陷编目</text>
+  <text class="bd" x="330" y="325" text-anchor="middle">gpt5.6 只保留变形/划痕</text>
+
+  <line class="flow" x1="330" y1="346" x2="330" y2="370" marker-end="url(#ah)"/>
+
+  <rect class="stage" x="140" y="378" width="380" height="80"/>
+  <rect class="numbg" x="140" y="378" width="26" height="26"/>
+  <text class="num" x="153" y="396" text-anchor="middle">2</text>
+  <text class="bt" x="330" y="409" text-anchor="middle">缺陷库 catalog.json</text>
+  <text class="bd" x="330" y="431" text-anchor="middle">128 条 (测试用)</text>
+  <text class="bd" x="330" y="450" text-anchor="middle">类型/严重度/几何描述/裁剪图</text>
+
+  <line class="flow" x1="330" y1="466" x2="330" y2="504" marker-end="url(#ah)"/>
+
+  <rect class="stage" x="140" y="512" width="380" height="60"/>
+  <rect class="numbg" x="140" y="512" width="26" height="26"/>
+  <text class="num" x="153" y="530" text-anchor="middle">3</text>
+  <text class="bt" x="330" y="538" text-anchor="middle">参考缺陷选择</text>
+  <text class="bd" x="330" y="559" text-anchor="middle">本类优先 / 跨类 35% / 逐条只用一次</text>
+
+  <!-- ---------- 中心: 合成 ---------- -->
+  <line class="flow" x1="528" y1="542" x2="612" y2="542" marker-end="url(#ah)"/>
+  <text class="lb" x="570" y="532" text-anchor="middle">参考</text>
+
+  <rect class="core" x="620" y="482" width="420" height="120"/>
+  <rect class="numbg" x="620" y="482" width="26" height="26"/>
+  <text class="num" x="633" y="500" text-anchor="middle">4</text>
+  <text class="bt" x="830" y="516" text-anchor="middle">单张合成流程 (见下图)</text>
+  <text class="bd" x="830" y="543" text-anchor="middle">瓶身分割 → 自适应裁块 → 三图参考引导编辑</text>
+  <text class="bd" x="830" y="563" text-anchor="middle">→ 光度对齐 → 差分掩膜 → 约束回贴 → 质检</text>
+  <text class="bd" x="830" y="588" text-anchor="middle"></text>
+
+  <!-- ---------- 右列: 干净侧 ---------- -->
+  <line class="flow" x1="1112" y1="542" x2="1048" y2="542" marker-end="url(#ah)"/>
+  <text class="lb" x="1080" y="532" text-anchor="middle">目标</text>
+
+  <rect class="box" x="1120" y="512" width="380" height="60"/>
+  <text class="bt" x="1310" y="540" text-anchor="middle">实拍负样本(无缺陷)</text>
+  <text class="bd" x="1310" y="561" text-anchor="middle">12 类, 共 1371 张待合成</text>
+
+  <!-- ---------- 输出分支 ---------- -->
+  <line class="flow" x1="715" y1="610" x2="715" y2="664" marker-end="url(#ah)"/>
+  <text class="lb" x="686" y="641" text-anchor="end">合格</text>
+  <line class="flow" x1="945" y1="610" x2="945" y2="664" marker-end="url(#ah)"/>
+  <text class="lb" x="974" y="641">驳回</text>
+
+  <rect class="box" x="620" y="672" width="190" height="70"/>
+  <text class="bt" x="715" y="700" text-anchor="middle">generated/</text>
+  <text class="bd" x="715" y="723" text-anchor="middle">+ masks/ 掩膜</text>
+
+  <rect class="box" x="850" y="672" width="190" height="70"/>
+  <text class="bt" x="945" y="700" text-anchor="middle">rejected/</text>
+  <text class="bd" x="945" y="723" text-anchor="middle">不存掩膜, 供复核</text>
+
+  <line class="flow" x1="715" y1="750" x2="715" y2="782" marker-end="url(#ah)"/>
+  <line class="flow" x1="945" y1="750" x2="945" y2="782" marker-end="url(#ah)"/>
+
+  <rect class="stage" x="620" y="790" width="420" height="64"/>
+  <rect class="numbg" x="620" y="790" width="26" height="26"/>
+  <text class="num" x="633" y="808" text-anchor="middle">5</text>
+  <text class="bt" x="830" y="820" text-anchor="middle">annotations.jsonl</text>
+  <text class="bd" x="830" y="842" text-anchor="middle">做质检溯源用来debug</text>
+
+  <line class="dash" x1="1048" y1="822" x2="1112" y2="822" marker-end="url(#ah)"/>
+
+  <rect class="box" x="1120" y="790" width="380" height="64"/>
+  <text class="bt" x="1310" y="818" text-anchor="middle">requalify (离线重判)</text>
+  <text class="bd" x="1310" y="840" text-anchor="middle">按新阈值重判</text>
+
+  <text class="ft" x="140" y="880"></text>
+  <text class="ft" x="1460" y="880" text-anchor="end">1 / 2</text>
+</svg>
+</div>
+
+<!-- ==================== SLIDE 2 ==================== -->
+<div class="slide">
+<svg width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#000"/>
+    </marker>
+  </defs>
+
+  <text class="ttl" x="140" y="72">图 2  单张合成流程</text>
+  <text class="sub" x="140" y="100"></text>
+  <line class="rule" x1="140" y1="118" x2="1460" y2="118"/>
+
+  <!-- ============ 第一行: 1 → 2 → 3 ============ -->
+  <rect class="box" x="140" y="160" width="380" height="130"/>
+  <rect class="numbg" x="140" y="160" width="26" height="26"/>
+  <text class="num" x="153" y="178" text-anchor="middle">1</text>
+  <text class="bt" x="330" y="200" text-anchor="middle">选参考缺陷</text>
+  <text class="bd" x="330" y="228" text-anchor="middle">本类优先, 35% 概率跨类</text>
+  <text class="bd" x="330" y="250" text-anchor="middle"></text>
+  <text class="bd" x="330" y="270" text-anchor="middle">每条参考严格只用一次</text>
+
+  <line class="flow" x1="528" y1="225" x2="602" y2="225" marker-end="url(#ah2)"/>
+
+  <rect class="box" x="610" y="160" width="380" height="130"/>
+  <rect class="numbg" x="610" y="160" width="26" height="26"/>
+  <text class="num" x="623" y="178" text-anchor="middle">2</text>
+  <text class="bt" x="800" y="200" text-anchor="middle">瓶身分割 + 自适应裁块</text>
+  <text class="bd" x="800" y="228" text-anchor="middle">背景 = 与边界连通的暗区</text>
+  <text class="bd" x="800" y="250" text-anchor="middle">裁块 = 参考 bbox(比例换算) × 1.3</text>
+  <text class="bd" x="800" y="270" text-anchor="middle">下限 768 / 上限 2048 px</text>
+
+  <line class="flow" x1="998" y1="225" x2="1072" y2="225" marker-end="url(#ah2)"/>
+
+  <rect class="core" x="1080" y="160" width="380" height="130"/>
+  <rect class="numbg" x="1080" y="160" width="26" height="26"/>
+  <text class="num" x="1093" y="178" text-anchor="middle">3</text>
+  <text class="bt" x="1270" y="200" text-anchor="middle">参考引导编辑 (gpt-image-2)</text>
+  <text class="bd" x="1270" y="228" text-anchor="middle">图1 目标裁块 · 图2 参考裁剪</text>
+  <text class="bd" x="1270" y="250" text-anchor="middle">图3 带通滤波图</text>
+  <text class="bd" x="1270" y="270" text-anchor="middle">为了严格限制其他部分不发生变化</text>
+
+  <!-- 第一行 → 第二行 (右侧竖直) -->
+  <line class="flow" x1="1270" y1="298" x2="1270" y2="352" marker-end="url(#ah2)"/>
+
+  <!-- ============ 第二行: 4 ← 5 ← 6 (右到左) ============ -->
+  <rect class="box" x="1080" y="360" width="380" height="130"/>
+  <rect class="numbg" x="1080" y="360" width="26" height="26"/>
+  <text class="num" x="1093" y="378" text-anchor="middle">4</text>
+  <text class="bt" x="1270" y="400" text-anchor="middle">光度对齐</text>
+  <text class="bd" x="1270" y="428" text-anchor="middle"> 把全局亮度</text>
+  <text class="bd" x="1270" y="450" text-anchor="middle">色偏拉回目标裁块水平</text>
+  <text class="bd" x="1270" y="470" text-anchor="middle"></text>
+
+  <line class="flow" x1="1072" y1="425" x2="998" y2="425" marker-end="url(#ah2)"/>
+
+  <rect class="box" x="610" y="360" width="380" height="130"/>
+  <rect class="numbg" x="610" y="360" width="26" height="26"/>
+  <text class="num" x="623" y="378" text-anchor="middle">5</text>
+  <text class="bt" x="800" y="400" text-anchor="middle">差分求缺陷掩膜</text>
+  <text class="bd" x="800" y="428" text-anchor="middle">逐像素差分(阈值 14)</text>
+  <text class="bd" x="800" y="450" text-anchor="middle"></text>
+  <text class="bd" x="800" y="470" text-anchor="middle">超限域不丢弃, 为空则回退保留</text>
+
+  <line class="flow" x1="602" y1="425" x2="528" y2="425" marker-end="url(#ah2)"/>
+
+  <rect class="box" x="140" y="360" width="380" height="130"/>
+  <rect class="numbg" x="140" y="360" width="26" height="26"/>
+  <text class="num" x="153" y="378" text-anchor="middle">6</text>
+  <text class="bt" x="330" y="400" text-anchor="middle">羽化 + 掩膜约束</text>
+  <text class="bd" x="330" y="428" text-anchor="middle">羽化 → 与瓶身掩膜求交</text>
+  <text class="bd" x="330" y="450" text-anchor="middle"></text>
+  <text class="bd" x="330" y="470" text-anchor="middle">→ 阈值 128 得标注掩膜</text>
+
+  <!-- 第二行 → 第三行 (左侧竖直) -->
+  <line class="flow" x1="330" y1="498" x2="330" y2="552" marker-end="url(#ah2)"/>
+
+  <!-- ============ 第三行: 7 → 8 → 9 ============ -->
+  <rect class="box" x="140" y="560" width="380" height="130"/>
+  <rect class="numbg" x="140" y="560" width="26" height="26"/>
+  <text class="num" x="153" y="578" text-anchor="middle">7</text>
+  <text class="bt" x="330" y="600" text-anchor="middle">掩膜有效性判定</text>
+  <text class="bd" x="330" y="628" text-anchor="middle"></text>
+  <text class="bd" x="330" y="650" text-anchor="middle">模型未改动 → 要求加强</text>
+  <text class="bd" x="330" y="670" text-anchor="middle">整块重绘 → 要求收敛范围</text>
+
+  <line class="flow" x1="528" y1="625" x2="602" y2="625" marker-end="url(#ah2)"/>
+
+  <rect class="box" x="610" y="560" width="380" height="130"/>
+  <rect class="numbg" x="610" y="560" width="26" height="26"/>
+  <text class="num" x="623" y="578" text-anchor="middle">8</text>
+  <text class="bt" x="800" y="600" text-anchor="middle">掩膜回贴融合</text>
+  <text class="bd" x="800" y="628" text-anchor="middle">result = 原图 + α · (编辑图 − 原图)</text>
+  <text class="bd" x="800" y="650" text-anchor="middle">保留褶皱强度</text>
+  <text class="bd" x="800" y="670" text-anchor="middle">掩膜外像素严格不变(硬约束)</text>
+
+  <line class="flow" x1="998" y1="625" x2="1072" y2="625" marker-end="url(#ah2)"/>
+
+  <rect class="core" x="1080" y="560" width="380" height="130"/>
+  <rect class="numbg" x="1080" y="560" width="26" height="26"/>
+  <text class="num" x="1093" y="578" text-anchor="middle">9</text>
+  <text class="bt" x="1270" y="600" text-anchor="middle">质检</text>
+  <text class="bd" x="1270" y="628" text-anchor="middle">像素硬约束校验</text>
+  <text class="bd" x="1270" y="650" text-anchor="middle">门槛 type≥5 severity≥4</text>
+  <text class="bd" x="1270" y="670" text-anchor="middle">highlight≥5 seam≥5 综合≥5.5</text>
+
+  <line class="flow" x1="1270" y1="698" x2="1270" y2="742" marker-end="url(#ah2)"/>
+
+  <!-- ============ 第四行: 落盘 ============ -->
+  <rect class="stage" x="1080" y="750" width="380" height="64"/>
+  <rect class="numbg" x="1080" y="750" width="26" height="26"/>
+  <text class="num" x="1093" y="768" text-anchor="middle">10</text>
+  <text class="bt" x="1270" y="778" text-anchor="middle">落盘</text>
+  <text class="bd" x="1270" y="800" text-anchor="middle">合格 → generated / 否则 → rejected</text>
+
+  <!-- 重试回边: 由落盘环节折回步骤1, 三段均为直线 -->
+  <line class="dash" x1="1072" y1="782" x2="60" y2="782"/>
+  <line class="dash" x1="60" y1="782" x2="60" y2="225"/>
+  <line class="dash" x1="60" y1="225" x2="132" y2="225" marker-end="url(#ah2)"/>
+  <text class="lb" x="580" y="802" text-anchor="middle">不合格: 按最弱维度定向强化后重试 (≤ 3 次)</text>
+
+  <text class="ft" x="140" y="880">工业瓶子缺陷数据增强 · defect_synthesis</text>
+  <text class="ft" x="1460" y="880" text-anchor="end">2 / 2</text>
+</svg>
+</div>
+
+</body>
+</html>
