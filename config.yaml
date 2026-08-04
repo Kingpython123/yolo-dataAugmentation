@@ -80,6 +80,11 @@ generation:
   max_patch_size: 2048     # 裁块单边上限(图高2400, 竖向贯穿褶皱需要大值)
   # 参考缺陷 severity 下限: 过弱的缺陷不适合当复刻标准(1~2分的建议排除)
   min_reference_severity: 3
+  # 按类型单独设下限, 覆盖上面的通用值。
+  # 划痕本身就是细线, VLM 给的 severity 天然偏低(实测 7 条里 6 条是 1~2 分),
+  # 用统一的 3 分门槛会把划痕参考几乎全部滤掉 -> 产出里没有划痕样本。
+  min_reference_severity_by_type:
+    划痕: 2
   num_per_clean: 2         # 每张干净图生成几个缺陷版本
   allow_cross_class: true  # 是否允许参考其他类别缺陷
   cross_class_ratio: 0.35  # 使用跨类参考的比例(0~1)

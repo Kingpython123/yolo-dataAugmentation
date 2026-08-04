@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import json
+import os
 import random
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, asdict
@@ -266,6 +267,49 @@ def _process_image(client: Config, cfg: Config, class_name: str,
     return entries
 
 
+def _analyzed_file(cfg: Config) -> Path:
+    return cfg.out_path("catalog") / "analyzed.json"
+
+
+def load_analyzed(cfg: Config) -> set[str]:
+    """已分析过的源图集合(绝对路径字符串)。
+
+    单靠 catalog.json 里的 source_image 不够: VLM 判定"无缺陷"的图不会产出条目,
+    但它确实已经花过一次调用。因此额外维护 analyzed.json, 避免增量重跑时
+    反复分析这些图。
+    """
+    done: set[str] = set()
+    f = _analyzed_file(cfg)
+    if f.exists():
+        try:
+            for rel in json.loads(f.read_text(encoding="utf-8")):
+                done.add(str(cfg.resolve(str(rel))))
+        except (json.JSONDecodeError, TypeError):
+            pass
+    # 兼容旧库: 没有 analyzed.json 时从 catalog.json 反推
+    cat = cfg.out_path("catalog") / "catalog.json"
+    if cat.exists():
+        try:
+            for r in json.loads(cat.read_text(encoding="utf-8")):
+                if r.get("source_image"):
+                    done.add(str(cfg.resolve(str(r["source_image"]))))
+        except json.JSONDecodeError:
+            pass
+    return done
+
+
+def save_analyzed(cfg: Config, paths: set[str]) -> None:
+    base = cfg.base_dir
+    rels = []
+    for p in sorted(paths):
+        try:
+            rels.append(Path(os.path.relpath(p, base)).as_posix())
+        except ValueError:
+            rels.append(p)
+    _analyzed_file(cfg).write_text(
+        json.dumps(rels, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
 def build_catalog(cfg: Config, max_per_class: int | None = None,
                   overwrite: bool = False,
                   only_classes: list[str] | None = None) -> list[dict]:
@@ -278,22 +322,37 @@ def build_catalog(cfg: Config, max_per_class: int | None = None,
     existing: list[dict] = []
     if catalog_file.exists():
         existing = json.loads(catalog_file.read_text(encoding="utf-8"))
-        if not overwrite and not only_classes:
-            print(f"[info] 已存在缺陷库 {catalog_file}, 使用 --overwrite 可重建")
-            return existing
+
+    # 增量模式: 已有缺陷库且未指定 --overwrite -> 只分析没分析过的图, 结果追加
+    incremental = bool(existing) and not overwrite
+    analyzed = load_analyzed(cfg) if incremental else set()
 
     class_images = scan_class_images(cfg, cfg.defect_root())
     if only_classes:
         class_images = {k: v for k, v in class_images.items() if k in only_classes}
-        print(f"[info] 仅(重)建类别: {list(class_images.keys())}")
+        print(f"[info] 仅处理类别: {list(class_images.keys())}")
     rng = random.Random(cfg.generation.get("seed", 42))
 
     tasks = []
+    skipped = 0
     for class_name, paths in class_images.items():
+        if incremental:
+            fresh = [p for p in paths if str(p.resolve()) not in analyzed]
+            skipped += len(paths) - len(fresh)
+            paths = fresh
         if max_per_class and len(paths) > max_per_class:
             paths = rng.sample(paths, max_per_class)
         for p in paths:
             tasks.append((class_name, p))
+
+    if incremental:
+        print(f"[增量] 已有 {len(existing)} 条 / 已分析过 {skipped} 张(跳过), "
+              f"本次待分析 {len(tasks)} 张")
+        if not tasks:
+            print("[done] 没有新图需要分析, 缺陷库保持不变")
+            return existing
+    else:
+        print(f"[全量重建] 待分析 {len(tasks)} 张")
 
     all_entries: list[DefectEntry] = []
     max_workers = cfg.api.get("max_workers", 3)
@@ -306,13 +365,25 @@ def build_catalog(cfg: Config, max_per_class: int | None = None,
             except Exception as e:
                 print(f"[warn] 任务失败: {e}")
 
-    records = [asdict(e) for e in all_entries]
-    if only_classes and existing:
+    new_records = [asdict(e) for e in all_entries]
+    if incremental:
+        # 增量: 直接追加(待分析集合已排除分析过的图, 不会重复)
+        records = existing + new_records
+        print(f"[增量] 新增 {len(new_records)} 条, "
+              f"{len(existing)} -> {len(records)} 条")
+    elif only_classes and existing:
         # 仅重建指定类别: 保留其他类别的旧记录, 替换这些类别
         kept = [r for r in existing if r.get("class_name") not in class_images]
-        records = kept + records
+        records = kept + new_records
+    else:
+        records = new_records
+
     catalog_file.write_text(json.dumps(records, ensure_ascii=False, indent=2),
                             encoding="utf-8")
+    # 记录本次分析过的图(含"无缺陷"判定的), 供下次增量跳过
+    analyzed |= {str(p.resolve()) for _, p in tasks}
+    save_analyzed(cfg, analyzed)
+
     _print_summary(records)
     print(f"[done] 缺陷库已写入 {catalog_file} (共 {len(records)} 条)")
     return records

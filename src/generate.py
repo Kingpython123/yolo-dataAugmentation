@@ -166,6 +166,31 @@ def _build_prompt(ref: dict, escalate: str | None = None,
     return p
 
 
+def usable_references(cfg: Config, records: list[dict],
+                      verbose: bool = True) -> list[dict]:
+    """按 severity 门槛筛出可作参考的缺陷。支持按类型分别设下限。
+
+    统一门槛对划痕不公平: 划痕是细线, VLM 给的 severity 天然偏低, 用变形的
+    标准会把划痕参考全部滤掉, 导致产出里一张划痕样本都没有。
+    """
+    gen = cfg.generation
+    base = gen.get("min_reference_severity", 3)
+    by_type = gen.get("min_reference_severity_by_type") or {}
+    if not base and not by_type:
+        return records
+    kept = []
+    for r in records:
+        lo = by_type.get(r.get("defect_type"), base) or 0
+        if int(r.get("severity", 3) or 3) >= lo:
+            kept.append(r)
+    if verbose and len(kept) != len(records):
+        detail = ", ".join(f"{k}≥{v}" for k, v in by_type.items())
+        print(f"[filter] 参考缺陷按 severity≥{base}"
+              f"{f' ({detail})' if detail else ''} 过滤: "
+              f"{len(records)} -> {len(kept)} 条")
+    return kept
+
+
 def _select_reference(catalog_by_class: dict, all_records: list,
                       target_class: str, rng: random.Random,
                       allow_cross: bool, cross_ratio: float) -> dict | None:
@@ -455,13 +480,7 @@ def _run_tasks(cfg: Config, tasks: list[Task], resume: bool = True):
     _warn_legacy(records)
 
     # 过滤过弱的参考缺陷(severity 太低的不适合做复刻标准)
-    min_sev = cfg.generation.get("min_reference_severity", 3)
-    if min_sev:
-        kept = [r for r in records if int(r.get("severity", 3) or 3) >= min_sev]
-        if kept and len(kept) < len(records):
-            print(f"[filter] 参考缺陷按 severity>={min_sev} 过滤: "
-                  f"{len(records)} -> {len(kept)} 条")
-            records = kept
+    records = usable_references(cfg, records) or records
 
     catalog_by_class: dict[str, list[dict]] = defaultdict(list)
     for r in records:
@@ -606,10 +625,7 @@ def generate_sweep(cfg: Config, classes: list[str], resume: bool = True,
         raise RuntimeError("缺陷库为空, 请先成功运行 build-catalog")
 
     # 与 _run_tasks 内部一致的参考过滤, 这里要先过滤才能正确分配
-    min_sev = cfg.generation.get("min_reference_severity", 3)
-    if min_sev:
-        records = [r for r in records
-                   if int(r.get("severity", 3) or 3) >= min_sev]
+    records = usable_references(cfg, records, verbose=False)
     if shuffle:
         random.Random(cfg.generation.get("seed", 42)).shuffle(records)
     if max_refs:
@@ -635,7 +651,7 @@ def generate_sweep(cfg: Config, classes: list[str], resume: bool = True,
         cursor += take
         plan.append((class_name, take))
 
-    print(f"[plan] 参考缺陷 {len(records)} 条(severity>={min_sev}), "
+    print(f"[plan] 可用参考缺陷 {len(records)} 条, "
           f"每条只用一次, 共 {len(tasks)} 个任务")
     for class_name, take in plan:
         print(f"        {class_name}: {take} 张")
@@ -643,6 +659,54 @@ def generate_sweep(cfg: Config, classes: list[str], resume: bool = True,
     if left > 0:
         print(f"[warn] 还有 {left} 条参考没分配到干净图, "
               f"请在 --classes 后面追加更多类别")
+    _run_tasks(cfg, tasks, resume=resume)
+
+
+def generate_target(cfg: Config, classes: list[str], count: int,
+                    resume: bool = True) -> None:
+    """给指定类别各生成固定数量的样本, 并保证覆盖缺陷库里每一条可用参考。
+
+    与 generate()/generate_sweep() 的区别:
+      generate()       以干净图为主体, 数量由 num_per_clean 决定, 参考随机重复选取
+      generate_sweep() 以参考为主体, 每条参考只用一次, 数量由"干净图数量"上限决定
+      generate_target()由目标数量 count 决定任务数, 参考按顺序循环使用,
+                       count >= 参考总数时保证每条参考至少用一次(足量还会循环第二轮)
+
+    用于"每类固定生成 N 张"的分工场景: 参考库共用, 每个类各自独立循环一遍,
+    因此对同一批参考库, 12 个类各跑一次即可让每条参考在每个类别上都出现过。
+    """
+    records = load_catalog(cfg)
+    if not records:
+        raise RuntimeError("缺陷库为空, 请先成功运行 build-catalog")
+    usable = usable_references(cfg, records)
+    if not usable:
+        raise RuntimeError("过滤后没有可用参考, 检查 min_reference_severity 配置")
+
+    clean_images = scan_class_images(cfg, cfg.clean_root())
+    n_ref = len(usable)
+    tasks: list[Task] = []
+
+    for class_name in classes:
+        paths = clean_images.get(class_name)
+        if not paths:
+            print(f"[warn] 类别无干净图, 跳过: {class_name}")
+            continue
+        n_clean = len(paths)
+        full_cycles, remainder = divmod(count, n_ref)
+        cover_msg = (f"完整覆盖 {full_cycles} 轮 + 前 {remainder} 条"
+                    if remainder else f"完整覆盖 {full_cycles} 轮")
+        if count < n_ref:
+            cover_msg = f"仅覆盖前 {count}/{n_ref} 条, 覆盖不全!"
+        print(f"[plan] {class_name}: 目标 {count} 张, 参考库 {n_ref} 条 "
+              f"({cover_msg}), 干净图 {n_clean} 张(循环使用)")
+        for i in range(count):
+            ref = usable[i % n_ref]
+            clean = paths[i % n_clean]
+            stem = (f"{_safe(class_name)}__{_safe(clean.stem)}__t{i}"
+                    f"__ref_{_safe(ref['entry_id'])}")
+            tasks.append(Task(class_name, clean, i, forced_ref=ref, stem=stem))
+
+    print(f"\n[plan] 共 {len(tasks)} 个任务")
     _run_tasks(cfg, tasks, resume=resume)
 
 

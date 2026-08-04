@@ -363,9 +363,42 @@ def cmd_requalify(args):
 
 
 def cmd_build_catalog(args):
-    from src.defect_catalog import build_catalog
+    from src.defect_catalog import build_catalog, load_analyzed
     cfg = load_config(args.config)
     only = args.classes.split(",") if args.classes else None
+
+    if args.dry_run:
+        import json as _json
+        from src.dataset import scan_class_images
+        cat = cfg.out_path("catalog") / "catalog.json"
+        recs = (_json.loads(cat.read_text(encoding="utf-8"))
+                if cat.exists() else [])
+        analyzed = load_analyzed(cfg) if recs and not args.overwrite else set()
+        imgs = scan_class_images(cfg, cfg.defect_root())
+        if only:
+            imgs = {k: v for k, v in imgs.items() if k in only}
+        todo_total = 0
+        print(f"{'类别':8} {'总图数':>7} {'已分析':>7} {'本次待分析':>10}")
+        for cls in sorted(imgs):
+            paths = imgs[cls]
+            done = sum(1 for p in paths if str(p.resolve()) in analyzed)
+            todo = len(paths) - done
+            if args.max_per_class:
+                todo = min(todo, args.max_per_class)
+            todo_total += todo
+            print(f"{cls:8} {len(paths):>7} {done:>7} {todo:>10}")
+        rate = (len(recs) / max(1, len(analyzed))) if analyzed else 1.36
+        print(f"\n本次将调用视觉模型 {todo_total} 次(每张图一次)")
+        print(f"按当前产出率 {rate:.2f} 条/图估算, 预计新增约 "
+              f"{int(todo_total * rate)} 条, 总量约 "
+              f"{len(recs) + int(todo_total * rate)} 条")
+        workers = max(1, int(cfg.api.get("max_workers", 3)))
+        print(f"并发 {workers}, 按单次 15~30 秒估算, 预计耗时 "
+              f"{todo_total * 15 / workers / 60:.0f}~"
+              f"{todo_total * 30 / workers / 60:.0f} 分钟")
+        print("\n(试算, 未调用任何 API。确认后去掉 --dry-run 即开始)")
+        return
+
     build_catalog(cfg, max_per_class=args.max_per_class,
                   overwrite=args.overwrite, only_classes=only)
 
@@ -376,6 +409,13 @@ def cmd_generate(args):
     only = args.classes.split(",") if args.classes else None
     generate(cfg, limit_per_class=args.limit_per_class, only_classes=only,
              resume=not args.force)
+
+
+def cmd_gen_target(args):
+    from src.generate import generate_target
+    cfg = load_config(args.config)
+    classes = [c.strip() for c in args.classes.split(",") if c.strip()]
+    generate_target(cfg, classes, count=args.count, resume=not args.force)
 
 
 def cmd_gen_sweep(args):
@@ -432,10 +472,15 @@ def main():
                    help="仅复判指定类别, 逗号分隔")
     p.set_defaults(func=cmd_requalify)
 
-    p = sub.add_parser("build-catalog")
+    p = sub.add_parser(
+        "build-catalog",
+        help="编目缺陷库。已有库时默认增量(只分析没分析过的图), 结果追加")
     p.add_argument("--max-per-class", type=int, default=None,
                    help="每类最多分析多少张缺陷图(控制成本)")
-    p.add_argument("--overwrite", action="store_true")
+    p.add_argument("--dry-run", action="store_true",
+                   help="只试算规模/成本/耗时, 不调用 API")
+    p.add_argument("--overwrite", action="store_true",
+                   help="全量重建(丢弃现有库并重新分析所有图, 慎用)")
     p.add_argument("--classes", type=str, default=None,
                    help="仅(重)建指定类别, 逗号分隔, 如 5.1,5.2,5.3,5.4")
     p.set_defaults(func=cmd_build_catalog)
@@ -448,6 +493,16 @@ def main():
     p.add_argument("--force", action="store_true",
                    help="忽略断点续跑, 重新生成已完成的样本")
     p.set_defaults(func=cmd_generate)
+
+    p = sub.add_parser(
+        "gen-target",
+        help="给指定类别各生成固定数量的样本, 参考库按顺序循环使用以保证全覆盖")
+    p.add_argument("--classes", required=True,
+                   help="目标类别, 逗号分隔, 如 1.jpg 或 1.jpg,1.bmp,5.1")
+    p.add_argument("--count", type=int, required=True,
+                   help="每个类别各生成多少张(达到参考库条数才算覆盖全部参考)")
+    p.add_argument("--force", action="store_true", help="忽略断点续跑")
+    p.set_defaults(func=cmd_gen_target)
 
     p = sub.add_parser(
         "gen-sweep",
