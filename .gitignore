@@ -29,6 +29,7 @@ outputs/gen_ref_review/
 outputs/structure_preview/
 outputs/annotations.jsonl
 outputs/annotations.jsonl.bak
+outputs/fail_log.jsonl
 outputs/catalog/catalog.json.bak
 
 # ---- 本地私有配置(存 API key 用, 永不提交) ----

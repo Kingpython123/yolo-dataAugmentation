@@ -265,6 +265,67 @@ def cmd_debug_preview(args):
     print("先看 _all.png, 或单张 outputs/debug_preview/<类别>_<尝试>.png")
 
 
+def cmd_fail_summary(args):
+    """离线统计 outputs/fail_log.jsonl 里的失败原因分类(不调用API)。"""
+    import json
+    from collections import Counter
+
+    cfg = load_config(args.config)
+    log_path = cfg.resolve(cfg.output.get("root", "outputs")) / "fail_log.jsonl"
+    if not log_path.exists():
+        print(f"没有失败日志: {log_path} (说明还没跑过, 或者这次没有失败)")
+        return
+
+    recs = []
+    for line in log_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            recs.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+
+    if args.classes:
+        only = set(c.strip() for c in args.classes.split(","))
+        recs = [r for r in recs if r.get("class") in only]
+    if args.since:
+        recs = [r for r in recs if r.get("time", "") >= args.since]
+
+    print(f"失败日志: {log_path}")
+    print(f"记录总数: {len(recs)}")
+    if not recs:
+        return
+
+    by_reason = Counter(r["reason"] for r in recs)
+    print("\n按原因分类:")
+    label = {
+        "channel_unavailable": "渠道不可用(中转站没货, 重试无意义, 需等中转站恢复)",
+        "rate_limited": "限流 429(等待后重试可能有效)",
+        "service_unavailable": "服务不可用 503",
+        "server_error": "服务端 5xx 错误",
+        "timeout": "请求超时",
+        "bad_response": "响应无法解析/未返回图像",
+        "image_open_failed": "干净图打开失败(文件损坏或路径问题)",
+        "synthesis_exception": "合成流程内部异常(需看 detail 排查代码问题)",
+        "other": "其它/未分类",
+        "exhausted_retries": "任务三次重试后仍失败(汇总记录, 具体原因看同 stem 的其它条目)",
+    }
+    for reason, n in by_reason.most_common():
+        print(f"  {n:>4}  {reason:<22} {label.get(reason, '')}")
+
+    print("\n按类别分类:")
+    by_class = Counter(r.get("class", "?") for r in recs)
+    for cls, n in sorted(by_class.items()):
+        print(f"  {cls:<8} {n:>4}")
+
+    # 每个 stem 唯一失败(去重后的"真实失败任务数", 因为同一任务重试多次会有多条)
+    stems = {r["stem"] for r in recs if r.get("stem")}
+    print(f"\n涉及的不同任务(stem)数: {len(stems)}")
+    print(f"(若担心是否还在发生, 可直接 `Get-Content {log_path.name} -Wait -Tail 5`"
+          f" 实时观察正在跑的进程)")
+
+
 def cmd_seg_check(args):
     """离线对比两种瓶身分割, 输出叠加预览供人工确认(不调用API)。"""
     import numpy as np
@@ -453,6 +514,14 @@ def main():
                    help="用当前 config 的差分阈值/面积上限重算掩膜并对比")
     p.add_argument("--thumb", type=int, default=420, help="每格缩略图高度(像素)")
     p.set_defaults(func=cmd_debug_preview)
+
+    p = sub.add_parser(
+        "fail-summary",
+        help="离线统计 outputs/fail_log.jsonl 里的失败原因分类(不调用API)")
+    p.add_argument("--classes", type=str, default=None, help="仅统计指定类别")
+    p.add_argument("--since", type=str, default=None,
+                   help="仅统计此时间之后的记录, ISO格式如 2026-08-04T15:00:00")
+    p.set_defaults(func=cmd_fail_summary)
 
     p = sub.add_parser("seg-check",
                        help="离线对比两种瓶身分割并输出叠加预览(不调用API)")

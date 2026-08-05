@@ -6,6 +6,7 @@
 """
 from __future__ import annotations
 
+import datetime
 import json
 import random
 import threading
@@ -206,6 +207,51 @@ def _select_reference(catalog_by_class: dict, all_records: list,
 _SRC_SIZE_CACHE: dict[str, tuple[int, int] | None] = {}
 _SRC_SIZE_LOCK = threading.Lock()
 
+# 失败原因日志: 之前只 print 到终端, 一旦被滚动的进度条冲掉就永久丢失,
+# 出问题只能靠翻窗口, 且翻不到的部分永远不知道原因(实测出现过 58% 失败率,
+# 真正原因是中转站渠道断供, 而不是限流, 靠猜会修错方向)。
+_FAIL_LOG_LOCK = threading.Lock()
+
+
+def _classify_failure(msg: str) -> str:
+    """把失败原因粗分类, 便于跑完后统计"多少次是哪种原因"而不用逐行翻日志。"""
+    m = msg or ""
+    if "model_not_found" in m or "暂无可用渠道" in m:
+        return "channel_unavailable"   # 中转站没有可用渠道, 重试无意义
+    if " 429" in m or "429 " in m or '"429' in m:
+        return "rate_limited"          # 限流, 等待后重试有意义
+    if "HTTP 503" in m:
+        return "service_unavailable"
+    if "HTTP 5" in m:
+        return "server_error"
+    if ("Timeout" in m or "超时" in m or "timed out" in m.lower()
+            or "ConnectionError" in m or "连接" in m):
+        return "timeout"
+    if "未返回图像" in m or "返回无法解析" in m:
+        return "bad_response"
+    if "打开失败" in m:
+        return "image_open_failed"
+    if "合成异常" in m:
+        return "synthesis_exception"
+    return "other"
+
+
+def _log_failure(cfg: Config, task_stem: str, class_name: str,
+                 attempt: int | None, reason: str, detail: str) -> None:
+    """失败原因落盘到 outputs/fail_log.jsonl, 与 print 并行, 不影响现有输出。"""
+    log_path = cfg.resolve(cfg.output.get("root", "outputs")) / "fail_log.jsonl"
+    rec = {
+        "time": datetime.datetime.now().isoformat(timespec="seconds"),
+        "class": class_name,
+        "stem": task_stem,
+        "attempt": attempt,
+        "reason": reason,
+        "detail": detail[:500],
+    }
+    with _FAIL_LOG_LOCK:
+        with open(log_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+
 
 def _ref_source_size(cfg: Config, rec: dict) -> tuple[int, int] | None:
     """参考缺陷所在原图的尺寸, 用于把 bbox 换算成与分辨率无关的比例。
@@ -260,7 +306,8 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
                     bottle: np.ndarray, class_name: str,
                     catalog_by_class: dict, records: list,
                     rng: random.Random, forced_ref: dict | None = None,
-                    debug_dir: Path | None = None):
+                    debug_dir: Path | None = None,
+                    task_stem: str = ""):
     gen = cfg.generation
     max_retries = gen.get("max_retries", 3)
     feather = gen.get("feather", 10)
@@ -320,7 +367,10 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
             raw_patch = relay.edit_image(prompt, orig_patch,
                                          references=ref_imgs, mask=edit_mask)
         except Exception as e:
-            print(f"[warn] 编辑失败(尝试{attempt+1}): {e}")
+            msg = str(e)
+            reason = _classify_failure(msg)
+            print(f"[warn] 编辑失败(尝试{attempt+1}, {reason}): {e}")
+            _log_failure(cfg, task_stem or "", class_name, attempt + 1, reason, msg)
             box = None  # 下一轮换位置
             continue
 
@@ -520,7 +570,8 @@ def _run_tasks(cfg: Config, tasks: list[Task], resume: bool = True):
         try:
             res = _synthesize_one(cfg, relay, clean, bottle, t.class_name,
                                   catalog_by_class, records, rng,
-                                  forced_ref=t.forced_ref, debug_dir=dbg)
+                                  forced_ref=t.forced_ref, debug_dir=dbg,
+                                  task_stem=t.stem)
         except Exception as e:
             return t, None, f"合成异常: {e}"
         return t, res, None
@@ -533,7 +584,14 @@ def _run_tasks(cfg: Config, tasks: list[Task], resume: bool = True):
             if err or res is None:
                 stats["failed"] += 1
                 if err:
-                    print(f"[warn] {t.clean_path.name}: {err}")
+                    reason = _classify_failure(err)
+                    print(f"[warn] {t.clean_path.name} ({reason}): {err}")
+                    _log_failure(cfg, t.stem, t.class_name, None, reason, err)
+                else:
+                    # _synthesize_one 内部三次重试均未通过, 逐次失败已在
+                    # 编辑调用处落过日志, 这里补一条"任务彻底失败"的汇总记录
+                    _log_failure(cfg, t.stem, t.class_name, None,
+                                "exhausted_retries", "三次重试后仍未获得合格/兜底结果")
                 continue
 
             rejected = isinstance(res, tuple) and len(res) == 4 and res[0] == "REJECTED"
@@ -576,6 +634,10 @@ def _run_tasks(cfg: Config, tasks: list[Task], resume: bool = True):
     print(f"       标注: {ann_path}")
     if stats["rejected"]:
         print(f"       驳回样本另存于: {rej_dir} (不混入训练集)")
+    if stats["failed"]:
+        fail_log = cfg.resolve(cfg.output.get("root", "outputs")) / "fail_log.jsonl"
+        print(f"       失败原因日志: {fail_log}")
+        print(f"       (用 `run.py fail-summary` 查看本次失败原因分类统计)")
 
 
 def _warn_legacy(records: list[dict]):
