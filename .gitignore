@@ -10,6 +10,8 @@ __pycache__/
 
 # ---- 临时脚本 ----
 _tmp_*.py
+tmp_*.txt
+tmp_*.log
 
 # ---- 数据集(体积大, 通过网盘/共享盘分发, 不进 git) ----
 /实拍正样本（有缺陷）/
@@ -40,3 +42,25 @@ config.local.yaml
 *.rar
 *.zip
 *.7z
+
+# ---- 桌面程序的运行期目录(工作区在别处, 这些只在源码运行时出现) ----
+logs/
+jobs/
+
+# ---- 打包产物 ----
+build/
+dist/
+
+# ---- 自检与截图的中间产物 ----
+tmp_gui/
+baseline/
+
+# ---- 形态检索描述子缓存(可从 catalog.json 随时重建, 不进 git) ----
+outputs/catalog/morphology.npz
+
+# ---- 驳回样本重新生成的产物(待人工复核, 不进 git) ----
+outputs/regenerated/
+
+# ---- 人工驳回样本原始数据 / 本机测试工作区(不进 git) ----
+没打标签的/
+/test/

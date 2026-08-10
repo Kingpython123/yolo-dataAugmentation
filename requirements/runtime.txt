@@ -1,0 +1,29 @@
+# 运行期依赖, 精确锁定版本(requirements.md FR-8.1)。
+#
+# 两处刻意的版本约束, 改动前请先读理由:
+#
+# opencv-python-headless (不是 opencv-python)
+#   1. opencv-python 自带一套 Qt5 插件, 与 PySide6 的 Qt6 在 PyInstaller 冻结后
+#      会争抢 platforms/qwindows.dll, 表现为程序启动即崩。
+#   2. 项目只用 cv2 的算法函数(cvtColor/GaussianBlur/threshold/morphologyEx/
+#      getStructuringElement/createCLAHE/seamlessClone/connectedComponents 等),
+#      没有 imshow/waitKey/VideoCapture, 因此 headless 无功能损失。
+#
+# opencv 锁在 4.x
+#   pip 默认已经会装到 OpenCV 5, 那是大版本跳跃, 可能改变形态学/阈值等算子的
+#   数值行为。本次改造的第一优先级是"行为等价", 因此锁 4.x。
+#   已验证: 4.14 下 selftest 的分割前景占比 0.281、掩膜外变化 0.00000,
+#   与项目 README 记录的期望值完全一致。
+
+pillow==12.3.0
+numpy==2.5.1
+opencv-python-headless==4.14.0.94
+requests==2.34.2
+PyYAML==6.0.3
+tqdm==4.70.0
+
+# 图形界面
+PySide6==6.11.1
+
+# API key 的加密存储(Windows 凭据管理器)
+keyring==25.7.0

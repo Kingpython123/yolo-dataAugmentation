@@ -17,9 +17,8 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image
-from tqdm import tqdm
 
-from . import mask_utils, quality_check, structure_ref
+from . import mask_utils, quality_check, reporting, structure_ref
 from .api_client import RelayClient
 from .config import Config
 from .dataset import safe_name, scan_class_images
@@ -140,6 +139,11 @@ def _f(rec: dict, key: str, default: str = "not specified") -> str:
 
 _safe = safe_name  # 目录/文件名净化(与 requalify 共用同一实现)
 
+# 取消标记。用一个不可能与真实错误信息重合的哨兵值, 让主循环把"用户主动
+# 停止"与"任务失败"区分开: 前者不写 fail_log, 也不计入失败率统计, 否则
+# 一次手动停止会在失败日志里留下几百条噪声, 把真正的失败原因埋掉。
+CANCELLED = "__cancelled__"
+
 
 def _to_arr(mask_img: Image.Image) -> np.ndarray:
     return np.array(mask_img.convert("L"))
@@ -186,9 +190,9 @@ def usable_references(cfg: Config, records: list[dict],
             kept.append(r)
     if verbose and len(kept) != len(records):
         detail = ", ".join(f"{k}≥{v}" for k, v in by_type.items())
-        print(f"[filter] 参考缺陷按 severity≥{base}"
-              f"{f' ({detail})' if detail else ''} 过滤: "
-              f"{len(records)} -> {len(kept)} 条")
+        reporting.info(f"[filter] 参考缺陷按 severity≥{base}"
+                       f"{f' ({detail})' if detail else ''} 过滤: "
+                       f"{len(records)} -> {len(kept)} 条")
     return kept
 
 
@@ -353,7 +357,7 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
                     gain=gen.get("structure_gain", 3.0))
                 ref_imgs.append(struct_img)
             except Exception as e:
-                print(f"[warn] 结构图生成失败, 退回仅用彩色参考: {e}")
+                reporting.warn(f"[warn] 结构图生成失败, 退回仅用彩色参考: {e}")
                 struct_img = None
 
         prompt = _build_prompt(ref, escalate, with_structure=struct_img is not None)
@@ -369,7 +373,7 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
         except Exception as e:
             msg = str(e)
             reason = _classify_failure(msg)
-            print(f"[warn] 编辑失败(尝试{attempt+1}, {reason}): {e}")
+            reporting.warn(f"[warn] 编辑失败(尝试{attempt+1}, {reason}): {e}")
             _log_failure(cfg, task_stem or "", class_name, attempt + 1, reason, msg)
             box = None  # 下一轮换位置
             continue
@@ -404,8 +408,9 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
             # 实测出现过 a1 0.063 -> a2 0.180 -> a3 0.002 的恶化链, 三次全废。
             if mask_info["over_thresh_ratio"] >= 0.35:
                 escalate = "over_repaint"
-                print(f"[info] 掩膜为空但模型改动很大(超阈值像素"
-                      f"{mask_info['over_thresh_ratio']:.2f}), 下轮要求收敛改动范围")
+                reporting.info(f"[info] 掩膜为空但模型改动很大(超阈值像素"
+                               f"{mask_info['over_thresh_ratio']:.2f}), "
+                               f"下轮要求收敛改动范围")
             else:
                 escalate = "severity_match"
             continue
@@ -500,6 +505,10 @@ class Task:
     index: int
     forced_ref: dict | None = None
     stem: str = ""
+    # 参与 RNG 播种但不影响文件命名。用于"同一张干净图 + 同一条参考"
+    # 需要重新挑一次裁块位置的场景(人工驳回样本重生成、定向补充素材)。
+    # 为空时播种字符串与改造前逐字相同, 不影响任何既有任务的可复现性。
+    salt: str = ""
 
 
 def _load_done(ann_path: Path) -> set[str]:
@@ -521,8 +530,21 @@ def _load_done(ann_path: Path) -> set[str]:
     return done
 
 
-def _run_tasks(cfg: Config, tasks: list[Task], resume: bool = True):
-    """统一的并发执行器, generate 与 gen-ref 共用(问题10: 消除重复逻辑)。"""
+def _run_tasks(cfg: Config, tasks: list[Task], resume: bool = True,
+               cancel: threading.Event | None = None,
+               img_dir_override: Path | None = None,
+               rej_dir_override: Path | None = None,
+               ann_path_override: Path | None = None):
+    """统一的并发执行器, generate 与 gen-ref 共用(问题10: 消除重复逻辑)。
+
+    cancel: 置位后不再启动新任务, 已在途的任务跑完并正常落盘。刻意不去强杀
+    线程, 因为 annotations.jsonl 是追加写的, 中途打断会留下半行 JSON, 下次
+    断点续跑解析到那一行就会丢掉整批已完成记录。
+
+    *_override: 让"驳回样本重生成""定向补充"这类规划器落盘到不同目录
+    (outputs/regenerated/ 等), 不与主批次的产物、标注混在一起。不传时
+    行为与改造前完全一致, 因此主批次生成不受影响。
+    """
     relay = RelayClient(cfg)
     records = load_catalog(cfg)
     if not records:
@@ -537,29 +559,44 @@ def _run_tasks(cfg: Config, tasks: list[Task], resume: bool = True):
         catalog_by_class[r["class_name"]].append(r)
 
     gen = cfg.generation
-    img_dir = cfg.out_path("images")
+    img_dir = img_dir_override or cfg.out_path("images")
     mask_dir = cfg.out_path("masks")
-    rej_dir = cfg.resolve(cfg.output.get("rejected", "outputs/rejected"))
-    ann_path = cfg.out_path("annotations")
+    rej_dir = rej_dir_override or cfg.resolve(
+        cfg.output.get("rejected", "outputs/rejected"))
+    ann_path = ann_path_override or cfg.out_path("annotations")
+    img_dir.mkdir(parents=True, exist_ok=True)
+    ann_path.parent.mkdir(parents=True, exist_ok=True)
     debug_on = gen.get("debug", False)
     debug_root = cfg.resolve(cfg.output.get("debug", "outputs/debug"))
 
     done = _load_done(ann_path) if resume else set()
     pending = [t for t in tasks if t.stem not in done]
     skipped = len(tasks) - len(pending)
+    reporting.event("plan", total=len(tasks), skipped=skipped,
+                    pending=len(pending))
     if skipped:
-        print(f"[resume] 跳过已完成 {skipped} 项, 待生成 {len(pending)} 项")
+        reporting.info(f"[resume] 跳过已完成 {skipped} 项, 待生成 {len(pending)} 项")
     if not pending:
-        print("[done] 没有待生成的任务")
+        reporting.info("[done] 没有待生成的任务")
+        reporting.event("finished", status="nothing_to_do", stats={
+            "ok": 0, "best_effort": 0, "rejected": 0,
+            "failed": 0, "cancelled": 0})
         return
 
     ann_lock = threading.Lock()
     ann_f = open(ann_path, "a", encoding="utf-8")
-    stats = {"ok": 0, "best_effort": 0, "rejected": 0, "failed": 0}
+    stats = {"ok": 0, "best_effort": 0, "rejected": 0, "failed": 0,
+             "cancelled": 0}
 
     def work(t: Task):
+        # 尚未启动的任务在这里直接退出, 不发起任何 API 调用(不烧额度)
+        if cancel is not None and cancel.is_set():
+            return t, None, CANCELLED
         seed = gen.get("seed", 42)
-        rng = random.Random(f"{seed}|{t.class_name}|{t.clean_path.name}|{t.index}")
+        seed_str = f"{seed}|{t.class_name}|{t.clean_path.name}|{t.index}"
+        if t.salt:
+            seed_str += f"|{t.salt}"
+        rng = random.Random(seed_str)
         try:
             clean = Image.open(t.clean_path).convert("RGB")
         except Exception as e:
@@ -579,13 +616,20 @@ def _run_tasks(cfg: Config, tasks: list[Task], resume: bool = True):
     workers = max(1, int(cfg.api.get("max_workers", 3)))
     with ThreadPoolExecutor(max_workers=workers) as ex:
         futs = [ex.submit(work, t) for t in pending]
-        for fut in tqdm(as_completed(futs), total=len(futs), desc="生成"):
+        done_count = 0
+        for fut in reporting.track(as_completed(futs), total=len(futs),
+                                   desc="生成"):
             t, res, err = fut.result()
+            if err == CANCELLED:
+                stats["cancelled"] += 1
+                continue
+            done_count += 1
+            reporting.progress_tick(done_count, len(futs))
             if err or res is None:
                 stats["failed"] += 1
                 if err:
                     reason = _classify_failure(err)
-                    print(f"[warn] {t.clean_path.name} ({reason}): {err}")
+                    reporting.warn(f"[warn] {t.clean_path.name} ({reason}): {err}")
                     _log_failure(cfg, t.stem, t.class_name, None, reason, err)
                 else:
                     # _synthesize_one 内部三次重试均未通过, 逐次失败已在
@@ -627,31 +671,47 @@ def _run_tasks(cfg: Config, tasks: list[Task], resume: bool = True):
             with ann_lock:
                 ann_f.write(json.dumps(meta, ensure_ascii=False) + "\n")
                 ann_f.flush()
+            reporting.event(
+                "task", stem=t.stem, cls=t.class_name,
+                verdict=("rejected" if rejected
+                         else meta.get("accepted_as") or "ok"),
+                realism=meta.get("qc", {}).get("realism"),
+                attempt=meta.get("attempt"))
 
     ann_f.close()
-    print(f"\n[done] 合格={stats['ok']} 兜底={stats['best_effort']} "
-          f"驳回={stats['rejected']} 失败={stats['failed']}")
-    print(f"       标注: {ann_path}")
+    reporting.info(f"\n[done] 合格={stats['ok']} 兜底={stats['best_effort']} "
+                   f"驳回={stats['rejected']} 失败={stats['failed']}")
+    reporting.info(f"       标注: {ann_path}")
+    if stats["cancelled"]:
+        reporting.info(f"       已取消未开始的任务: {stats['cancelled']} 项"
+                       f"(可重跑同样命令续跑)")
     if stats["rejected"]:
-        print(f"       驳回样本另存于: {rej_dir} (不混入训练集)")
+        reporting.info(f"       驳回样本另存于: {rej_dir} (不混入训练集)")
     if stats["failed"]:
         fail_log = cfg.resolve(cfg.output.get("root", "outputs")) / "fail_log.jsonl"
-        print(f"       失败原因日志: {fail_log}")
-        print(f"       (用 `run.py fail-summary` 查看本次失败原因分类统计)")
+        reporting.info(f"       失败原因日志: {fail_log}")
+        reporting.info(f"       (用 `run.py fail-summary` 查看本次失败原因分类统计)")
+    reporting.event(
+        "finished",
+        status=("cancelled" if cancel is not None and cancel.is_set()
+                else "completed"),
+        stats=dict(stats))
 
 
 def _warn_legacy(records: list[dict]):
     """问题9: 提示缺陷库中的旧格式条目。"""
     legacy = [r for r in records if "severity" not in r]
     if legacy:
-        print(f"[warn] 缺陷库中有 {len(legacy)}/{len(records)} 条为旧格式"
-              f"(缺 severity 等细化字段), 建议 build-catalog --overwrite 重建")
+        reporting.warn(
+            f"[warn] 缺陷库中有 {len(legacy)}/{len(records)} 条为旧格式"
+            f"(缺 severity 等细化字段), 建议 build-catalog --overwrite 重建")
 
 
 # --------------------------- 对外入口 ---------------------------
 
 def generate(cfg: Config, limit_per_class: int | None = None,
-             only_classes: list[str] | None = None, resume: bool = True):
+             only_classes: list[str] | None = None, resume: bool = True,
+             cancel: threading.Event | None = None):
     clean_images = scan_class_images(cfg, cfg.clean_root())
     if only_classes:
         clean_images = {k: v for k, v in clean_images.items() if k in only_classes}
@@ -665,12 +725,13 @@ def generate(cfg: Config, limit_per_class: int | None = None,
             for k in range(num_per):
                 tasks.append(Task(class_name, p, k,
                                   stem=f"{_safe(p.stem)}__d{k}"))
-    print(f"[plan] 共 {len(tasks)} 个生成任务, 覆盖 {len(clean_images)} 个类别")
-    _run_tasks(cfg, tasks, resume=resume)
+    reporting.info(f"[plan] 共 {len(tasks)} 个生成任务, 覆盖 {len(clean_images)} 个类别")
+    _run_tasks(cfg, tasks, resume=resume, cancel=cancel)
 
 
 def generate_sweep(cfg: Config, classes: list[str], resume: bool = True,
-                   shuffle: bool = False, max_refs: int | None = None):
+                   shuffle: bool = False, max_refs: int | None = None,
+                   cancel: threading.Event | None = None):
     """每条参考缺陷只用一次: 一张干净图配一条参考, 按给定类别顺序铺开。
 
     与 generate() 的区别: generate() 是"以干净图为主体, 每张随机抽参考",
@@ -702,7 +763,7 @@ def generate_sweep(cfg: Config, classes: list[str], resume: bool = True,
             break
         paths = clean_images.get(class_name)
         if not paths:
-            print(f"[warn] 类别无干净图, 跳过: {class_name}")
+            reporting.warn(f"[warn] 类别无干净图, 跳过: {class_name}")
             continue
         take = min(len(paths), len(records) - cursor)
         for i in range(take):
@@ -713,19 +774,20 @@ def generate_sweep(cfg: Config, classes: list[str], resume: bool = True,
         cursor += take
         plan.append((class_name, take))
 
-    print(f"[plan] 可用参考缺陷 {len(records)} 条, "
-          f"每条只用一次, 共 {len(tasks)} 个任务")
+    reporting.info(f"[plan] 可用参考缺陷 {len(records)} 条, "
+                   f"每条只用一次, 共 {len(tasks)} 个任务")
     for class_name, take in plan:
-        print(f"        {class_name}: {take} 张")
+        reporting.info(f"        {class_name}: {take} 张")
     left = len(records) - cursor
     if left > 0:
-        print(f"[warn] 还有 {left} 条参考没分配到干净图, "
-              f"请在 --classes 后面追加更多类别")
-    _run_tasks(cfg, tasks, resume=resume)
+        reporting.warn(f"[warn] 还有 {left} 条参考没分配到干净图, "
+                       f"请在 --classes 后面追加更多类别")
+    _run_tasks(cfg, tasks, resume=resume, cancel=cancel)
 
 
 def generate_target(cfg: Config, classes: list[str], count: int,
-                    resume: bool = True) -> None:
+                    resume: bool = True,
+                    cancel: threading.Event | None = None) -> None:
     """给指定类别各生成固定数量的样本, 并保证覆盖缺陷库里每一条可用参考。
 
     与 generate()/generate_sweep() 的区别:
@@ -751,7 +813,7 @@ def generate_target(cfg: Config, classes: list[str], count: int,
     for class_name in classes:
         paths = clean_images.get(class_name)
         if not paths:
-            print(f"[warn] 类别无干净图, 跳过: {class_name}")
+            reporting.warn(f"[warn] 类别无干净图, 跳过: {class_name}")
             continue
         n_clean = len(paths)
         full_cycles, remainder = divmod(count, n_ref)
@@ -759,8 +821,8 @@ def generate_target(cfg: Config, classes: list[str], count: int,
                     if remainder else f"完整覆盖 {full_cycles} 轮")
         if count < n_ref:
             cover_msg = f"仅覆盖前 {count}/{n_ref} 条, 覆盖不全!"
-        print(f"[plan] {class_name}: 目标 {count} 张, 参考库 {n_ref} 条 "
-              f"({cover_msg}), 干净图 {n_clean} 张(循环使用)")
+        reporting.info(f"[plan] {class_name}: 目标 {count} 张, 参考库 {n_ref} 条 "
+                       f"({cover_msg}), 干净图 {n_clean} 张(循环使用)")
         for i in range(count):
             ref = usable[i % n_ref]
             clean = paths[i % n_clean]
@@ -768,13 +830,14 @@ def generate_target(cfg: Config, classes: list[str], count: int,
                     f"__ref_{_safe(ref['entry_id'])}")
             tasks.append(Task(class_name, clean, i, forced_ref=ref, stem=stem))
 
-    print(f"\n[plan] 共 {len(tasks)} 个任务")
-    _run_tasks(cfg, tasks, resume=resume)
+    reporting.info(f"\n[plan] 共 {len(tasks)} 个任务")
+    _run_tasks(cfg, tasks, resume=resume, cancel=cancel)
 
 
 def generate_with_reference(cfg: Config, reference_entry: str,
                             classes: list[str], per_class: int = 1,
-                            resume: bool = True):
+                            resume: bool = True,
+                            cancel: threading.Event | None = None):
     """定向实验: 固定用某条参考缺陷, 在指定类别各随机抽 per_class 张干净图生成。"""
     records = load_catalog(cfg)
     ref = next((r for r in records if r["entry_id"] == reference_entry), None)
@@ -784,8 +847,9 @@ def generate_with_reference(cfg: Config, reference_entry: str,
     if ref is None:
         raise ValueError(f"缺陷库中找不到参考条目: {reference_entry}\n"
                          f"可用示例: {[r['entry_id'] for r in records[:5]]} ...")
-    print(f"[参考缺陷] {ref['entry_id']} | 类型={ref['defect_type']} "
-          f"| severity={ref.get('severity','?')} | {ref.get('appearance','')}")
+    reporting.info(f"[参考缺陷] {ref['entry_id']} | 类型={ref['defect_type']} "
+                   f"| severity={ref.get('severity','?')} | "
+                   f"{ref.get('appearance','')}")
 
     clean_images = scan_class_images(cfg, cfg.clean_root())
     rng = random.Random(cfg.generation.get("seed", 42))
@@ -793,10 +857,199 @@ def generate_with_reference(cfg: Config, reference_entry: str,
     for class_name in classes:
         paths = clean_images.get(class_name)
         if not paths:
-            print(f"[warn] 类别无干净图: {class_name}")
+            reporting.warn(f"[warn] 类别无干净图: {class_name}")
             continue
         for p in rng.sample(paths, min(per_class, len(paths))):
             tasks.append(Task(class_name, p, 0, forced_ref=ref,
                               stem=f"{_safe(p.stem)}__ref_{_safe(ref['entry_id'])}"))
-    print(f"[plan] 共 {len(tasks)} 个定向生成任务")
-    _run_tasks(cfg, tasks, resume=resume)
+    reporting.info(f"[plan] 共 {len(tasks)} 个定向生成任务")
+    _run_tasks(cfg, tasks, resume=resume, cancel=cancel)
+
+
+# --------------------------- 驳回样本重生成 ---------------------------
+
+def _next_round_suffix(out_dir: Path, original_stem: str) -> str:
+    """扫已存在的 {original_stem}__r*.png, 返回下一个可用轮次后缀。
+
+    从 __r2 开始(__r1 省略不用, 避免与"第一次生成"混淆); 找不到已有轮次时
+    直接给 __r2。轮次号必须探测而不能固定, 否则同一张驳回图第二次重跑会
+    覆盖第一次重生成的结果, 人工没法对比多轮效果。
+    """
+    existing = set()
+    if out_dir.exists():
+        prefix = f"{original_stem}__r"
+        for p in out_dir.glob(f"{prefix}*.png"):
+            tail = p.stem[len(prefix):]
+            if tail.isdigit():
+                existing.add(int(tail))
+    n = 2
+    while n in existing:
+        n += 1
+    return f"__r{n}"
+
+
+def plan_regenerate_rejected(
+        cfg: Config, directories: list, reroll_ref: bool = False,
+        catalog_records: list[dict] | None = None):
+    """从人工驳回样本目录反查上下文, 规划出重生成任务列表。
+
+    只负责"规划", 不落盘不调用 API —— dry-run 与真跑共用这一份规划结果,
+    保证 --dry-run 打印的清单与真正执行的任务完全一致。
+
+    返回 (tasks, scan_report, skipped): skipped 是反查成功但目标产物已存在
+    的任务(视为已经重生成过, 断点续跑语义与其它规划器一致)。
+    """
+    from . import rejection
+
+    records = catalog_records if catalog_records is not None else load_catalog(cfg)
+    if not records:
+        raise RuntimeError("缺陷库为空, 请先成功运行 build-catalog")
+    by_class: dict[str, list[dict]] = defaultdict(list)
+    for r in records:
+        by_class[r["class_name"]].append(r)
+
+    scan_report = rejection.scan_rejected_dirs(cfg, directories, records)
+
+    regen_root = cfg.resolve(cfg.output.get("regenerated", "outputs/regenerated"))
+    rng = random.Random(cfg.generation.get("seed", 42))
+
+    tasks: list[Task] = []
+    skipped: list = []
+    for item in scan_report.resolved:
+        ref = item.ref_record
+        if reroll_ref:
+            pool = by_class.get(item.class_name) or records
+            # 排除掉原参考, 否则"换一条"有较大概率抽回同一条(概率随库内
+            # 同类别条目数减少而升高), 与用户意图(换个思路重试)相悖
+            alt_pool = [r for r in pool if r["entry_id"] != item.ref_entry_id]
+            ref = rng.choice(alt_pool or pool)
+
+        out_dir = regen_root / _safe(item.class_name)
+        suffix = _next_round_suffix(out_dir, item.original_stem)
+        stem = f"{item.original_stem}{suffix}"
+
+        if (out_dir / f"{stem}.png").exists():
+            skipped.append(item)
+            continue
+
+        # salt 用重生成的目标 stem 本身: 同一张驳回图多轮重生成时,
+        # stem 因轮次号不同而不同, 天然保证每轮换到不同的裁块位置。
+        tasks.append(Task(
+            item.class_name, item.clean_path, item.index,
+            forced_ref=ref, stem=stem, salt=stem))
+    return tasks, scan_report, skipped
+
+
+def regenerate_rejected(
+        cfg: Config, directories: list, reroll_ref: bool = False,
+        cancel: threading.Event | None = None) -> dict:
+    """重新生成人工驳回样本, 落盘到 outputs/regenerated/ 供人工二次 review。
+
+    刻意不写进 outputs/generated/: 这批本来就是被挑出来的不合格样本,
+    重新生成后仍应该先让人看一眼, 由用户自行决定要不要合并进训练集
+    (需求明确不要程序代管合并)。
+
+    产物目录与标注文件都换成 regenerated 下的独立位置(经 _run_tasks 的
+    *_override 参数), 不与主批次的 outputs/generated、
+    outputs/annotations.jsonl 混在一起, 也就不会干扰主批次的断点续跑。
+    """
+    tasks, scan_report, skipped = plan_regenerate_rejected(
+        cfg, directories, reroll_ref=reroll_ref)
+
+    if scan_report.problems:
+        for p in scan_report.problems:
+            reporting.warn(f"[warn] {p}")
+    reporting.info(
+        f"[plan] 扫描 {scan_report.scanned_files} 个文件, "
+        f"反查成功 {scan_report.ok_count}, 反查失败 {scan_report.problem_count}, "
+        f"已重生成过跳过 {len(skipped)}, 待重生成 {len(tasks)}")
+
+    if not tasks:
+        reporting.info("[done] 没有待重生成的任务")
+        return {"planned": 0, "skipped": len(skipped),
+                "problems": len(scan_report.problems)}
+
+    regen_root = cfg.resolve(cfg.output.get("regenerated", "outputs/regenerated"))
+    # 重生成过程中若再次判定不合格, 也落在 regenerated 下便于对比,
+    # 不能混进主批次的 outputs/rejected/
+    _run_tasks(cfg, tasks, resume=False, cancel=cancel,
+              img_dir_override=regen_root,
+              rej_dir_override=regen_root / "_rejected",
+              ann_path_override=regen_root / "annotations.jsonl")
+
+    return {"planned": len(tasks), "skipped": len(skipped),
+            "problems": len(scan_report.problems)}
+
+
+# --------------------------- 定向补充(按参考缺陷批量生成) ---------------------------
+
+def plan_augment_by_references(
+        cfg: Config, ref_entry_ids: list, classes: list, per_ref: int = 1,
+        catalog_records: list[dict] | None = None) -> list[Task]:
+    """给定一组参考缺陷条目, 在指定类别上各铺开生成 per_ref 张。
+
+    用于需求二: 训练后发现某类褶皱识别效果差, 先用 catalog_query(按属性筛)或
+    rejection.extract_reference_ids(按出问题的产出图反查)选出针对性的参考条目,
+    再用这个函数批量补充。
+
+    只负责"规划", 不落盘不调用 API。与 build-catalog / regen-rejected 保持同一
+    模式: dry-run 与真跑共用同一份任务列表, 保证打印的清单和真正执行的内容一致。
+
+    命名 {class}__{clean_stem}__aug{i}__ref_{entry_id}, 用 aug 而不是
+    generate_target() 的 t 前缀, 便于事后在 outputs/generated 里靠文件名区分
+    "主批次"与"定向补充"产出的样本。
+
+    干净图分配: 用一个在"参考 x 张数"上连续推进的游标, 而不是每条参考都从第 0
+    张开始 —— 后者在 per_ref=1 时会让所有参考共用同一张干净图, 补充出来的样本
+    背景全都一样, 对训练几乎没有增益。
+    """
+    from .defect_catalog import load_catalog
+
+    records = catalog_records if catalog_records is not None else load_catalog(cfg)
+    if not records:
+        raise RuntimeError("缺陷库为空, 请先成功运行 build-catalog")
+    by_entry = {r["entry_id"]: r for r in records}
+
+    missing = [eid for eid in ref_entry_ids if eid not in by_entry]
+    if missing:
+        tail = "..." if len(missing) > 5 else ""
+        raise ValueError(f"缺陷库中找不到以下参考条目: {missing[:5]}{tail}")
+
+    clean_images = scan_class_images(cfg, cfg.clean_root())
+    tasks: list[Task] = []
+    for class_name in classes:
+        paths = clean_images.get(class_name)
+        if not paths:
+            reporting.warn(f"[warn] 类别无干净图, 跳过: {class_name}")
+            continue
+        n_clean = len(paths)
+        cursor = 0
+        for eid in ref_entry_ids:
+            ref = by_entry[eid]
+            for i in range(per_ref):
+                clean = paths[cursor % n_clean]
+                cursor += 1
+                stem = (f"{_safe(class_name)}__{_safe(clean.stem)}__aug{i}"
+                        f"__ref_{_safe(eid)}")
+                # 干净图数量不足时会被复用; salt 取完整 stem(含 aug 序号与参考名),
+                # 保证即便复用同一张干净图, RNG 播种也不同, 裁块位置不会重复
+                tasks.append(Task(class_name, clean, i, forced_ref=ref,
+                                  stem=stem, salt=stem))
+    return tasks
+
+
+def augment_by_references(
+        cfg: Config, ref_entry_ids: list, classes: list, per_ref: int = 1,
+        resume: bool = True, cancel: threading.Event | None = None) -> None:
+    """执行定向补充。
+
+    产物落进 outputs/generated/(主数据集), 而不是像驳回样本重生成那样另存到
+    待审目录: 这批样本的目的就是直接修补训练集的检测短板, 而且质检
+    (qc.passed)照常把关 —— 不合格的一样会落进 outputs/rejected/, 不会因为
+    "定向补充"就放松标准。
+    """
+    tasks = plan_augment_by_references(cfg, ref_entry_ids, classes, per_ref)
+    reporting.info(f"[plan] 定向补充: {len(ref_entry_ids)} 条参考 x "
+                   f"{len(classes)} 个类别 x 每条 {per_ref} 张, "
+                   f"共 {len(tasks)} 个任务")
+    _run_tasks(cfg, tasks, resume=resume, cancel=cancel)

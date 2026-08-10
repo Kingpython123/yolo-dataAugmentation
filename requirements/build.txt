@@ -1,0 +1,4 @@
+# 构建期依赖。运行期依赖见 runtime.txt。
+-r runtime.txt
+
+pyinstaller==6.16.0

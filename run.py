@@ -15,7 +15,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from app.runtime import bootstrap
 from src.config import load_config
+
+DEFAULT_REJECTED_DIR = '没打标签的'
 
 
 def cmd_test_api(args):
@@ -89,49 +92,16 @@ def cmd_selftest(args):
 
 
 def cmd_inspect(args):
-    """离线体检缺陷库: 格式/类型/严重度/字段完整度/裁剪图是否存在。"""
-    import json
-    from collections import Counter
-    from pathlib import Path as P
+    """离线体检缺陷库: 格式/类型/严重度/字段完整度/裁剪图是否存在。
+
+    判定逻辑已提炼到 src/catalog_report.py, 图形界面复用同一份结果;
+    这里只负责把它渲染成控制台文本。
+    """
+    from src import catalog_report
     cfg = load_config(args.config)
-    f = cfg.out_path("catalog") / "catalog.json"
-    if not f.exists():
-        print(f"缺陷库不存在: {f}")
-        return
-    recs = json.loads(f.read_text(encoding="utf-8"))
-    print(f"缺陷库: {f}\n条目总数: {len(recs)}")
-
-    new = [r for r in recs if "severity" in r]
-    print(f"新格式(含细化字段): {len(new)} / 旧格式: {len(recs) - len(new)}")
-    print("按类型:", dict(Counter(r.get("defect_type") for r in recs)))
-    print("按严重度:", dict(sorted(Counter(
-        r.get("severity", "?") for r in recs).items(), key=lambda x: str(x[0]))))
-    print("按类别:", dict(sorted(Counter(r.get("class_name") for r in recs).items())))
-
-    white = (cfg.get("catalog", {}) or {}).get("defect_types", ["变形", "划痕"])
-    bad_type = [r["entry_id"] for r in recs if r.get("defect_type") not in white]
-    missing = [r["entry_id"] for r in recs
-               if not cfg.resolve(str(r.get("crop_path", ""))).exists()]
-    no_size = [r["entry_id"] for r in recs
-               if not isinstance(r.get("source_size"), (list, tuple))]
-    fields = ["orientation", "geometry", "extent", "photometry",
-              "edge_profile", "texture_effect", "prompt_hint"]
-    empty = [r["entry_id"] for r in recs
-             if sum(1 for k in fields if not str(r.get(k, "")).strip()) > 2]
-    print(f"\n非白名单类型: {len(bad_type)}", bad_type[:5])
-    print(f"裁剪图缺失: {len(missing)}", missing[:5])
-    if no_size:
-        print(f"[警告] 缺 source_size 的条目: {len(no_size)} 条 —— 这些条目在"
-              f"没有'有缺陷'原图的机器上会退回按绝对像素算裁块(尺寸偏大)")
-    print(f"描述字段大量缺失: {len(empty)}", empty[:5])
-
-    big = [(r["entry_id"], r["bbox"][2], r["bbox"][3]) for r in recs
-           if r.get("bbox") and max(r["bbox"][2], r["bbox"][3])
-           > cfg.generation.get("max_patch_size", 1536)]
-    if big:
-        print(f"\n[提示] {len(big)} 条缺陷长边超过 max_patch_size, 裁块无法完整覆盖:")
-        for e, w, h in big[:5]:
-            print(f"   {e}  bbox={w}x{h}")
+    report = catalog_report.build_report(cfg)
+    for line in catalog_report.format_lines(report):
+        print(line)
 
 
 def cmd_debug_preview(args):
@@ -495,9 +465,363 @@ def cmd_gen_ref(args):
                             per_class=args.per_class, resume=not args.force)
 
 
+def cmd_regen_rejected(args):
+    """重新生成人工驳回样本(用原本那条参考缺陷), 落盘到 outputs/regenerated/。
+
+    默认只反查 "没打标签的" 目录(--dirs 可传多个覆盖默认值)。反查基于文件名,
+    不依赖 annotations.jsonl(人工挑出的驳回样本很可能在别的机器生成、标注文件
+    不一定在手上)。--dry-run 只打印将要重生成的清单, 不发起任何 API 调用。
+    """
+    from src.config import load_config as _load_config
+    from src.dataset import safe_name
+    from src.generate import plan_regenerate_rejected, regenerate_rejected
+
+    cfg = _load_config(args.config)
+    dirs = args.dirs or [DEFAULT_REJECTED_DIR]
+    dir_paths = [cfg.resolve(d) for d in dirs]
+
+    tasks, scan_report, skipped = plan_regenerate_rejected(
+        cfg, dir_paths, reroll_ref=args.reroll_ref)
+
+    print(f"扫描目录: {[str(p) for p in scan_report.scanned_dirs]}")
+    print(f"扫描文件数: {scan_report.scanned_files}")
+    print(f"反查成功: {scan_report.ok_count}")
+    print(f"反查失败: {scan_report.problem_count}")
+    if scan_report.problems:
+        print("失败详情(前10条):")
+        for p in scan_report.problems[:10]:
+            print(f"  - {p}")
+    print(f"已重生成过(跳过): {len(skipped)}")
+    print(f"本次将重生成: {len(tasks)} 张")
+
+    if args.dry_run:
+        if tasks:
+            workers = max(1, int(cfg.api.get("max_workers", 3)))
+            print(f"\n预计 API 调用: 约 {len(tasks) * 2}~{len(tasks) * 4} 次"
+                 f"(每张编辑+质检至少各一次, 视重试次数)")
+            print(f"按单张 50~60 秒、并发 {workers} 估算, "
+                 f"预计耗时 {len(tasks) * 50 / workers / 60:.0f}~"
+                 f"{len(tasks) * 60 / workers / 60:.0f} 分钟")
+            print("\n清单(前 10 条):")
+            for t in tasks[:10]:
+                print(f"  {t.stem}")
+                print(f"    干净图={t.clean_path.name}  参考={t.forced_ref['entry_id']}")
+        print("\n(试算, 未调用任何 API。确认无误后去掉 --dry-run 即开始)")
+        return 0
+
+    if not tasks:
+        return 0
+
+    regenerate_rejected(cfg, dir_paths, reroll_ref=args.reroll_ref)
+
+    if not args.archive:
+        return 0
+
+    # 归档: 逐条检查目标产物是否真的落盘, 只归档确实生成成功的那些。
+    # 必须在 regenerate_rejected 跑完之后才能做这个检查(落盘时间点已确定),
+    # 且必须在归档之前完成, 不能颠倒 —— 挪走原文件后就没法从文件名反查了。
+    regen_root = cfg.resolve(cfg.output.get("regenerated", "outputs/regenerated"))
+    archived = 0
+    for item in scan_report.resolved:
+        matches = list((regen_root / safe_name(item.class_name)).glob(
+            f"{item.original_stem}__r*.png")) if (
+            regen_root / safe_name(item.class_name)).exists() else []
+        if not matches:
+            continue
+        archive_dir = item.file_path.parent / "已重生成"
+        archive_dir.mkdir(parents=True, exist_ok=True)
+        dest = archive_dir / item.file_path.name
+        if item.file_path.exists():
+            item.file_path.rename(dest)
+            archived += 1
+    print(f"\n已归档 {archived} 个原驳回文件到各目录下的 已重生成/ 子目录")
+    return 0
+
+
+
+def cmd_find_similar(args):
+    """按褶皱形态检索缺陷库: 给一张出问题的图或一条种子参考, 找形态最像的条目。
+
+    完全离线, 不调用任何 API。基于 structure_ref 的灰度浮雕图算形态描述子
+    (方向直方图/多尺度带通能量/连通域统计/方向集中度), 首次运行会为缺陷库全部
+    裁剪图建一次缓存(约 1 分钟), 之后检索是毫秒级。
+
+    输出的 entry_id 可以直接喂给 gen-augment --refs 做定向补充。
+    """
+    from src import morphology
+    from src.config import load_config as _load_config
+    from src.defect_catalog import load_catalog
+
+    cfg = _load_config(args.config)
+    records = load_catalog(cfg)
+
+    if not args.image and not args.entry:
+        print("请给出检索种子, 二者其一:")
+        print("  --image <图片路径>   出问题的图(误检区域截图/漏检的真实褶皱)")
+        print("  --entry <entry_id>  以缺陷库里已有条目为种子找相似")
+        return 2
+
+    if args.rebuild_cache:
+        print("重建形态描述子缓存(遍历缺陷库全部裁剪图, 约 1 分钟) ...")
+
+    if args.image:
+        image_path = cfg.resolve(args.image)
+        if not image_path.exists():
+            print(f"[error] 图片不存在: {image_path}")
+            return 2
+        print(f"检索种子(图片): {image_path}")
+        hits = morphology.query_by_image(
+            cfg, image_path, records, top_k=args.top_k,
+            rebuild_cache=args.rebuild_cache, progress=True)
+    else:
+        by_id = {r["entry_id"]: r for r in records}
+        if args.entry not in by_id:
+            print(f"[error] 缺陷库中找不到条目: {args.entry}")
+            return 2
+        seed = by_id[args.entry]
+        print(f"检索种子(条目): {args.entry}")
+        print(f"  类型={seed.get('defect_type')} 严重度={seed.get('severity')} "
+              f"条数={seed.get('count')} 走向={seed.get('orientation','')}")
+        hits = morphology.query_by_entry(
+            cfg, args.entry, records, top_k=args.top_k,
+            rebuild_cache=args.rebuild_cache)
+
+    if not hits:
+        print("没有检索到任何结果(缺陷库描述子可能为空)")
+        return 1
+
+    print(f"\n形态最相似的 {len(hits)} 条(距离越小越像):")
+    for i, h in enumerate(hits, 1):
+        r = h.record
+        print(f"{i:>3}. d={h.distance:.3f}  {h.entry_id}")
+        print(f"      类型={r.get('defect_type')} 严重度={r.get('severity')} "
+              f"条数={r.get('count')} 走向={str(r.get('orientation',''))[:40]}")
+
+    print("\n可直接把这些 entry_id 交给 gen-augment 做定向补充, 例如:")
+    ids_preview = " ".join(h.entry_id for h in hits[:3])
+    print(f"  run.py gen-augment --classes 1.jpg --per-ref 2 --refs {ids_preview}")
+    print("或者一步到位(gen-augment 内置同样的检索):")
+    seed_arg = (f"--similar-to-image {args.image}" if args.image
+                else f"--similar-to-entry {args.entry}")
+    print(f"  run.py gen-augment --classes 1.jpg --per-ref 2 "
+          f"{seed_arg} --similar-top-k {args.top_k}")
+    return 0
+
+
+def cmd_gen_augment(args):
+    """定向补充: 按缺陷形态挑出参考条目, 批量补充训练样本。
+
+    两种挑选方式(可组合, 取并集):
+      方式A 按属性筛  --type/--severity/--count/--orientation/--ref-class
+      方式C 按产出图反查 --from-images 目录  (从文件名反查它们用过哪些参考)
+
+    默认强制预览: 打印匹配到的参考清单与成本预估后停下, 需要显式加 --yes 才真跑。
+    """
+    from src.catalog_query import QueryFilter, parse_range, query
+    from src.config import load_config as _load_config
+    from src.defect_catalog import load_catalog
+    from src.generate import augment_by_references, plan_augment_by_references
+    from src.rejection import extract_reference_ids
+
+    cfg = _load_config(args.config)
+    records = load_catalog(cfg)
+    by_entry = {r["entry_id"]: r for r in records}
+
+    selected: list = []          # 保持挑选顺序, 便于用户核对
+    seen: set = set()
+
+    def add(entry_id: str) -> None:
+        if entry_id not in seen:
+            seen.add(entry_id)
+            selected.append(entry_id)
+
+    # ---- 方式 C: 从出问题的产出图反查参考 ----
+    if args.from_images:
+        dirs = [cfg.resolve(d) for d in args.from_images]
+        rep = extract_reference_ids(dirs, records)
+        print(f"[方式C] 扫描目录: {[str(p) for p in rep.scanned_dirs]}")
+        print(f"        文件数 {rep.scanned_files}, "
+              f"反查出参考条目 {len(rep.entry_ids)} 条, "
+              f"反查失败 {len(rep.problems)}")
+        for p in rep.problems[:5]:
+            print(f"        - {p}")
+        # 按 entry_id 排序保证多次运行结果稳定(set 迭代顺序不保证)
+        for eid in sorted(rep.entry_ids):
+            add(eid)
+
+    # ---- 方式 B: 按形态相似检索 ----
+    if args.similar_to_image or args.similar_to_entry:
+        from src import morphology
+        if args.similar_to_image:
+            seed_path = cfg.resolve(args.similar_to_image)
+            if not seed_path.exists():
+                print(f"[error] 种子图片不存在: {seed_path}")
+                return 2
+            hits = morphology.query_by_image(
+                cfg, seed_path, records, top_k=args.similar_top_k,
+                progress=True)
+            print(f"[方式B] 按形态相似检索(种子图片 {seed_path.name}): "
+                  f"取前 {len(hits)} 条")
+        else:
+            if args.similar_to_entry not in by_entry:
+                print(f"[error] 缺陷库中找不到种子条目: {args.similar_to_entry}")
+                return 2
+            hits = morphology.query_by_entry(
+                cfg, args.similar_to_entry, records, top_k=args.similar_top_k)
+            print(f"[方式B] 按形态相似检索(种子条目 {args.similar_to_entry}): "
+                  f"取前 {len(hits)} 条")
+        for h in hits:
+            print(f"        d={h.distance:.3f}  {h.entry_id}")
+            add(h.entry_id)
+
+    # ---- 方式 A: 按属性筛 ----
+    used_attr_filter = any([args.type, args.severity, args.count,
+                           args.orientation, args.ref_class])
+    if used_attr_filter:
+        sev_min, sev_max = parse_range(args.severity)
+        cnt_min, cnt_max = parse_range(args.count)
+        flt = QueryFilter(
+            defect_type=args.type, severity_min=sev_min, severity_max=sev_max,
+            count_min=cnt_min, count_max=cnt_max,
+            orientation_kw=args.orientation, class_name=args.ref_class)
+        result = query(records, flt)
+        print(f"[方式A] 按属性筛选: {result.count}/{result.total} 条命中")
+        dist = result.distribution()
+        print(f"        按类型: {dist['by_type']}")
+        print(f"        按严重度: {dist['by_severity']}")
+        print(f"        按来源类别: {dist['by_class']}")
+        for r in result.matched:
+            add(r["entry_id"])
+
+    # ---- 显式指定 entry_id ----
+    if args.refs:
+        for eid in args.refs:
+            if eid not in by_entry:
+                print(f"[error] 缺陷库中找不到参考条目: {eid}")
+                return 2
+            add(eid)
+
+    if not selected:
+        print("没有选中任何参考条目。请至少给出一种挑选方式:")
+        print("  --from-images <目录>        从出问题的产出图反查用过的参考")
+        print("  --similar-to-image <图>     按形态相似检索(需要一张出问题的图)")
+        print("  --similar-to-entry <id>     以缺陷库某条目为种子按形态相似检索")
+        print("  --severity 4-5 等属性条件   按形态属性筛选")
+        print("  --refs <entry_id> ...      直接指定参考条目")
+        return 2
+
+    if args.max_refs and len(selected) > args.max_refs:
+        print(f"\n[限制] 选中 {len(selected)} 条, 按 --max-refs 截断为前 "
+              f"{args.max_refs} 条")
+        selected = selected[:args.max_refs]
+
+    classes = [c.strip() for c in args.classes.split(",") if c.strip()]
+
+    print(f"\n最终选中参考条目 {len(selected)} 条, 目标类别 {classes}, "
+          f"每条每类 {args.per_ref} 张")
+    print("\n参考条目清单(前 15 条):")
+    for eid in selected[:15]:
+        r = by_entry[eid]
+        print(f"  {eid}")
+        print(f"    类型={r.get('defect_type')} 严重度={r.get('severity')} "
+              f"条数={r.get('count')} 走向={r.get('orientation','')[:24]}")
+
+    tasks = plan_augment_by_references(cfg, selected, classes,
+                                      per_ref=args.per_ref,
+                                      catalog_records=records)
+    workers = max(1, int(cfg.api.get("max_workers", 3)))
+    print(f"\n将生成 {len(tasks)} 张样本(落进 outputs/generated/, "
+          f"质检不合格的照常进 outputs/rejected/)")
+    print(f"预计 API 调用约 {len(tasks) * 2}~{len(tasks) * 4} 次"
+          f"(每张编辑+质检至少各一次, 视重试次数)")
+    print(f"按单张 50~60 秒、并发 {workers} 估算, 预计耗时 "
+          f"{len(tasks) * 50 / workers / 60:.0f}~"
+          f"{len(tasks) * 60 / workers / 60:.0f} 分钟")
+
+    if not args.yes:
+        print("\n(以上为预览, 未调用任何 API。确认无误后加 --yes 开始生成)")
+        return 0
+
+    augment_by_references(cfg, selected, classes, per_ref=args.per_ref,
+                          resume=not args.force)
+    return 0
+
+
+
+# --------------------------- 作业(供图形界面与脚本使用) ---------------------------
+
+def cmd_worker(args):
+    """执行一个作业目录里描述的任务。由界面以分离进程方式调用, 也可手工调用排障。"""
+    from app.worker import run_job
+    return run_job(args.job)
+
+
+def cmd_job_start(args):
+    """提交一个后台生成作业并立即返回。关闭终端不会中断它。"""
+    from app.services import job_service
+    classes = [c.strip() for c in args.classes.split(",") if c.strip()]
+    check = job_service.preflight(classes, args.count, force=args.force)
+    for w in check.warnings:
+        print(f"[warn] {w}")
+    if not check.ok:
+        for b in check.blockers:
+            print(f"[error] {b}")
+        return 2
+    print(f"[plan] {check.message}")
+    if check.pending == 0 and not args.force:
+        return 0
+    status = job_service.submit(classes, args.count, force=args.force,
+                               max_workers=args.max_workers)
+    print(f"[started] 作业 {status.job_id} 已在后台运行 (pid={status.pid})")
+    print(f"          作业目录: {status.job_dir}")
+    print(f"          查看进度: run.py job-list")
+    print(f"          停止任务: run.py job-cancel --job-id {status.job_id}")
+    return 0
+
+
+def cmd_job_list(args):
+    """列出最近的作业及其进度。"""
+    from app.jobs.protocol import format_clock
+    from app.services import job_service
+    jobs = job_service.recent(limit=args.limit)
+    if not jobs:
+        print("还没有任何作业")
+        return 0
+    print(f"{'作业ID':22} {'状态':10} {'进度':>12}  {'合格/驳回/失败':>16}  最后活动")
+    for status in jobs:
+        progress, _ = job_service.load_progress(status)
+        pct = f"{progress.done}/{progress.pending}" if progress.pending else "-"
+        counts = (f"{progress.ok}/{progress.rejected}/{progress.failed}")
+        print(f"{status.job_id:22} {status.state:10} {pct:>12}  {counts:>16}  "
+              f"{format_clock(progress.last_ts)}")
+    return 0
+
+
+def cmd_job_cancel(args):
+    """请求停止一个作业(优雅停止: 在途任务会跑完并正常落盘)。"""
+    from app.jobs import store
+    from app.services import job_service
+    target = None
+    for status in job_service.recent(limit=200):
+        if status.job_id == args.job_id:
+            target = status
+            break
+    if target is None:
+        print(f"找不到作业: {args.job_id}")
+        return 2
+    if target.is_terminal:
+        print(f"作业已结束({target.state}), 无需取消")
+        return 0
+    store.request_cancel(target.job_dir)
+    print(f"已请求停止 {target.job_id}。在途任务会先落盘, 请稍候。")
+    return 0
+
 def main():
     ap = argparse.ArgumentParser(description="工业瓶子缺陷合成流水线")
     ap.add_argument("--config", default=None, help="config.yaml 路径")
+    ap.add_argument("--workspace", default=None,
+                    help="工作区目录(存放 config.yaml/outputs/logs/jobs);"
+                         "默认取用户配置, 源码运行时回退为仓库根目录")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser("test-api").set_defaults(func=cmd_test_api)
@@ -596,9 +920,98 @@ def main():
                    help="忽略断点续跑, 重新生成已完成的样本")
     p.set_defaults(func=cmd_gen_ref)
 
+    p = sub.add_parser(
+        "regen-rejected",
+        help="重新生成人工驳回样本(用原参考缺陷), 落盘到 outputs/regenerated/")
+    p.add_argument("--dirs", nargs="+", default=None,
+                   help=f"驳回样本所在目录, 可传多个; 默认 {DEFAULT_REJECTED_DIR!r}")
+    p.add_argument("--dry-run", action="store_true",
+                   help="只打印将要重生成的清单与预估成本, 不调用 API")
+    p.add_argument("--reroll-ref", action="store_true",
+                   help="换一条同类别的参考缺陷, 而不是沿用原参考"
+                        "(适合怀疑是参考本身不合适的情形)")
+    p.add_argument("--archive", action="store_true",
+                   help="重生成成功后把原驳回文件移到各目录下的 已重生成/ 子目录")
+    p.set_defaults(func=cmd_regen_rejected)
+
+    p = sub.add_parser(
+        "gen-augment",
+        help="定向补充: 按缺陷形态挑参考条目批量补样本(默认只预览, 加 --yes 才跑)")
+    p.add_argument("--classes", required=True,
+                   help="目标类别, 逗号分隔, 如 1.jpg,1.bmp")
+    p.add_argument("--per-ref", type=int, default=1,
+                   help="每条参考在每个类别上生成多少张(默认1)")
+    p.add_argument("--from-images", nargs="+", default=None,
+                   help="[方式C] 出问题的产出图所在目录, 从文件名反查用过的参考")
+    p.add_argument("--type", default=None,
+                   help="[方式A] 缺陷类型精确匹配, 如 变形 或 划痕")
+    p.add_argument("--severity", default=None,
+                   help="[方式A] 严重度区间, 如 4-5 或 4")
+    p.add_argument("--count", default=None,
+                   help="[方式A] 褶皱条数区间, 如 5-12")
+    p.add_argument("--orientation", default=None,
+                   help="[方式A] 走向关键词包含匹配, 如 横向 / 斜向 / 交叉")
+    p.add_argument("--ref-class", default=None,
+                   help="[方式A] 限定参考缺陷的来源类别, 如 5.1")
+    p.add_argument("--similar-to-image", default=None,
+                   help="[方式B] 以一张出问题的图为种子, 检索形态相似的参考条目")
+    p.add_argument("--similar-to-entry", default=None,
+                   help="[方式B] 以缺陷库某条目为种子, 检索形态相似的参考条目")
+    p.add_argument("--similar-top-k", type=int, default=10,
+                   help="[方式B] 相似检索取前 N 条(默认10)")
+    p.add_argument("--refs", nargs="+", default=None,
+                   help="直接指定参考条目 entry_id, 可多个")
+    p.add_argument("--max-refs", type=int, default=None,
+                   help="选中过多时只取前 N 条(控制成本)")
+    p.add_argument("--yes", action="store_true",
+                   help="确认执行(不加则只预览清单与成本, 不调用 API)")
+    p.add_argument("--force", action="store_true", help="忽略断点续跑")
+    p.set_defaults(func=cmd_gen_augment)
+
+    p = sub.add_parser(
+        "find-similar",
+        help="按褶皱形态检索缺陷库(离线, 不调API), 结果可喂给 gen-augment")
+    p.add_argument("--image", default=None,
+                   help="检索种子图片: 出问题的图(误检截图/漏检的真实褶皱)")
+    p.add_argument("--entry", default=None,
+                   help="检索种子条目: 以缺陷库里已有 entry_id 为种子找相似")
+    p.add_argument("--top-k", type=int, default=15, help="返回前 N 条(默认15)")
+    p.add_argument("--rebuild-cache", action="store_true",
+                   help="强制重建形态描述子缓存(改过描述子参数或缺陷库扩容后用)")
+    p.set_defaults(func=cmd_find_similar)
+
+
+
+
+    p = sub.add_parser("worker",
+                       help="执行一个作业目录(由图形界面调用, 一般不需手工执行)")
+    p.add_argument("--job", required=True, help="作业目录路径")
+    p.set_defaults(func=cmd_worker)
+
+    p = sub.add_parser("job-start",
+                       help="提交后台生成作业并立即返回(关终端不中断)")
+    p.add_argument("--classes", required=True, help="目标类别, 逗号分隔")
+    p.add_argument("--count", type=int, required=True, help="每个类别各生成多少张")
+    p.add_argument("--force", action="store_true", help="忽略断点续跑")
+    p.add_argument("--max-workers", type=int, default=None, help="并发线程数")
+    p.set_defaults(func=cmd_job_start)
+
+    p = sub.add_parser("job-list", help="列出最近的后台作业及进度")
+    p.add_argument("--limit", type=int, default=20, help="最多列出几条")
+    p.set_defaults(func=cmd_job_list)
+
+    p = sub.add_parser("job-cancel", help="请求停止某个后台作业(优雅停止)")
+    p.add_argument("--job-id", required=True, help="作业 ID, 见 job-list")
+    p.set_defaults(func=cmd_job_cancel)
+
     args = ap.parse_args()
-    args.func(args)
+    # 装配运行环境: 固定标准流编码、把默认 config.yaml 指向工作区、
+    # 注入凭据管理器里的 API key。源码方式运行且未设置工作区时,
+    # 工作区回退为仓库根目录, 行为与改造前一致。
+    bootstrap.install(workspace=getattr(args, "workspace", None))
+    # 子命令可以返回退出码; 返回 None 视为成功, 保持原有行为
+    return args.func(args) or 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
