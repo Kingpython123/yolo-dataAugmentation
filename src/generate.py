@@ -21,7 +21,7 @@ from PIL import Image
 from . import mask_utils, quality_check, reporting, structure_ref
 from .api_client import RelayClient
 from .config import Config
-from .dataset import safe_name, scan_class_images
+from .dataset import safe_name, same_product, scan_class_images
 from .defect_catalog import load_catalog
 
 EDIT_PROMPT_TMPL = """You are an industrial defect synthesis expert.
@@ -93,6 +93,77 @@ undeformed surface, lighter = raised, darker = sunken. It contains ONLY the crea
 geometry — no colour, no printed content, no lighting from the source bottle.
 Use image 3 as the authoritative guide for the SHAPE and LAYOUT of the creases."""
 
+# flat-edit 模式的 prompt。底图已被低通抹掉印刷内容, 因此要求与常规模式相反:
+# 不再是"保护文字不要重画", 而是"禁止画出任何文字"。模型只需在平滑表面上
+# 输出褶皱的明暗起伏, 我们再把这份明暗调制乘回带文字的原图。
+FLAT_EDIT_PROMPT_TMPL = """You are an industrial defect synthesis expert.
+Image 1 = a DELIBERATELY SMOOTHED (defocused) patch of a bottle surface. Its printed
+artwork has been intentionally removed by blurring; what remains is only the base
+colour and the soft lighting gradient of the surface. This is BY DESIGN, not a mistake.
+Image 2 = REFERENCE photo of a REAL "{dtype}" defect (on a DIFFERENT bottle).
+{structure_note}
+YOUR TASK: render the SAME deformation onto the smooth surface of image 1, producing
+a smooth surface that carries ONLY the light-and-shade relief of the creases.
+
+IMPORTANT — how to use the references:
+- Take the defect's GEOMETRY ONLY from the reference(s): where the creases run, how
+  many there are, how they branch and how deep the undulation is.
+- Take the base colour, light direction and overall brightness from image 1.
+- Do NOT copy the reference's colours, its printed graphics, or its highlights.
+
+=== REFERENCE DEFECT SPECIFICATION (reproduce this precisely) ===
+Type: {dtype}
+Overall: {appearance}
+Severity: {severity}/5  (5 = extremely pronounced; you MUST match this level)
+Count: about {count} creases/lines
+Orientation: {orientation}
+Geometry: {geometry}
+Extent: {extent}
+Light & shade (describes the SOURCE photo — reproduce the light/dark STRUCTURE it
+implies, but re-render it with the target's own diffuse lighting, and treat any
+mention of bright highlights as diffuse shading, NOT as specular glare): {photometry}
+Edge profile: {edge_profile}
+Hint: {prompt_hint}
+================================================================
+
+GOAL: Reproduce that defect's GEOMETRY AS FAITHFULLY AS POSSIBLE (1:1).
+Match the exact shape, orientation, count, layout and extent described above, and
+especially the SEVERITY. Keep it as strong, deep and clearly visible as the reference —
+do NOT soften, shrink, simplify, regularise or make it subtler. The defect must be obvious.
+
+MOST COMMON FAILURE — do not do this: producing a set of evenly-spaced, near-parallel,
+regularly-repeating creases regardless of what the reference actually looks like. That is
+wrong unless the reference itself is described that way. Specifically:
+- If the orientation above says the creases CROSS in several directions, they MUST visibly
+  cross and interleave — not run parallel.
+- If it says they branch / fork, they MUST branch.
+- If it says they are irregular, wavy, or of differing lengths, they MUST be visibly
+  uneven: vary their length, spacing, curvature and depth. Avoid a machine-like pattern.
+- Produce approximately the stated NUMBER of creases — not noticeably fewer, not more.
+- Vary the DEPTH between creases: some deep and sharp, some shallow. Do not render every
+  crease at the same uniform depth.
+
+CRITICAL — absolute requirements:
+1. Output a SMOOTH surface. Do NOT add any text, letters, logo, barcode, printed
+   artwork, graphics, pattern or texture of any kind. The ONLY structure in your
+   output must be the light-and-shade relief of the creases themselves. Do not try
+   to "restore", "sharpen" or "reconstruct" any detail — there is nothing to restore.
+2. The creases must be STRUCTURALLY STRONG but NOT SPECULAR:
+   (a) DO make the deformation clearly readable: deep, well-defined folds with
+       distinct light-and-shade relief, obvious at a glance. The crease ridges and
+       valleys should be crisp, not washed out.
+   (b) Do NOT use mirror-like specular reflections: no pure-white or blown-out hot
+       spots, no glowing rims, no chrome sheen. This is a MATTE / satin label film
+       under soft diffuse light, so build the relief from DIFFUSE shading — the
+       shadow side may go clearly darker, but the lit side must stay within the
+       brightness range of the surrounding surface.
+3. Keep the overall base colour and the large-scale lighting gradient of image 1
+   unchanged. Only add the localized crease shading on top of it.
+4. This must be a SURFACE DEFORMATION (wrinkle/crease/dent) of the film itself.
+   Do NOT produce dirt, stains, dark spots, specks or foreign particles.
+5. Output at the SAME resolution and framing as image 1.
+Return only the edited image."""
+
 # 按上一轮质检最弱维度追加的强化指令(分级重试)
 ESCALATE_HINTS = {
     "type_match": "\n\nPREVIOUS ATTEMPT FAILED: the defect type was wrong. It MUST be a "
@@ -126,6 +197,24 @@ ESCALATE_HINTS = {
                     "undamaged surface.",
 }
 
+# flat-edit 模式下部分强化提示需要改写: 底图本就没有文字, 再让模型"保持文字
+# 不变"会把它引回"重画印刷内容"的老路, 与本模式的前提冲突。
+FLAT_ESCALATE_OVERRIDES = {
+    "seam_continuity": "\n\nPREVIOUS ATTEMPT FAILED: the result did not blend with the "
+                       "rest of the surface. Keep the base colour and the large-scale "
+                       "lighting gradient of image 1 exactly as they are, and make the "
+                       "crease shading fade out smoothly before the patch border. Do NOT "
+                       "add any text, logo or printed pattern.",
+    "blend_quality": "\n\nPREVIOUS ATTEMPT FAILED: it looked pasted on. Build the relief "
+                     "with physically correct diffuse shading consistent with image 1's own "
+                     "lighting, fading smoothly into the surrounding smooth surface, with no "
+                     "halo and no added texture or printed content.",
+    "over_repaint": "\n\nPREVIOUS ATTEMPT FAILED: you changed the ENTIRE patch instead of "
+                    "adding localized creases. Keep the deformation just as strong, but "
+                    "confine the shading changes to the creased area only — the rest of the "
+                    "smooth surface must keep its original brightness and colour.",
+}
+
 
 # --------------------------- 小工具 ---------------------------
 
@@ -149,9 +238,34 @@ def _to_arr(mask_img: Image.Image) -> np.ndarray:
     return np.array(mask_img.convert("L"))
 
 
+# flat 模式下 defect_gain 不适用, 但要显式告警一次而不是静默忽略
+_GAIN_WARNED = False
+_GAIN_WARN_LOCK = threading.Lock()
+
+
+def _warn_gain_ignored_once(gen: dict) -> None:
+    """flat-edit 模式下 defect_gain 无效时告警一次(整个进程只提示一次)。
+
+    defect_gain 是"像素差值放大倍率", 乘性明暗场里没有对应的物理量,
+    直接套用没有意义。静默忽略会让人以为调了参数其实没生效, 所以显式提示。
+    """
+    global _GAIN_WARNED
+    if abs(float(gen.get("defect_gain", 1.0)) - 1.0) < 1e-6:
+        return
+    with _GAIN_WARN_LOCK:
+        if _GAIN_WARNED:
+            return
+        _GAIN_WARNED = True
+    reporting.warn(
+        f"[warn] flat_edit 模式下 defect_gain={gen.get('defect_gain')} 不适用"
+        f"(它是像素差值倍率, 乘性明暗场无此概念), 已忽略。"
+        f"要调强度请改 shading_strength。")
+
+
 def _build_prompt(ref: dict, escalate: str | None = None,
-                  with_structure: bool = False) -> str:
-    p = EDIT_PROMPT_TMPL.format(
+                  with_structure: bool = False, flat_edit: bool = False) -> str:
+    tmpl = FLAT_EDIT_PROMPT_TMPL if flat_edit else EDIT_PROMPT_TMPL
+    p = tmpl.format(
         structure_note=(STRUCTURE_NOTE if with_structure else ""),
         dtype=ref.get("defect_type", "defect"),
         appearance=_f(ref, "appearance"),
@@ -164,8 +278,11 @@ def _build_prompt(ref: dict, escalate: str | None = None,
         edge_profile=_f(ref, "edge_profile"),
         texture_effect=_f(ref, "texture_effect"),
         prompt_hint=_f(ref, "prompt_hint"))
-    if escalate and escalate in ESCALATE_HINTS:
-        p += ESCALATE_HINTS[escalate].format(
+    hints = ESCALATE_HINTS
+    if flat_edit:
+        hints = {**ESCALATE_HINTS, **FLAT_ESCALATE_OVERRIDES}
+    if escalate and escalate in hints:
+        p += hints[escalate].format(
             dtype=ref.get("defect_type", "defect"),
             severity=ref.get("severity", 3))
     return p
@@ -315,6 +432,7 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
     gen = cfg.generation
     max_retries = gen.get("max_retries", 3)
     feather = gen.get("feather", 10)
+    flat_edit = gen.get("flat_edit", False)
     best = None
     box = None
     escalate: str | None = None
@@ -343,6 +461,17 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
                 min_bottle_cover=gen.get("min_bottle_cover", 0.55))
         orig_patch = mask_utils.crop(clean, box)
 
+        # flat-edit: 交给模型的底图先低通抹掉印刷内容, 模型便无文字可重画
+        flat_patch = None
+        if flat_edit:
+            fsig = mask_utils.flat_sigma(
+                orig_patch.size,
+                gen.get("flat_sigma_ratio", mask_utils.FLAT_SIGMA_RATIO),
+                gen.get("flat_sigma_min", mask_utils.FLAT_SIGMA_MIN),
+                gen.get("flat_sigma_max", mask_utils.FLAT_SIGMA_MAX))
+            flat_patch = mask_utils.flatten_patch(orig_patch, fsig)
+        edit_base = flat_patch if flat_edit else orig_patch
+
         ref_img = _load_ref_crop(cfg, ref)
         ref_imgs = [ref_img] if ref_img else []
 
@@ -360,7 +489,22 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
                 reporting.warn(f"[warn] 结构图生成失败, 退回仅用彩色参考: {e}")
                 struct_img = None
 
-        prompt = _build_prompt(ref, escalate, with_structure=struct_img is not None)
+        # 记录这一轮实际生效的 escalate(即将被 _build_prompt 拼进提示词末尾的
+        # 那一段追加指令), 与最终 meta 一起落盘。escalate 变量会在本轮末尾被
+        # 重新赋值用于"下一轮", 这里必须在赋值前存一份快照, 否则 meta 里记的
+        # 就会是"下一轮要用的"而不是"这一轮实际用的", 时间线会错一格。
+        escalate_applied = escalate
+        prompt = _build_prompt(ref, escalate, with_structure=struct_img is not None,
+                               flat_edit=flat_edit)
+        # 提示词原文在这里就落盘(而不是等到本轮合成成功才存), 因为 API 报错或
+        # 掩膜判空都会在下面提前 continue, 那样的尝试之前完全没有留下任何记录
+        # (包括这次会话里被用户发现的那个案例: a1 因掩膜判空提前 continue,
+        # a2 的重试追加内容因此无法还原)。想知道"某次失败的尝试到底问了什么"
+        # 往往比想知道"成功的那次问了什么"更有排查价值。
+        if debug_dir is not None:
+            debug_dir.mkdir(parents=True, exist_ok=True)
+            (debug_dir / f"a{attempt+1}_prompt.txt").write_text(
+                prompt, encoding="utf-8")
 
         edit_mask = None
         if cfg.models.get("edit_backend") == "openai_images":
@@ -368,7 +512,7 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
                 orig_patch.width, orig_patch.height)
 
         try:
-            raw_patch = relay.edit_image(prompt, orig_patch,
+            raw_patch = relay.edit_image(prompt, edit_base,
                                          references=ref_imgs, mask=edit_mask)
         except Exception as e:
             msg = str(e)
@@ -379,15 +523,45 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
             continue
 
         # --- 问题3: 先做光度对齐, 再差分, 避免全局漂移被当成缺陷 ---
+        # flat-edit 模式下对齐的基准是平坦底图(模型看到的就是它)
+        align_ref = edit_base
         edited_patch = raw_patch
         if gen.get("photometric_align", True):
-            edited_patch = mask_utils.align_photometry(raw_patch, orig_patch)
+            edited_patch = mask_utils.align_photometry(raw_patch, align_ref)
 
-        patch_mask, mask_info = mask_utils.diff_defect_mask(
-            orig_patch, edited_patch,
-            thresh=gen.get("diff_threshold", 14),
-            max_area_ratio=gen.get("max_defect_area_ratio", 0.85),
-            return_info=True)
+        # 实际生效的强度倍率。severity_adaptive_gain 的语义是"严重度越高、缺陷
+        # 越强", 这个意图能自然映射到明暗调制强度上, 所以在 flat 模式下照旧生效;
+        # 而 defect_gain 的语义是"像素差值放大倍率", 与乘性明暗场不是同一个物理量,
+        # 无法套用 -> 不适用并告警, 不静默忽略。
+        sev_factor = 1.0
+        if gen.get("severity_adaptive_gain", False):
+            sev_factor = 1.0 + 0.12 * max(0, int(ref.get("severity", 3) or 3) - 3)
+
+        log_ratio = None
+        if flat_edit:
+            _warn_gain_ignored_once(gen)
+            eff_strength = gen.get("shading_strength", 1.0) * sev_factor
+            # 明暗调制场: 分母是平坦底图, 分子是模型输出 -> 场里不含任何墨迹,
+            # 但褶皱棱线由分子提供, 依然锐利。
+            # strength 在 clamp 之前参与, 保证 clamp 始终是真实的安全上限。
+            log_ratio = mask_utils.shading_log_ratio(
+                edit_base, edited_patch,
+                eps_ratio=gen.get("ratio_eps_ratio", mask_utils.RATIO_EPS_RATIO),
+                eps_floor=gen.get("ratio_eps_floor", mask_utils.RATIO_EPS_FLOOR),
+                clamp_lo=gen.get("ratio_log_clamp_lo", mask_utils.RATIO_LOG_CLAMP_LO),
+                clamp_hi=gen.get("ratio_log_clamp_hi", mask_utils.RATIO_LOG_CLAMP_HI),
+                strength=eff_strength)
+            patch_mask, mask_info = mask_utils.mask_from_log_ratio(
+                log_ratio,
+                thresh=gen.get("ratio_mask_thresh", mask_utils.RATIO_MASK_THRESH),
+                min_area_ratio=gen.get("min_defect_area_ratio", 0.0005),
+                return_info=True)
+        else:
+            patch_mask, mask_info = mask_utils.diff_defect_mask(
+                orig_patch, edited_patch,
+                thresh=gen.get("diff_threshold", 14),
+                max_area_ratio=gen.get("max_defect_area_ratio", 0.85),
+                return_info=True)
 
         # 先羽化(模糊会外扩), 再施加约束, 顺序不能颠倒否则约束会被打穿
         alpha = mask_utils.feather_alpha(patch_mask, feather)
@@ -415,14 +589,26 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
                 escalate = "severity_match"
             continue
 
-        gain = gen.get("defect_gain", 1.0)
-        if gen.get("severity_adaptive_gain", False):
-            sev = int(ref.get("severity", 3) or 3)
-            gain *= 1.0 + 0.12 * max(0, sev - 3)
-        # 融合用软 alpha(feather=0, 因为已在上面羽化过)
-        result = mask_utils.composite(
-            clean, edited_patch, alpha, box,
-            mode=gen.get("blend_mode", "feather"), feather=0, gain=gain)
+        if flat_edit:
+            # 乘性回贴: 只调制原图明暗, 不替换任何像素内容
+            # 强度已折进 log_ratio, 这里不再乘, 避免绕过 clamp
+            applied_strength = eff_strength
+            blend_kind = "ratio"
+            result = mask_utils.ratio_composite(
+                clean, log_ratio, alpha, box,
+                highlight_knee=gen.get("ratio_highlight_knee",
+                                       mask_utils.RATIO_HIGHLIGHT_KNEE),
+                displace_strength=gen.get("displace_strength",
+                                          mask_utils.DISPLACE_STRENGTH),
+                displace_sigma=gen.get("displace_sigma",
+                                       mask_utils.DISPLACE_SIGMA))
+        else:
+            applied_strength = gen.get("defect_gain", 1.0) * sev_factor
+            blend_kind = gen.get("blend_mode", "feather")
+            # 融合用软 alpha(feather=0, 因为已在上面羽化过)
+            result = mask_utils.composite(
+                clean, edited_patch, alpha, box,
+                mode=blend_kind, feather=0, gain=applied_strength)
 
         # 落盘/校验用二值标注掩膜
         full_mask_img = mask_utils.full_mask_from_patch(clean.size, label_mask, box)
@@ -445,19 +631,38 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
             "severity": ref.get("severity"),
             "reference_class": ref.get("class_name"),
             "reference_entry": ref.get("entry_id"),
+            # cross_class: 类别(= 产品+角度)是否不同。保留原语义与字段名, 历史
+            # 标注才能继续比较。
             "cross_class": ref.get("class_name") != class_name,
+            # cross_product: 是否真的跨了产品(忽略角度)。必须单独记录 ——
+            # cross_class 为真可能只是换了个拍摄角度(同一个瓶子), 拿它当"跨产品"
+            # 用会把同产品样本误算成跨产品。类别改名成 `<产品>_角度N` 之前, 这
+            # 件事根本无法从标注里恢复。
+            "cross_product": not same_product(
+                str(ref.get("class_name") or ""), class_name),
             "patch_box": [box.x, box.y, box.w, box.h],
             "defect_bbox_global": ([box.x + bb.x, box.y + bb.y, bb.w, bb.h]
                                    if bb else None),
-            "gain": round(gain, 3),
+            # gain 记录的是"实际生效"的强度倍率, 不是配置里读到的值:
+            # flat 模式走乘性明暗场, defect_gain 不适用, 生效的是 shading_strength
+            # (× severity 系数)。之前两条路都记 defect_gain, 会让 annotations
+            # 声称一个从未被施加过的倍率, 污染后续离线分析。
+            "gain": round(applied_strength, 3),
+            "blend": blend_kind,
             "qc": qc.to_dict(),
             "attempt": attempt + 1,
+            # 这一轮提示词末尾是否追加了针对上一轮失败维度的强化指令, 追加的是
+            # 哪一个。之前完全没有记录这件事: 一旦某次 attempt 的 debug 没落盘
+            # (比如掩膜判空提前 continue 的那种情况), 后续轮次就没法知道当时
+            # 冲的是哪个问题, 只能凭 prompt.txt 反查文本内容去猜。
+            "escalate_applied": escalate_applied,
             # 差分各环节占比: 用于区分"模型没画"与"整块重绘被面积上限吃掉"
             "mask_info": mask_info,
             "mask_ratio_final": round(float(mask_utils.changed_ratio(label_mask)), 4),
         }
 
         # --- 问题8: debug 中间产物, 便于归因(模型弱? mask截断? 融合削弱?) ---
+        # 提示词已在上面提前落盘(见那里的说明), 这里不重复存
         if debug_dir is not None:
             debug_dir.mkdir(parents=True, exist_ok=True)
             tag = f"a{attempt+1}"
@@ -471,6 +676,33 @@ def _synthesize_one(cfg: Config, relay: RelayClient, clean: Image.Image,
                 ref_img.save(debug_dir / f"{tag}_0a_reference.png")
             if struct_img is not None:
                 struct_img.save(debug_dir / f"{tag}_0b_structure.png")
+            if flat_edit and flat_patch is not None:
+                flat_patch.save(debug_dir / f"{tag}_1b_flat_base.png")
+                # 明暗调制场可视化: 128=无调制, 亮=被提亮, 暗=被压暗
+                vis = np.clip(128.0 + log_ratio * 128.0, 0, 255).astype(np.uint8)
+                Image.fromarray(vis).save(debug_dir / f"{tag}_3b_shading_field.png")
+                # 几何位移场可视化: 位移会真的搬动像素, 必须能看出"推了多远、
+                # 往哪推", 否则符号和幅度只能靠猜。
+                #   3c = 位移幅度(越亮=推得越远), 用于确认位移集中在折痕陡侧
+                #        而不是棱线顶部
+                #   3d = 位移方向(R=水平分量, G=竖直分量, 128=不动)
+                dfield = mask_utils.displacement_field(
+                    log_ratio, alpha.astype(np.float32) / 255.0,
+                    gen.get("displace_strength", mask_utils.DISPLACE_STRENGTH),
+                    gen.get("displace_sigma", mask_utils.DISPLACE_SIGMA))
+                if dfield is not None:
+                    ddx, ddy = dfield
+                    dmag = np.hypot(ddx, ddy)
+                    peak = max(float(dmag.max()), 1e-6)
+                    Image.fromarray(
+                        np.clip(dmag / peak * 255.0, 0, 255).astype(np.uint8)
+                    ).save(debug_dir / f"{tag}_3c_displace_mag.png")
+                    dvis = np.zeros((*dmag.shape, 3), np.uint8)
+                    dvis[..., 0] = np.clip(128 + ddx / peak * 127, 0, 255)
+                    dvis[..., 1] = np.clip(128 + ddy / peak * 127, 0, 255)
+                    dvis[..., 2] = 128
+                    Image.fromarray(dvis).save(
+                        debug_dir / f"{tag}_3d_displace_dir.png")
             (debug_dir / f"{tag}_meta.json").write_text(
                 json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
 

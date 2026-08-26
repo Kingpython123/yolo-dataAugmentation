@@ -109,7 +109,7 @@ def scan(root: Path | str, extensions: tuple | list = DEFAULT_EXTENSIONS,
             report.hints.append(
                 f"根目录下直接放着 {len(loose)} 张图片, 但程序按"
                 f"'一个子目录 = 一个类别'的结构读取。请把图片按类别放进子目录, "
-                f"例如 {root.name}/1.jpg/、{root.name}/5.1/")
+                f"例如 {root.name}/500多效极润_角度1/、{root.name}/120蓝瓶_角度4/")
         else:
             report.hints.append("目录里没有任何子目录, 请确认选的是数据集根目录")
 

@@ -64,3 +64,12 @@ outputs/regenerated/
 # ---- 人工驳回样本原始数据 / 本机测试工作区(不进 git) ----
 没打标签的/
 /test/
+# ---- 临时脚本的产物(原有规则只挡了 _tmp_*.py, 漏了 txt/json 等) ----
+_tmp_*
+# ---- 类别改名迁移的本地备份与撤销映射 ----
+# 备份是本机安全网(体积大且含绝对路径), 撤销映射同理;
+# 迁移逻辑本身记录在 tools/migrate_classes_by_product.py 的映射表里, 不依赖这些文件
+*.pre_product_migration
+outputs/product_migration_reverse_map.json
+# ---- relief-transfer 对照图(该方案已放弃, 50MB 图不进 git) ----
+outputs/relief_compare/

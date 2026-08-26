@@ -14,21 +14,35 @@
 
 **12 个类别，每个类别都要生成 700 张**，四人各负责 3 个类：
 
+类别名的格式是 `<产品>_角度<N>`，四人按**角度**分工，每人负责 3 个产品的同一个角度：
+
 | 人 | 负责类别 | 运行命令 |
 |---|---|---|
-| **A** | 1.jpg, 1.bmp, 5.1 | `run.py gen-target --classes 1.jpg --count 700`（三个类分别跑，见下） |
-| **B** | 2.jpg, 2.bmp, 5.2 | `run.py gen-target --classes 2.jpg --count 700` |
-| **C** | 3.jpg, 3.bmp, 5.3 | `run.py gen-target --classes 3.jpg --count 700` |
-| **D** | 4.jpg, 4.bmp, 5.4 | `run.py gen-target --classes 4.jpg --count 700` |
+| **A** | 500多效极润_角度1, 60ml多效极润_角度1, 500水次方_角度1 | `run.py gen-target --classes 500多效极润_角度1 --count 700`（三个类分别跑，见下） |
+| **B** | 500多效极润_角度2, 60ml多效极润_角度2, 500水次方_角度2 | 同上，把类别换成自己的 |
+| **C** | 500多效极润_角度3, 60ml多效极润_角度3, 500水次方_角度3 | 同上 |
+| **D** | 500多效极润_角度4, 60ml多效极润_角度4, 500水次方_角度4 | 同上 |
 
 **只跑自己负责的类别**，不要跑别人的，避免重复消耗 API 额度。三个类别要分三次跑
 （一次一个类别，方便断点续跑和排查问题），比如 A 依次执行：
 
 ```powershell
-.\.venv\Scripts\python.exe run.py gen-target --classes 1.jpg --count 700
-.\.venv\Scripts\python.exe run.py gen-target --classes 1.bmp --count 700
-.\.venv\Scripts\python.exe run.py gen-target --classes 5.1  --count 700
+.\.venv\Scripts\python.exe run.py gen-target --classes 500多效极润_角度1 --count 700
+.\.venv\Scripts\python.exe run.py gen-target --classes 60ml多效极润_角度1 --count 700
+.\.venv\Scripts\python.exe run.py gen-target --classes 500水次方_角度1  --count 700
 ```
+
+> **类别名在 2026-08-26 改过**（原来叫 `1~4.jpg` / `1~4.bmp` / `5.1~5.4`）。
+> 原因是旧名看不出是哪种瓶子，而且 `1~4.bmp` 在两个数据集根目录下其实是**不同产品**：
+> 有缺陷那边是 120蓝瓶，无缺陷那边是 60ml多效极润。流水线按同名类别目录配对，
+> 于是"拿 60ml 白瓶当目标 + 120蓝瓶的缺陷当参考"被记成了同类样本。
+> 迁移脚本见 `tools/migrate_classes_by_product.py`。
+>
+> 随之而来的一个行为变化：**`60ml多效极润` 没有自己的缺陷样本**，所以它只能用
+> 其他产品的缺陷当参考（流水线会自动回退到跨类参考，不需要额外配置）。
+> 另外 `120蓝瓶_角度4` 和 `360森呼吸_角度1~4` 现在也可以生成了（旧结构下
+> `120蓝瓶` 因为在有缺陷目录里没有同名文件夹，90 张干净图一直没被用过），
+> 这几类暂未分工，需要时再排。
 
 ### `gen-target` 是什么
 
@@ -39,7 +53,7 @@
 多出的 47 张再从头循环一轮（覆盖两遍）。启动时会打印分配计划确认覆盖情况：
 
 ```
-[plan] 1.jpg: 目标 700 张, 参考库 653 条 (完整覆盖 1 轮 + 前 47 条), 干净图 114 张(循环使用)
+[plan] 500多效极润_角度1: 目标 700 张, 参考库 653 条 (完整覆盖 1 轮 + 前 47 条), 干净图 114 张(循环使用)
 ```
 
 干净图只有 114 张，会被循环使用（同一张干净图会配上不同的参考缺陷生成多次），
@@ -80,9 +94,9 @@ python -m venv .venv
 │   ├── config.yaml
 │   └── outputs/catalog/            ← 缺陷库，已随 git 一起提供
 └── 实拍负样本（无缺陷）/              ← 必需，放你负责的那三个类就行
-    ├── 1.bmp/
-    ├── 1.jpg/
-    └── 5.1/
+    ├── 500多效极润_角度1/
+    ├── 60ml多效极润_角度1/
+    └── 500水次方_角度1/
 ```
 
 注意：
@@ -127,7 +141,7 @@ key 找 A 要。中转站地址已经写在 `config.yaml` 里，不用改。
 
 ```powershell
 # 换成你自己负责的类别, 三个类分三次跑
-.\.venv\Scripts\python.exe run.py gen-target --classes 1.jpg --count 700
+.\.venv\Scripts\python.exe run.py gen-target --classes 500多效极润_角度1 --count 700
 ```
 
 ### 耗时与注意事项
@@ -144,10 +158,11 @@ key 找 A 要。中转站地址已经写在 `config.yaml` 里，不用改。
 **第一次务必先跑一个小数量确认没问题**，比如：
 
 ```powershell
-.\.venv\Scripts\python.exe run.py gen-target --classes 1.jpg --count 10
+.\.venv\Scripts\python.exe run.py gen-target --classes 500多效极润_角度1 --count 10
 ```
 
-确认 `outputs/generated/1.jpg/` 和 `outputs/rejected/1.jpg/` 里的图质量正常后，
+确认 `outputs/generated/500多效极润_角度1/` 和 `outputs/rejected/500多效极润_角度1/`
+里的图质量正常后，
 再跑 `--count 700` 的正式量。正式量跑起来后如果中途发现问题，Ctrl+C 停掉，
 改完配置后重新执行同样的命令即可（断点续跑会跳过已完成的，不会重复烧额度）。
 
@@ -193,8 +208,9 @@ outputs/
 
 - **缺陷面积大、变形夸张不是缺点**。真实样本里本来就存在大面积严重褶皱，
   不要因为"变形太夸张"而丢掉。
-- 有少数样本缺陷可能画到了**桌布/背景**上（1~4.bmp 这几类的自动分割区分不了
-  浅色桌布和瓶身背光面）。这种图**不用丢**，人工打标签时**不给桌布上的缺陷打框**即可。
+- 有少数样本缺陷可能画到了**桌布/背景**上（`60ml多效极润` 这几类是亮背景拍法，
+  自动分割区分不了浅色桌布和瓶身背光面）。这种图**不用丢**，人工打标签时
+  **不给桌布上的缺陷打框**即可。
 
 ---
 
@@ -212,7 +228,7 @@ outputs/
 
 ```powershell
 # 把某个类的中间产物拼成对比图：参考 → 浮雕图 → 目标块 → 模型输出 → 对齐后 → 掩膜
-.\.venv\Scripts\python.exe run.py debug-preview --classes 1.bmp
+.\.venv\Scripts\python.exe run.py debug-preview --classes 60ml多效极润_角度1
 ```
 
 ---
@@ -264,7 +280,7 @@ outputs/
 - **变形远多于划痕**：缺陷库 668 条里变形占 93%、划痕仅 7%（划痕天生细线，
   VLM 给的 severity 天然偏低，已单独放宽门槛到 2 分，但基数依然偏少）。
   700 张里划痕样本占比会明显低于变形。
-- **1~4.bmp 的桌布问题**：这几类是亮背景拍法，自动分割无法区分浅色桌布和
+- **`60ml多效极润` 的桌布问题**：这几类是亮背景拍法，自动分割无法区分浅色桌布和
   瓶身背光面，少数缺陷可能落在桌布上（人工标注时跳过即可）。
 - **模型偶发不稳定**：编辑模型可能调用失败或画得偏弱，122 张里可能有零星几张
   质量不佳，会被隔离到 `rejected/`，不会污染 `generated/`。

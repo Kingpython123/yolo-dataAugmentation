@@ -50,9 +50,70 @@ def run_cmd(argv: list[str]) -> str:
     return buf.getvalue()
 
 
+def check_flat_edit_defaults() -> list[str]:
+    """config.yaml 的 flat-edit 参数键 与 mask_utils 里的默认值常量 是否一致。
+
+    背景: 曾经把 highlight_knee 的默认值同时写在"函数签名"和"config.yaml"
+    两处, 调参时只改了两处、漏了 generate.py 里 gen.get() 的第三处兜底值,
+    结果 config 该 key 一旦缺失或拼错就会静默回退到一个已被实测否决的旧值
+    (235, 而非当时定的 252), 且不报错, 很难被发现。
+    修复方式是把默认值集中定义成 mask_utils 里的常量, 函数签名与调用处都
+    引用同一个常量。这里的检查确保三处(常量 / 签名 / config.yaml)不再各说
+    各话 —— 一旦有人改常量却忘了同步 config, 或反过来, 立刻报出来。
+    """
+    import inspect as _inspect
+
+    from src import mask_utils
+    from src.config import load_config
+
+    # (config.yaml 里的 key, mask_utils 里的常量名, 引用该默认值的函数, 形参名)
+    checks = [
+        ("flat_sigma_ratio", "FLAT_SIGMA_RATIO", mask_utils.flat_sigma, "ratio"),
+        ("flat_sigma_min", "FLAT_SIGMA_MIN", mask_utils.flat_sigma, "lo"),
+        ("flat_sigma_max", "FLAT_SIGMA_MAX", mask_utils.flat_sigma, "hi"),
+        ("ratio_eps_ratio", "RATIO_EPS_RATIO", mask_utils.shading_log_ratio, "eps_ratio"),
+        ("ratio_eps_floor", "RATIO_EPS_FLOOR", mask_utils.shading_log_ratio, "eps_floor"),
+        ("ratio_log_clamp_lo", "RATIO_LOG_CLAMP_LO", mask_utils.shading_log_ratio, "clamp_lo"),
+        ("ratio_log_clamp_hi", "RATIO_LOG_CLAMP_HI", mask_utils.shading_log_ratio, "clamp_hi"),
+        ("ratio_highlight_knee", "RATIO_HIGHLIGHT_KNEE", mask_utils.ratio_composite, "highlight_knee"),
+        ("ratio_mask_thresh", "RATIO_MASK_THRESH", mask_utils.mask_from_log_ratio, "thresh"),
+    ]
+
+    gen = load_config().generation
+    problems = []
+    for cfg_key, const_name, fn, param in checks:
+        const_val = getattr(mask_utils, const_name)
+        sig_val = _inspect.signature(fn).parameters[param].default
+        cfg_val = gen.get(cfg_key)
+
+        if sig_val != const_val:
+            problems.append(
+                f"{fn.__name__}() 形参 {param} 的默认值 {sig_val!r} "
+                f"与 mask_utils.{const_name} = {const_val!r} 不一致")
+        if cfg_val is None:
+            problems.append(f"config.yaml 缺少 generation.{cfg_key}"
+                            f"(缺失时会回退到常量 {const_val!r}, 请确认这是预期的)")
+        elif abs(float(cfg_val) - float(const_val)) > 1e-9:
+            problems.append(
+                f"config.yaml 的 generation.{cfg_key} = {cfg_val!r} "
+                f"与 mask_utils.{const_name} = {const_val!r} 不一致 "
+                f"(若是故意覆盖默认值可忽略, 若不是请检查是否调参时漏改了某一处)")
+    return problems
+
+
 def main_check() -> int:
     ok = True
     lines: list[str] = []
+
+    flat_edit_problems = check_flat_edit_defaults()
+    if flat_edit_problems:
+        ok = False
+        lines.append("DIFF: flat_edit_defaults")
+        for p in flat_edit_problems:
+            lines.append(f"  {p}")
+    else:
+        lines.append("identical: flat_edit_defaults")
+
     for name in ("selftest", "inspect"):
         baseline = normalize(read_text_any(REPO / "baseline" / f"{name}.txt"))
         actual = normalize(run_cmd([name]))

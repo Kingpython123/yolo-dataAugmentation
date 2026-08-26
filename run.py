@@ -4,7 +4,7 @@
   python run.py test-api                    # 测试中转站连通性(视觉+编辑模型)
   python run.py selftest                    # 离线自检(不调用API, 验证分割/差分/回贴)
   python run.py build-catalog [--max-per-class N] [--overwrite]
-  python run.py generate [--limit-per-class N] [--classes 1.jpg,2.jpg]
+  python run.py generate [--limit-per-class N] [--classes 500多效极润_角度1,500水次方_角度1]
   python run.py requalify [--apply]        # 按新阈值离线重判已有样本(免费)
 """
 from __future__ import annotations
@@ -875,14 +875,14 @@ def main():
     p.add_argument("--overwrite", action="store_true",
                    help="全量重建(丢弃现有库并重新分析所有图, 慎用)")
     p.add_argument("--classes", type=str, default=None,
-                   help="仅(重)建指定类别, 逗号分隔, 如 5.1,5.2,5.3,5.4")
+                   help="仅(重)建指定类别, 逗号分隔, 如 500水次方_角度1,500水次方_角度2")
     p.set_defaults(func=cmd_build_catalog)
 
     p = sub.add_parser("generate")
     p.add_argument("--limit-per-class", type=int, default=None,
                    help="每类最多处理多少张干净图")
     p.add_argument("--classes", type=str, default=None,
-                   help="仅处理指定类别, 逗号分隔, 如 1.jpg,2.jpg")
+                   help="仅处理指定类别, 逗号分隔, 如 500多效极润_角度1,500多效极润_角度2")
     p.add_argument("--force", action="store_true",
                    help="忽略断点续跑, 重新生成已完成的样本")
     p.set_defaults(func=cmd_generate)
@@ -891,7 +891,8 @@ def main():
         "gen-target",
         help="给指定类别各生成固定数量的样本, 参考库按顺序循环使用以保证全覆盖")
     p.add_argument("--classes", required=True,
-                   help="目标类别, 逗号分隔, 如 1.jpg 或 1.jpg,1.bmp,5.1")
+                   help="目标类别, 逗号分隔, 如 500多效极润_角度1 或 "
+                        "500多效极润_角度1,120蓝瓶_角度4,500水次方_角度1")
     p.add_argument("--count", type=int, required=True,
                    help="每个类别各生成多少张(达到参考库条数才算覆盖全部参考)")
     p.add_argument("--force", action="store_true", help="忽略断点续跑")
@@ -901,7 +902,7 @@ def main():
         "gen-sweep",
         help="每条参考缺陷只用一次, 一图一参考, 按类别顺序铺开(用完溢出到下一类)")
     p.add_argument("--classes", required=True,
-                   help="目标类别, 按顺序逗号分隔, 如 5.1,5.2")
+                   help="目标类别, 按顺序逗号分隔, 如 500水次方_角度1,500水次方_角度2")
     p.add_argument("--shuffle", action="store_true",
                    help="打乱参考顺序(默认按缺陷库原顺序)")
     p.add_argument("--max-refs", type=int, default=None,
@@ -911,9 +912,10 @@ def main():
 
     p = sub.add_parser("gen-ref", help="定向: 固定某条参考缺陷, 在指定类别各随机抽N张生成")
     p.add_argument("--reference-entry", required=True,
-                   help="参考缺陷的 entry_id, 如 1.jpg__1_20260426161537754__0")
+                   help="参考缺陷的 entry_id, 如 "
+                        "500多效极润_角度1__1_20260426161537754__0")
     p.add_argument("--classes", required=True,
-                   help="目标类别, 逗号分隔, 如 1.jpg,2.jpg,3.jpg,4.jpg")
+                   help="目标类别, 逗号分隔, 如 500多效极润_角度1,500多效极润_角度2")
     p.add_argument("--per-class", type=int, default=1,
                    help="每类随机抽多少张干净图(默认1)")
     p.add_argument("--force", action="store_true",
@@ -938,7 +940,7 @@ def main():
         "gen-augment",
         help="定向补充: 按缺陷形态挑参考条目批量补样本(默认只预览, 加 --yes 才跑)")
     p.add_argument("--classes", required=True,
-                   help="目标类别, 逗号分隔, 如 1.jpg,1.bmp")
+                   help="目标类别, 逗号分隔, 如 500多效极润_角度1,120蓝瓶_角度4")
     p.add_argument("--per-ref", type=int, default=1,
                    help="每条参考在每个类别上生成多少张(默认1)")
     p.add_argument("--from-images", nargs="+", default=None,
@@ -952,7 +954,7 @@ def main():
     p.add_argument("--orientation", default=None,
                    help="[方式A] 走向关键词包含匹配, 如 横向 / 斜向 / 交叉")
     p.add_argument("--ref-class", default=None,
-                   help="[方式A] 限定参考缺陷的来源类别, 如 5.1")
+                   help="[方式A] 限定参考缺陷的来源类别, 如 500水次方_角度1")
     p.add_argument("--similar-to-image", default=None,
                    help="[方式B] 以一张出问题的图为种子, 检索形态相似的参考条目")
     p.add_argument("--similar-to-entry", default=None,

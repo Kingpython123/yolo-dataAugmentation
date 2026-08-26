@@ -30,7 +30,7 @@ class QueryFilter:
     count_min: int | None = None
     count_max: int | None = None
     orientation_kw: str | None = None        # 关键词包含匹配, 如 "横向"
-    class_name: str | None = None            # 限定来源类别(如只要 5.1 的参考)
+    class_name: str | None = None            # 限定来源类别(如只要 500水次方_角度1 的参考)
 
     def matches(self, rec: dict) -> bool:
         if self.defect_type is not None and rec.get("defect_type") != self.defect_type:
